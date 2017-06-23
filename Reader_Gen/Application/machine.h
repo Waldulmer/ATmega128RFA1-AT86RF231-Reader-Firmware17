@@ -34,11 +34,11 @@ void getSQAuditData(void);
 
 //ACA Command and data codes
 
-#define PROGRAMMING_DATA					0x20
-#define PROGRAMMING_DATA_TOPLOAD			0x21
-#define PROGRAMMING_DATA_FRONTLOAD			0x22
+#define PROGRAMMING_DATA					0x20			//Program Packet Base Value
+#define PROGRAMMING_DATA_TOPLOAD			0x21			//Program Packet ID Topload
+#define PROGRAMMING_DATA_FRONTLOAD			0x22			//Program Packet ID Frontload
 
-#define PROGRAMMING_DATA_DRYER				0x29
+#define PROGRAMMING_DATA_DRYER				0x29			//Program Packet ID Dryer
 
 //#define AUDIT_DATA_REQUEST			0x30
 //#define AUDIT_DATA_TOPLOAD			0x31

@@ -242,12 +242,12 @@ halGetEeprom(MACHINE_SETUP_ADDR_QUANTUM, QUANTUM_SETUP_NUM_BYTE, (u8*)&SQACATopl
 void SaveMachineSetupData(void)
 {
 }
-*/
 
+//PPOS170621
 void SetDefaultMachineSetup(void)
 {
 }
-
+*/ 
 
 u8 sendMdcPacket(u8 *ucDataBuf)
 {

@@ -201,9 +201,9 @@ UART/serial.d \
 RUM/sensors.d \
 RUM/sixlowpan_wake.d
 
-OUTPUT_FILE_PATH +=RDR_MDC_20150129_V0.3.6.elf
+OUTPUT_FILE_PATH +=RDR_ACA_20170621_V0.1.1.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=RDR_MDC_20150129_V0.3.6.elf
+OUTPUT_FILE_PATH_AS_ARGS +=RDR_ACA_20170621_V0.1.1.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -360,11 +360,11 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="RDR_MDC_20150129_V0.3.6.map" -Wl,--start-group -Wl,-lprintf_flt -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -Wl,--defsym=__stack=0x4000 -mmcu=atmega128rfa1 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega128rfa1" -Wl,-u,vfprintf -Wl,--section-start=.data=0x800200  
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="RDR_ACA_20170621_V0.1.1.map" -Wl,--start-group -Wl,-lprintf_flt -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -Wl,--defsym=__stack=0x4000 -mmcu=atmega128rfa1 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.1.130\gcc\dev\atmega128rfa1" -Wl,-u,vfprintf -Wl,--section-start=.data=0x800200  
 	@echo Finished building target: $@
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "RDR_MDC_20150129_V0.3.6.elf" "RDR_MDC_20150129_V0.3.6.hex"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "RDR_MDC_20150129_V0.3.6.elf" > "RDR_MDC_20150129_V0.3.6.lss"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "RDR_MDC_20150129_V0.3.6.elf"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "RDR_ACA_20170621_V0.1.1.elf" "RDR_ACA_20170621_V0.1.1.hex"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "RDR_ACA_20170621_V0.1.1.elf" > "RDR_ACA_20170621_V0.1.1.lss"
+	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "RDR_ACA_20170621_V0.1.1.elf"
 	
 	
 
@@ -376,5 +376,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "RDR_MDC_20150129_V0.3.6.elf" "RDR_MDC_20150129_V0.3.6.a" "RDR_MDC_20150129_V0.3.6.hex" "RDR_MDC_20150129_V0.3.6.lss" "RDR_MDC_20150129_V0.3.6.eep" "RDR_MDC_20150129_V0.3.6.map" "RDR_MDC_20150129_V0.3.6.srec" "RDR_MDC_20150129_V0.3.6.usersignatures"
+	rm -rf "RDR_ACA_20170621_V0.1.1.elf" "RDR_ACA_20170621_V0.1.1.a" "RDR_ACA_20170621_V0.1.1.hex" "RDR_ACA_20170621_V0.1.1.lss" "RDR_ACA_20170621_V0.1.1.eep" "RDR_ACA_20170621_V0.1.1.map" "RDR_ACA_20170621_V0.1.1.srec" "RDR_ACA_20170621_V0.1.1.usersignatures"
 	

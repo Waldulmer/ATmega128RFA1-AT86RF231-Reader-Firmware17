@@ -75,10 +75,10 @@ void getSQSetupData(void)
 		SQACAToploadProgramming.VendPrice8[1] = 0;
 		SQACAToploadProgramming.VendPrice9[0] = tmp[17];	//Delicate/Cold Cycle Vend Price (cents)
 		SQACAToploadProgramming.VendPrice9[1] = 0;
-		SQACAToploadProgramming.MediumCycle_VendPrice[0] = tmp[19];		//Cycle Modifier Key 1 Vend Price (Medium/B/Extra Wash)
-		SQACAToploadProgramming.MediumCycle_VendPrice[1] = 0;		//
-		SQACAToploadProgramming.HeavyCycle_VendPrice[0] = 50;		//Cycle Modifier Key 2 Vend Price (Heavy/C/Extra Rinse)
-		SQACAToploadProgramming.HeavyCycle_VendPrice[1] = 0;
+		SQACAToploadProgramming.MediumCycle_VendPrice[0] = tmp[19];		//Cycle Modifier Key #1 Vend Price Adder (Medium/B/Extra Wash)
+		SQACAToploadProgramming.MediumCycle_VendPrice[1] = 0;			//Default: 25 (All Controls)
+		SQACAToploadProgramming.HeavyCycle_VendPrice[0] = 50;			//Cycle Modifier Key #2 Vend Price Adder (Heavy/C/Extra Rinse)
+		SQACAToploadProgramming.HeavyCycle_VendPrice[1] = 0;			//Default: 25 (A2) 50 (A4/A3)
 		SQACAToploadProgramming.MediumCycle_option = 0;					//- bit 0: Warm Rinse (1 = Enabled) Default: 0x00
 		SQACAToploadProgramming.HeavyCycle_option = 0;
 		SQACAToploadProgramming.MediumCycle_extraWashTime = 0;
@@ -165,7 +165,7 @@ void getSQSetupData(void)
 		SQACAFrontloadProgramming.AudioSetting = 29;						//enable audio
 		break;
 		case PROGRAMMING_DATA_DRYER:
-		halGetEeprom(MACHINE_SETUP_ADDR, 14, (u8*)&tmp);			//write machine setup string 14 Bytes for dryer to eeprom PPOS170601
+		halGetEeprom(MACHINE_SETUP_ADDR, 17, (u8*)&tmp);			//write machine setup string 16 Bytes for dryer to eeprom PPOS170601
 		//halGetEeprom(MACHINE_SETUP_ADDR, 18, (u8*)&tmp);			//write machine setup string 18 Bytes for dryer to eeprom
 		vendPrice = (tmp[1] * 256 + tmp[2]) / 100.0;
 		
@@ -181,11 +181,11 @@ void getSQSetupData(void)
 		SQACADryerProgramming.HeatVendPrice4[0] = tmp[7];			//Delicates Cycle Vend Price (cents)
 		SQACADryerProgramming.HeatVendPrice4[1] = 0;
 		SQACADryerProgramming.NoHeatVendPrice[0] = tmp[9];			//No Heat Cycle Vend Price (cents)
-		SQACADryerProgramming.NoHeatVendPrice[1] = 0;
-		SQACADryerProgramming.PaymSTopoffOn = 1;
+		SQACADryerProgramming.NoHeatVendPrice[1] = 0;				
+		SQACADryerProgramming.PaymSTopoffOn = tmp[13];				//Top Off Enabled, default=1
 		SQACADryerProgramming.PaymSTopoffPrice[0] = tmp[11];		//Top Off Price (cents)
 		SQACADryerProgramming.PaymSTopoffPrice[1] = 0;
-		SQACADryerProgramming.PaymSTopoffMinutes = tmp[12];			//Top Off Time (minutes)
+		SQACADryerProgramming.PaymSTopoffMinutes = tmp[14];			//Top Off Time (minutes)
 		SQACADryerProgramming.PaymSTopoffSeconds = 38;
 		SQACADryerProgramming.Coin1TopoffMinutes = 5;
 		SQACADryerProgramming.Coin1TopoffSeconds = 38;
@@ -315,7 +315,7 @@ bool sendSQACAVendPrice(void)
 			temp[0] = ACA_VEND_PRICE_BYTES;
 			temp[1] = ACA_VEND_PRICE_PACKET;									//Vend Price Packet 0x72
 			
-			switch( SQACAMachineStatus.CycleType )								//Cycle Value 1-9
+			switch( SQACAMachineStatus.CycleType )								//Cycle Value(Delicate...) 1-9
 			{
 				case 9:
 				temp[2] = SQACAToploadProgramming.VendPrice9[0];
@@ -354,29 +354,29 @@ bool sendSQACAVendPrice(void)
 				temp[3] = SQACAToploadProgramming.VendPrice1[1];
 				break;
 			}
-			temp[4] = SQACAToploadProgramming.MediumCycle_VendPrice[0];				//Washer only: Cycle Modifier Key 1 Vend Price (cents)
-			temp[5] = SQACAToploadProgramming.MediumCycle_VendPrice[1];				//(0x00 for dryers)
-			/*
-			switch( SQACAMachineStatus.CycleModifier )								//Cycle Modifier A4 Default: 0 = Light
+			//temp[4] = SQACAToploadProgramming.MediumCycle_VendPrice[0];				//Washer only: Cycle Modifier Key 1 Vend Price (cents)
+			//temp[5] = SQACAToploadProgramming.MediumCycle_VendPrice[1];				//(0x00 for dryers)
+			
+			switch( SQACAMachineStatus.CycleModifier )								//Cycle Modifier A4 Default: 0 = Light, 1 = Medium, 2 = Heavy			
 			{
 				case 3:
 				temp[4] = 0;														//Washer only: Cycle Modifier = 3 (Small Load)
 				temp[5] = 0;
 				break;
-				case 2:
-				temp[4] = SQACAToploadProgramming.HeavyCycle_VendPrice[0];			//Washer only: Cycle Modifier Key 1 Vend Price (cents)
-				temp[5] = SQACAToploadProgramming.HeavyCycle_VendPrice[1];			//(0x00 for dryers)
+				case 2:																//Heavy
+				temp[4] = SQACAToploadProgramming.HeavyCycle_VendPrice[0];			//Washer only: Cycle Modifier Key 2 Vend Price (cents)
+				temp[5] = SQACAToploadProgramming.HeavyCycle_VendPrice[1];			//Default: 25 (A2) 50 (A4/A3)
 				break;
-				case 1:
-				temp[4] = SQACAToploadProgramming.MediumCycle_VendPrice[0];			//Washer only: Cycle Modifier Key 2 Vend Price (cents)
-				temp[5] = SQACAToploadProgramming.MediumCycle_VendPrice[0];
+				case 1:																//Medium
+				temp[4] = SQACAToploadProgramming.MediumCycle_VendPrice[0];			//Washer only: Cycle Modifier Key 1 Vend Price (cents)
+				temp[5] = SQACAToploadProgramming.MediumCycle_VendPrice[1];			//Default: 25 (All Controls)
 				break;
-				case 0:
+				case 0:																//Light
 				temp[4] = 0;														//Washer only: Default Cycle Modifier = 0 (Light) 
 				temp[5] = 0;
 				break;
 			}
-			*/
+			
 			temp[6] = 0;
 			temp[7] = 0;															//Dryer only
 			temp[8] = 0;															//Top-Off Time in Minutes (Dryer)
@@ -435,34 +435,34 @@ bool sendSQACAVendPrice(void)
 			temp[9] = 0;															//Top-Off time seconds, dryer only															//Top-Off Seconds (Dryer)
 			
 			break;
-			case PROGRAMMING_DATA_DRYER:
+			case PROGRAMMING_DATA_DRYER:											//Program Packet ID Dryer 0x29
 			temp[0] = ACA_VEND_PRICE_BYTES;
 			temp[1] = ACA_VEND_PRICE_PACKET;
-			switch( SQACAMachineStatus.CycleType )								//Cycle Value 1-5
+			switch( SQACAMachineStatus.CycleType )									//Cycle Definitions, Cycle Value 1-5
 			{
-				case 5:
+				case 5:																//Delicates Cycle
 				temp[2] = SQACADryerProgramming.HeatVendPrice4[0];
 				temp[3] = SQACADryerProgramming.HeatVendPrice4[1];
 				break;
-				case 4:													//default
+				case 4:																//default, Medium Temperature Cycle
 				temp[2] = SQACADryerProgramming.HeatVendPrice1[0];
 				temp[3] = SQACADryerProgramming.HeatVendPrice1[1];
 				break;
-				case 3:
-				temp[2] = SQACADryerProgramming.NoHeatVendPrice[0];		//No Heat Cycle Vend Price (cents)
+				case 3:																//No Heat Cycle Vend Price (cents)
+				temp[2] = SQACADryerProgramming.NoHeatVendPrice[0];					
 				temp[3] = SQACADryerProgramming.NoHeatVendPrice[1];
-				case 2:
+				case 2:																//Low Temperature Cycle
 				temp[2] = SQACADryerProgramming.HeatVendPrice3[0];
 				temp[3] = SQACADryerProgramming.HeatVendPrice3[1];
 				break;
-				case 1:
-				temp[2] = SQACADryerProgramming.HeatVendPrice2[0];		//High Temp Cycle Vend Price (cents)
+				case 1:																//High Temp Cycle Vend Price (cents)
+				temp[2] = SQACADryerProgramming.HeatVendPrice2[0];					
 				temp[3] = SQACADryerProgramming.HeatVendPrice2[1];
 				break;
 				
 			}
 			
-			temp[4] = 0;														//Washer only
+			temp[4] = 0;															//Washer only
 			temp[5] = 0;
 			temp[6] = SQACADryerProgramming.PaymSTopoffPrice[0];
 			temp[7] = SQACADryerProgramming.PaymSTopoffPrice[1];					//Dryer only
@@ -474,6 +474,7 @@ bool sendSQACAVendPrice(void)
 	}
 	return (sendSQDataPacket(temp) );
 }
+
 bool IsACA(void)
 {
 	//Initialization Packet = 0x73
@@ -1035,45 +1036,45 @@ switch( deviceStatus.deviceType[0] )
 			temp[36] = SQACAFrontloadProgramming.DefaultCycleModifier;
 			temp[37] = SQACAFrontloadProgramming.AudioSetting;
 			break;
-			case PROGRAMMING_DATA_DRYER:
-			temp[0] = QDT_PROGRAMMING_DATA_SIZE;					//37 bytes
-			temp[1] = deviceStatus.deviceType[0];					//0x29 for Dryer Prog
+			case PROGRAMMING_DATA_DRYER:									//DRYER PROGRAMMING
+			temp[0] = QDT_PROGRAMMING_DATA_SIZE;							//37 bytes
+			temp[1] = deviceStatus.deviceType[0];							//0x29 for Dryer Prog
 			temp[2] = SQACADryerProgramming.ProductByte[0];
 			temp[3] = SQACADryerProgramming.ProductByte[1];
 			temp[4] = SQACADryerProgramming.ProductByte[2];
 			temp[5] = SQACADryerProgramming.ProductByte[3];
 			temp[6] = SQACADryerProgramming.ProductByte[4];
-			temp[7] = SQACADryerProgramming.HeatVendPrice1[0];
+			temp[7] = SQACADryerProgramming.HeatVendPrice1[0];				//Heat Vend Price
 			temp[8] = SQACADryerProgramming.HeatVendPrice1[1];
-			temp[9] = SQACADryerProgramming.NoHeatVendPrice[0];
+			temp[9] = SQACADryerProgramming.NoHeatVendPrice[0];				//No Heat Vend Price
 			temp[10] = SQACADryerProgramming.NoHeatVendPrice[1];
-			temp[11] = SQACADryerProgramming.PaymSTopoffOn;
-			temp[12] = SQACADryerProgramming.PaymSTopoffPrice[0];
-			temp[13] = SQACADryerProgramming.PaymSTopoffPrice[1];
-			temp[14] = SQACADryerProgramming.PaymSTopoffMinutes;
+			temp[13] = SQACADryerProgramming.PaymSTopoffOn;					//Top-Off On/Off
+			temp[11] = SQACADryerProgramming.PaymSTopoffPrice[0];			//Payment System Top-Off Vend Price
+			temp[12] = SQACADryerProgramming.PaymSTopoffPrice[1];
+			temp[14] = SQACADryerProgramming.PaymSTopoffMinutes;			//Payment System Top-Off Time
 			temp[15] = SQACADryerProgramming.PaymSTopoffSeconds;
-			temp[16] = SQACADryerProgramming.Coin1TopoffMinutes;
+			temp[16] = SQACADryerProgramming.Coin1TopoffMinutes;			//Coin #1 Top-off Time
 			temp[17] = SQACADryerProgramming.Coin1TopoffSeconds;
-			temp[18] = SQACADryerProgramming.Coin2TopoffMinutes;
+			temp[18] = SQACADryerProgramming.Coin2TopoffMinutes;			//Coin #2 Top-off Time
 			temp[19] = SQACADryerProgramming.Coin2TopoffSeconds;
-			temp[20] = SQACADryerProgramming.HeatCycleMinutes;
+			temp[20] = SQACADryerProgramming.HeatCycleMinutes;				//Heat Cycle Time
 			temp[21] = SQACADryerProgramming.HeatCycleSeconds;
-			temp[22] = SQACADryerProgramming.NoHeatCycleMinutes;
+			temp[22] = SQACADryerProgramming.NoHeatCycleMinutes;			//No Heat Cycle Time
 			temp[23] = SQACADryerProgramming.NoHeatCycleSeconds;
-			temp[24] = SQACADryerProgramming.HighCoolDownTime;
-			temp[25] = SQACADryerProgramming.MediumCoolDownTime;
-			temp[26] = SQACADryerProgramming.LowCoolDownTime;
-			temp[27] = SQACADryerProgramming.DelicateCoolDownTime;
-			temp[28] = SQACADryerProgramming.HighTempSetting;
+			temp[24] = SQACADryerProgramming.HighCoolDownTime;				//High Temperature Cool Down Time (Minutes)
+			temp[25] = SQACADryerProgramming.MediumCoolDownTime;			//Medium Temperature Cool Down Time (Minutes)
+			temp[26] = SQACADryerProgramming.LowCoolDownTime;				//Low Temperature Cool Down Time (Minutes)
+			temp[27] = SQACADryerProgramming.DelicateCoolDownTime;			//Delicate Temperature Cool Down Time (Minutes)
+			temp[28] = SQACADryerProgramming.HighTempSetting;				//High Temperature
 			temp[29] = SQACADryerProgramming.MediumTempSetting;
-			temp[30] = SQACADryerProgramming.LowTempSetting;
+			temp[30] = SQACADryerProgramming.LowTempSetting;				//Low Temperature
 			temp[31] = SQACADryerProgramming.DelicateTempSetting;
-			temp[32] = SQACADryerProgramming.DefaultCycle;
-			temp[33] = SQACADryerProgramming.AudioSetting;
-			temp[34] = SQACADryerProgramming.AudioEnable1;
-			temp[35] = SQACADryerProgramming.AudioEnable2;
-			temp[36] = SQACADryerProgramming.DisplaySetting1;
-			temp[37] = SQACADryerProgramming.DisplaySetting2;
+			temp[32] = SQACADryerProgramming.DefaultCycle;					//Default Cycle
+			temp[33] = SQACADryerProgramming.AudioSetting;					//Audio
+			temp[34] = SQACADryerProgramming.AudioEnable1;					//Anti-Wrinkle Audio Enable
+			temp[35] = SQACADryerProgramming.AudioEnable2;					//Extended Tumble Audio Enable
+			temp[36] = SQACADryerProgramming.DisplaySetting1;				//Fahrenheit / Celsius
+			temp[37] = SQACADryerProgramming.DisplaySetting2;				//Minutes / Minutes & Seconds Display
 			
 			break;
 		}

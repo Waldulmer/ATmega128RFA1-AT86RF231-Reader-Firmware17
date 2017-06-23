@@ -106,7 +106,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'default' ">
     <OutputPath>bin\default\</OutputPath>
     <OutputType>Executable</OutputType>
-    <OutputFileName>RDR_MDC_20150129_V0.3.6</OutputFileName>
+    <OutputFileName>RDR_ACA_20170621_V0.1.1</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <ToolchainSettings>
       <AvrGcc>

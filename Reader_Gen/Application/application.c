@@ -919,11 +919,11 @@ void appDataIndication(void)
 	void appInit(void)
 	{
 		
-		#if (DEVICE_CONNECTED == ACA_MACHINE)
+		//#if (DEVICE_CONNECTED == ACA_MACHINE)
 		u8 machineCode;
 		u8 tmp=0;
 		u8 machineTimerId;
-		#endif
+		//#endif
 		
 		// Init the mac
 		LED_INIT();
@@ -1138,7 +1138,6 @@ void appDataIndication(void)
 		//vars declaration
 		ucSendDataSize = 0;
 		unsigned char tmp[16];
-
 
 		u8 ucTimerID=0xff;
 		char *uctempBuf;
@@ -1413,14 +1412,16 @@ void appDataIndication(void)
 						
 						//Display card balance on machine
 						double fBalance = 0.0;
-						uctempBuf = strstr((char *)DataBuffer,"Balance: ");
 						
+						uctempBuf = strstr((char *)DataBuffer,"Balance: ");
+												
 						uctempBuf += 9;
 						ptr = strchr(uctempBuf,'.');
 						k = ptr - uctempBuf;
 						fBalance = atof(uctempBuf);
 						
 						// Format the Balance to XX.XX
+						//capture numeric into string 
 						if (k <2)
 						sprintf(uctempBuf,"0%.2f",fBalance);
 						else if(k == 2)
@@ -1433,18 +1434,20 @@ void appDataIndication(void)
 						The codes for characters "0" through "9" are 48 through 57. So just adding 48 to any single-digit number will give you the code for the character that 
 						corresponds to that digit, f.e. uctempBuf[0]=49. digit 1=uctempBuf[0]-0x30 .
 						*/
+						//split string into individual values, skip decimal point
 						CurrentAccount.Value = (uctempBuf[0]-0x30) * 1000 + (uctempBuf[1]-0x30) * 100 + (uctempBuf[3]-0x30) * 10 + uctempBuf[4]-0x30;
 														
 						#if(DEVICE_CONNECTED == ACA_MACHINE)
 						
 						// give display control back to front end controller. Important! Don't forget!!!!
 						//displayMsg(BLANK_MSG);
-						//_delay_ms(100);
-						//sendSQDisplayCommand(0x06,0x5B,0x7D,msgNumber[uctempBuf[0]-0x30],msgNumber[uctempBuf[1]-0x30],msgNumber[uctempBuf[3]-0x30],10);
-						//_delay_ms(1000);
-						sendSQDisplayCommand(msgNumber[uctempBuf[0]-0x30],msgNumber[uctempBuf[1]-0x30] /10,msgNumber[uctempBuf[3]-0x30],msgNumber[uctempBuf[4]-0x30],LED_BLANK,LED_BLANK,10);
-						_delay_ms(2000);
 						
+						//sendSQDisplayCommand(0x06,0x5B,0x7D,msgNumber[uctempBuf[0]-0x30],msgNumber[uctempBuf[1]-0x30],msgNumber[uctempBuf[3]-0x30],10);
+						
+						sendSQDisplayCommand(msgNumber[uctempBuf[0]-0x30], msgNumber[uctempBuf[1]-0x30], msgNumber[uctempBuf[3]-0x30], msgNumber[uctempBuf[4]-0x30], LED_BLANK, LED_BLANK,10);
+						_delay_ms(2000);
+
+						//display vend price
 						if( SQACAMimicQuantumSequence(REGULAR_VEND) )
 						{
 							#if(DEBUG_BOW)

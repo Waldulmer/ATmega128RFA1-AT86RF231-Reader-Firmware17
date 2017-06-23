@@ -45,7 +45,7 @@
 #define VALID_READER_SETUP          0x00
 
 //Reader State Def
-#define READER_NEW			       0x07//0x0F //0xc7
+#define READER_NEW			        0x07//0x0F //0xc7
 
 //============================================BIT MASK===============================================//
 
@@ -53,7 +53,7 @@
 //setup info only apply to ACA
 //field start addresses must be recalculated for new field size
 
-//#define MACHINE_SETUP_MAX_BYTE			60  //maximum number of bytes per machine setup			PPOS170612 from 50 o 60
+#define MACHINE_SETUP_MAX_BYTE			60  //maximum number of bytes per machine setup			PPOS170612 from 50 o 60
 
 //#if( DEVICE_CONNECTED == ACA_MACHINE)
 	#define MACHINE_SETUP_NUM_BYTE		22  // number of bytes needed to store washer setup in eeprom PPOS170601
@@ -75,8 +75,8 @@
 #define MACHINE_TYPE_ADDR                   (u8*)0x1E//(u8*)0x20
 #define READER_STATE_ADDR                   (u8*)0x22
 
-#define MACHINE_SETUP_ADDR				     (u8*)0x24
-#define VALIDATION_CODE_ADDR			     ((u8*)(MACHINE_SETUP_ADDR+60+1))			//maximum number of bytes per machine setup	60 + 1
+#define MACHINE_SETUP_ADDR				    (u8*)0x24
+#define VALIDATION_CODE_ADDR		        ((u8*)(MACHINE_SETUP_ADDR+MACHINE_SETUP_MAX_BYTE+1))			//maximum number of bytes per machine setup	60 + 1
 
 //#define MACHINE_SETUP_ADDR                  MACHINE_SETUP_START_ADDR
 //#define MACHINE_SETUP_ADDR_DRYER            ((u8*)(MACHINE_SETUP_ADDR+MACHINE_SETUP_NUM_BYTE))

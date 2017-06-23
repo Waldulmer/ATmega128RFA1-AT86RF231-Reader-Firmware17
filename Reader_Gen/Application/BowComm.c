@@ -214,7 +214,7 @@ u8 extractIncomingMessage(char *dataBuffer)
 			n = asciiStringToNibble(ptr, nibbleStr);
 			// copy setup data
 
-			halPutEeprom(MACHINE_SETUP_ADDR, n, (u8*)nibbleStr); //write machine setup string to eeprom 
+			halPutEeprom(MACHINE_SETUP_ADDR, n, (u8*)nibbleStr); //write machine setup string to eeprom; Maurice's Fix
             
 			ReaderSetup.maxOfflineTransaction = nibbleStr[n-1];
 			halPutEeprom(READER_SETUP_ADDR, 1, (u8*)&ReaderSetup.maxOfflineTransaction); //write machine setup string to eeprom minus "number of offline transactions"            

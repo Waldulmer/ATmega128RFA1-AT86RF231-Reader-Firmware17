@@ -62,7 +62,7 @@ ReaderStateFlag.Busy = false;
 		halGetEeprom(MACHINE_DESCRIPTION_ADDR, MACHINE_NAME_SIZE, (u8*)&ReaderSetup.machineDescription);
 	}
 	else{
-		SetDefaultMachineSetup();
+		//SetDefaultMachineSetup();
 	}
 	
 

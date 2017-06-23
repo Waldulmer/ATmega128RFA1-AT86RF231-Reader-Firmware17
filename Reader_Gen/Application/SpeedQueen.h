@@ -83,11 +83,11 @@ bool getSQACAInitData(void);               //receive Initialization Packet 0x74
 // write setup data to the appropriate location in memory
 void getSQSetupData(void);
 //STATUS REQUEST PACKET 0x70
-bool SQACAMachineStatusSequence(void);         ////STATUS REQUEST PACKET 0x70 SQACAMachineStatusSequence
+bool SQACAMachineStatusSequence(void);		//STATUS REQUEST PACKET 0x70 SQACAMachineStatusSequence
 //receive Status Packet 0x71
 bool getSQACAStatusData(void);				//getSQACAStatusData receive Status Packet 0x71
 //send Vend Price Packet 0x72
-bool sendSQACAVendPrice(void);             //send Vend Price Packet 0x72
+bool sendSQACAVendPrice(void);				//send Vend Price Packet 0x72
 //send Audit Data Packet 0x30
 bool SQACAAuditDataSequence(void);
 //receive Audit Data Packet 0x31
