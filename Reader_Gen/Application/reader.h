@@ -68,8 +68,6 @@ typedef struct {
 	u16 locationId;
 	u8	maxOfflineTransaction;
 	u8  numOfSavedTransactions;
-//	bool  EnableTransactionColl;		//Allow transactions to be collected
-//	bool	MaxNumTransReached;
 	u8 machineDescription[MACHINE_NAME_SIZE+1];
 	u8 machineLabel[MACHINE_LABEL_SIZE+1];
 	
@@ -113,7 +111,7 @@ typedef struct {
 	u8 Time[3];			//number of seconds from 12AM; 12:00:00AM == 0 seconds, 11:59:59PM == 86399 seconds.
 	u8 isOffline;
 }  __attribute__((packed)) structTransaction;
-
+/*
 typedef struct
 {
 	u32 cardId;
@@ -121,7 +119,7 @@ typedef struct
 	structDate date;			//date of transaction based on time received from server. BCD (mm,dd,yyyy).
 	structTime time;			//time of transaction.
 } __attribute__((packed))structBATransaction;
-
+*/
 void initReader(void);
 void getDate(structDate *date);
 void getTime(structTime *time);

@@ -98,15 +98,11 @@ void getSQSetupData(void)
 		SQACAToploadProgramming.DelicateCycle_extraRinseAgitateTime = 0;
 		SQACAToploadProgramming.DelicateCycle_finalSpinTime = 5;
 		SQACAToploadProgramming.DefaultCycle = 5;							//Cycle value (Perm Press/Warm)
-		SQACAToploadProgramming.DefaultCycleModifier = 0;					//Default: 0 = Light 
+		SQACAToploadProgramming.DefaultCycleModifier = 0;					//Default: 0 = Light
 		SQACAToploadProgramming.WarmRinse = 1;
 		SQACAToploadProgramming.AudioSetting = 29;
-
-		
-		//MachineToploadSetupData.ModifiedVendPrice[0] = tmp[3];
-		//MachineToploadSetupData.ModifiedVendPrice[1] = tmp[4];
-		//SQACAToploadProgramming.ControlConfig = tmp[14];
 		break;
+
 		case PROGRAMMING_DATA_FRONTLOAD:
 		halGetEeprom(MACHINE_SETUP_ADDR, 16, (u8*)&tmp);			//write machine setup string 16 Bytes to eeprom
 		vendPrice = (tmp[9] * 256 + tmp[10]) / 100.0;				//Perm Press/Warm Cycle Vend Price (cents) default
@@ -164,8 +160,9 @@ void getSQSetupData(void)
 		SQACAFrontloadProgramming.DefaultCycleModifier = 0;
 		SQACAFrontloadProgramming.AudioSetting = 29;						//enable audio
 		break;
+
 		case PROGRAMMING_DATA_DRYER:
-		halGetEeprom(MACHINE_SETUP_ADDR, 17, (u8*)&tmp);			//write machine setup string 16 Bytes for dryer to eeprom PPOS170601
+		halGetEeprom(MACHINE_SETUP_ADDR, 17, (u8*)&tmp);			//write machine setup string 18-1 Bytes for dryer to eeprom PPOS170601
 		//halGetEeprom(MACHINE_SETUP_ADDR, 18, (u8*)&tmp);			//write machine setup string 18 Bytes for dryer to eeprom
 		vendPrice = (tmp[1] * 256 + tmp[2]) / 100.0;
 		
@@ -181,7 +178,7 @@ void getSQSetupData(void)
 		SQACADryerProgramming.HeatVendPrice4[0] = tmp[7];			//Delicates Cycle Vend Price (cents)
 		SQACADryerProgramming.HeatVendPrice4[1] = 0;
 		SQACADryerProgramming.NoHeatVendPrice[0] = tmp[9];			//No Heat Cycle Vend Price (cents)
-		SQACADryerProgramming.NoHeatVendPrice[1] = 0;				
+		SQACADryerProgramming.NoHeatVendPrice[1] = 0;
 		SQACADryerProgramming.PaymSTopoffOn = tmp[13];				//Top Off Enabled, default=1
 		SQACADryerProgramming.PaymSTopoffPrice[0] = tmp[11];		//Top Off Price (cents)
 		SQACADryerProgramming.PaymSTopoffPrice[1] = 0;
@@ -191,9 +188,9 @@ void getSQSetupData(void)
 		SQACADryerProgramming.Coin1TopoffSeconds = 38;
 		SQACADryerProgramming.Coin2TopoffMinutes = 22;
 		SQACADryerProgramming.Coin2TopoffSeconds = 30;
-		SQACADryerProgramming.HeatCycleMinutes = 45;
+		SQACADryerProgramming.HeatCycleMinutes = 45; 		
 		SQACADryerProgramming.HeatCycleSeconds = 0;
-		SQACADryerProgramming.NoHeatCycleMinutes = 45;
+		SQACADryerProgramming.NoHeatCycleMinutes = 45; 		
 		SQACADryerProgramming.NoHeatCycleSeconds = 0;
 		SQACADryerProgramming.HighCoolDownTime = 3;
 		SQACADryerProgramming.MediumCoolDownTime = 3;
@@ -226,8 +223,7 @@ Packet. Assuming the Payment System received the packet correctly, it will then 
 Vend Price Packet. The Machine Control will respond with an ACK, and the Payment System and Machine Control will terminate the
 communication sequence. The Machine Control will accept the vend price passed in this packet as the current vend
 price to be written to the display, and used in a vending transaction.
-The Machine Status Communication Sequence in the Payment System Driven Vend Price option must be
-completed as shown.
+The Machine Status Communication Sequence in the Payment System Driven Vend Price option must be completed as shown.
 PS: <0x70 – Status Request> <ACK> <0x72 – Vend Price>
 MC: <ACK> <0x71 – Machine Status> <ACK>
 
@@ -260,7 +256,7 @@ bool SQACAMachineStatusSequence(void)
 }
 
 bool getSQACAStatusData(void)
-{	
+{
 	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
 	{
 		u8 buf[ACA_STATUS_RESPONSE_BYTES] = {0};
@@ -302,10 +298,10 @@ bool getSQACAStatusData(void)
 	return false;
 }
 
-
+//The Payment System sends the Machine Control the active vend price for a machine cycle.
 bool sendSQACAVendPrice(void)
 {
-	u8 temp[11]= {0};	
+	u8 temp[11]= {0};
 	
 	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
 	{
@@ -354,10 +350,8 @@ bool sendSQACAVendPrice(void)
 				temp[3] = SQACAToploadProgramming.VendPrice1[1];
 				break;
 			}
-			//temp[4] = SQACAToploadProgramming.MediumCycle_VendPrice[0];				//Washer only: Cycle Modifier Key 1 Vend Price (cents)
-			//temp[5] = SQACAToploadProgramming.MediumCycle_VendPrice[1];				//(0x00 for dryers)
-			
-			switch( SQACAMachineStatus.CycleModifier )								//Cycle Modifier A4 Default: 0 = Light, 1 = Medium, 2 = Heavy			
+						
+			switch( SQACAMachineStatus.CycleModifier )								//Cycle Modifier A4 Default: 0 = Light, 1 = Medium, 2 = Heavy
 			{
 				case 3:
 				temp[4] = 0;														//Washer only: Cycle Modifier = 3 (Small Load)
@@ -372,7 +366,7 @@ bool sendSQACAVendPrice(void)
 				temp[5] = SQACAToploadProgramming.MediumCycle_VendPrice[1];			//Default: 25 (All Controls)
 				break;
 				case 0:																//Light
-				temp[4] = 0;														//Washer only: Default Cycle Modifier = 0 (Light) 
+				temp[4] = 0;														//Washer only: Default Cycle Modifier = 0 (Light)
 				temp[5] = 0;
 				break;
 			}
@@ -449,14 +443,14 @@ bool sendSQACAVendPrice(void)
 				temp[3] = SQACADryerProgramming.HeatVendPrice1[1];
 				break;
 				case 3:																//No Heat Cycle Vend Price (cents)
-				temp[2] = SQACADryerProgramming.NoHeatVendPrice[0];					
+				temp[2] = SQACADryerProgramming.NoHeatVendPrice[0];
 				temp[3] = SQACADryerProgramming.NoHeatVendPrice[1];
 				case 2:																//Low Temperature Cycle
 				temp[2] = SQACADryerProgramming.HeatVendPrice3[0];
 				temp[3] = SQACADryerProgramming.HeatVendPrice3[1];
 				break;
 				case 1:																//High Temp Cycle Vend Price (cents)
-				temp[2] = SQACADryerProgramming.HeatVendPrice2[0];					
+				temp[2] = SQACADryerProgramming.HeatVendPrice2[0];
 				temp[3] = SQACADryerProgramming.HeatVendPrice2[1];
 				break;
 				
@@ -464,7 +458,7 @@ bool sendSQACAVendPrice(void)
 			
 			temp[4] = 0;															//Washer only
 			temp[5] = 0;
-			temp[6] = SQACADryerProgramming.PaymSTopoffPrice[0];
+			temp[6] = SQACADryerProgramming.PaymSTopoffPrice[0];					//Dryer only - TopOff Price
 			temp[7] = SQACADryerProgramming.PaymSTopoffPrice[1];					//Dryer only
 			temp[8] = SQACADryerProgramming.PaymSTopoffMinutes;						//Top-Off Time in Minutes (Dryer)
 			temp[9] = 0;															//Top-Off time seconds, dryer only															//Top-Off Seconds (Dryer)
@@ -472,9 +466,12 @@ bool sendSQACAVendPrice(void)
 			break;
 		}
 	}
-	return (sendSQDataPacket(temp) );
+	return ( sendSQDataPacket(temp) );
 }
 
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 bool IsACA(void)
 {
 	//Initialization Packet = 0x73
@@ -498,12 +495,7 @@ bool IsACA(void)
 	return false;
 
 }
-/*						//PPOS
-bool isMDC(void)
-{
-	return false;
-}
-*/
+
 /**
 @brief MACHINE CONTROL INITIALIZATION PACKET
 The Payment System must perform an Initialization Communication sequence ten seconds after power-up.
@@ -535,7 +527,9 @@ bool getSQACAInitData()
 	return false;
 }
 
-
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 bool sendSQDataPacket(u8 *buf)
 {
 	u8 n, numberOfBytes, BCC, i;
@@ -584,6 +578,9 @@ bool sendSQDataPacket(u8 *buf)
 	return false;
 }
 
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 bool getSQDataPacket(u8 *buf)
 {
 	u8 i,n,BCC;
@@ -619,104 +616,123 @@ bool getSQDataPacket(u8 *buf)
 	}
 	return 0;
 }
-//MachineType[0] = 33,34,29, MachineType[1] = 3
+
+/**
+Callback function, called to examine machine status to determine if the machine is in MACHINE_READY_MODE(0x01) and MIMIC_QUANTUM_LOCK_ACTIVE(0x20)
+
+@param waitSQStartKey True if Machine Status MACHINE_READY_MODE and MIMIC_QUANTUM_LOCK_ACTIVE bit is set,
+Machine Status = Ready Mode = 0x01
+Machine Status Secondary Modes = 0x20 (Mimic Quantum Lock Cycle Selections Active)
+or false if bits are not set.
+The MACHINE_READY_MODE bit and the MIMIC_QUANTUM_LOCK_ACTIVE bit is set when the machine is not running a cycle, and is waiting for a vend to be
+performed. In this mode of operation, the display shows the currently selected cycle, the full current vend price for that cycle.
+If the full vend amount is entered, the control will go to Start Mode.
+MachineType[0] = 33,34,29 MachineType[1] = 3 = ACA
+*/
 bool waitSQStartKey(void)
-{														
-	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES )
+{	
+	//if( (SQACAMachineStatus.MachineStatus[0] & MACHINE_READY_MODE) ||
+	//((SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) && (SQACAMachineStatus.MachineType[0] == PROGRAMMING_DATA_DRYER)) )
+	
+	if( (SQACAMachineStatus.MachineStatus[0] & MACHINE_READY_MODE) && (SQACAMachineStatus.MachineStatus[1] == MIMIC_QUANTUM_LOCK_ACTIVE) )
+	
 	{
-		if( (SQACAMachineStatus.MachineStatus[0] & MACHINE_READY_MODE) || ((SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) &&
-		(SQACAMachineStatus.MachineType[0] == PROGRAMMING_DATA_DRYER)) || ((SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE)))
-		//READY MODE, START MODE, PARTIAL VEND MODE
-		if( (SQACAMachineStatus.MachineStatus[1] == MACHINE_MIMIC_LOCK_ACTIVE) )
 		return true;
 	}
 	
-
 	return false;
 }
 
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 bool isSQCycleRunning(void)
 {
-	return ( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) || SQACAMachineStatus.MachineStatus[1] == MACHINE_RUN_MODE );
+	//return ( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) || SQACAMachineStatus.MachineStatus[1] == MACHINE_RUN_MODE ); PPOS
+	return ( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) );
 }
-
+/*
 bool sendSQCashCardInserted(void)
 {
-	u8 temp[6] = {0};
+u8 temp[6] = {0};
 
-	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-	{
-		temp[0] = 3;
-		temp[1] = CASH_CARD_INSERTED;
-		temp[2] = CurrentAccount.Value >> 8;
-		temp[3] = CurrentAccount.Value;
-	}
-	else
-	{
-		temp[0] = CASH_CARD_SIZE;
-		temp[1] = CASH_CARD_INSERTED;
-		temp[2] = CurrentAccount.Value >> 8;
-		temp[3] = CurrentAccount.Value;
-		temp[4] = SQACAToploadProgramming.VendPrice1[0];
-		temp[5] = SQACAToploadProgramming.VendPrice1[1];
-	}
+if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
+{
+temp[0] = 3;
+temp[1] = CASH_CARD_INSERTED;
+temp[2] = CurrentAccount.Value >> 8;
+temp[3] = CurrentAccount.Value;
+}
+else
+{
+temp[0] = CASH_CARD_SIZE;
+temp[1] = CASH_CARD_INSERTED;
+temp[2] = CurrentAccount.Value >> 8;
+temp[3] = CurrentAccount.Value;
+temp[4] = SQACAToploadProgramming.VendPrice1[0];
+temp[5] = SQACAToploadProgramming.VendPrice1[1];
+}
 
-	return (sendSQDataPacket(temp) );
+return (sendSQDataPacket(temp) );
 }
 
 bool sendSQCashCardInsetedForTopoff(void)
 {
-	u8 temp[7] = {0};
+u8 temp[7] = {0};
 
-	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-	{
-		temp[0] = 3;
-		temp[1] = CASH_CARD_TOPOFF;
-		temp[2] = CurrentAccount.Value >> 8;
-		temp[3] = CurrentAccount.Value;
-	}
-	else
-	{
-		temp[0] = CASH_CARD_TOPOFF_SIZE;
-		temp[1] = CASH_CARD_TOPOFF;
-		temp[2] = CurrentAccount.Value >> 8;
-		temp[3] = CurrentAccount.Value;
-		temp[4] = SQACAToploadProgramming.VendPrice1[0];
-		temp[5] = SQACAToploadProgramming.VendPrice1[1];
-		
-	}
+if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
+{
+temp[0] = 3;
+temp[1] = CASH_CARD_TOPOFF;
+temp[2] = CurrentAccount.Value >> 8;
+temp[3] = CurrentAccount.Value;
+}
+else
+{
+temp[0] = CASH_CARD_TOPOFF_SIZE;
+temp[1] = CASH_CARD_TOPOFF;
+temp[2] = CurrentAccount.Value >> 8;
+temp[3] = CurrentAccount.Value;
+temp[4] = SQACAToploadProgramming.VendPrice1[0];
+temp[5] = SQACAToploadProgramming.VendPrice1[1];
 
-	return (sendSQDataPacket(temp) );
+}
+
+return (sendSQDataPacket(temp) );
 }
 
 bool sendSQCashCardRemoved(void)
 {
-	u8 temp[7] = {0};
+u8 temp[7] = {0};
 
-	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-	{
-		temp[0] = 3;
-		temp[1] = CARD_REMOVED;
-		temp[2] = CurrentAccount.Value >> 8;
-		temp[3] = CurrentAccount.Value;
-	}
-	else
-	{
-		temp[0] = CASH_CARD_REMOVED_SIZE;
-		temp[1] = CARD_REMOVED;
-		temp[2] = CurrentAccount.Value >> 8;
-		temp[3] = CurrentAccount.Value;
-		temp[4] = SQACAToploadProgramming.VendPrice1[0];
-		temp[5] = SQACAToploadProgramming.VendPrice1[1];
-	}
-	return (sendSQDataPacket(temp) );
+if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
+{
+temp[0] = 3;
+temp[1] = CARD_REMOVED;
+temp[2] = CurrentAccount.Value >> 8;
+temp[3] = CurrentAccount.Value;
 }
+else
+{
+temp[0] = CASH_CARD_REMOVED_SIZE;
+temp[1] = CARD_REMOVED;
+temp[2] = CurrentAccount.Value >> 8;
+temp[3] = CurrentAccount.Value;
+temp[4] = SQACAToploadProgramming.VendPrice1[0];
+temp[5] = SQACAToploadProgramming.VendPrice1[1];
+}
+return (sendSQDataPacket(temp) );
+}
+*/
 
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 bool SQACAMimicQuantumSequence(u8 cardType)
 {
+	//If True, the Start Pad will now be flashing one second on, one second off for 30 seconds
 	if( (cardType == REGULAR_VEND) && sendSQACAMimicQuantumVending() )
-	{
-		CurrentAccount.CardState = CARD_IN;
+	{		
 		return true;
 	}
 	return false;
@@ -737,30 +753,52 @@ Mimic Quantum Lock Cycle Selections will now be seen in the next Machine Status 
 */
 bool sendSQACAMimicQuantumVending(void)
 {
-	u8 temp[4] = {0};
-
-	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-	{
-		temp[0] = ACA_A4_MIMIC_QUANTUM_BYTES;						//Number of bytes in Data Field = 3
-		temp[1] = ACA_A4_MIMIC_QUANTUM_PACKET;						//Mimic Quantum Interface = 0x64
-		temp[2] = ACA_A4_STARTPAD_FLASHING;
-		temp[3] = ACA_A4_LOCKCYCLE_ENABLED;
-	}
-	return (sendSQDataPacket(temp) );
+	u8 temp[4] = {0};	
+	
+	temp[0] = ACA_A4_MIMIC_QUANTUM_BYTES;						//Number of bytes in Data Field = 3
+	temp[1] = ACA_A4_MIMIC_QUANTUM_PACKET;						//Mimic Quantum Interface = 0x64
+	temp[2] = ACA_A4_STARTPAD_FLASHING;							//Duration of Start Pad Flashing = 30
+	temp[3] = ACA_A4_LOCKCYCLE_ENABLED;							//Lock Cycle Selection enabled = 1
+	
+	return ( sendSQDataPacket(temp) );
 }
-
-bool sendSQACAVendingTransactions(void)
+/**
+@brief The Payment System sends this packet to the Machine Control to perform a vending transaction.
+Once this vend is received by the machine control, the Start Pad LED will no longer flash. As long as the door has been
+closed the entire time and the 10 seconds has not expired, the control will begin the purchased cycle. If either of these
+are not true, the control will enter Start Mode which will prompt the user to press Start again.
+If the packet is received without error, the Machine Control will respond with an <ACK>. The updated vending
+information internal to the control will be updated in the Machine Status Packet in the next Machine Status
+communication.
+If the vend could not be performed as presented in the Vending Payment Packet, as would be the case when the UnAvailable bit is set,
+the Machine Control will respond with an <INV>.
+*/
+bool sendSQACAVendingTransaction(void)
 {
 	u8 temp[7] = {0};
 
-	temp[0] = ACA_VENDING_PAYMENT_BYTES;						//Number of bytes in Data Field = 6
-	temp[1] = ACA_VENDING_PAYMENT_PACKET;						//Vending Payment = 0x6A
-	temp[2] = SQACAMachineStatus.RemainingVend[0];
+	temp[0] = ACA_VENDING_PAYMENT_BYTES;							//Number of bytes in Data Field = 6
+	temp[1] = ACA_VENDING_PAYMENT_PACKET;							//Vending Payment = 0x6A
+	temp[2] = SQACAMachineStatus.RemainingVend[0];					//Vend Amount
 	temp[3] = SQACAMachineStatus.RemainingVend[1];
 	temp[4] = SQACAMachineStatus.RemainingVend[0];
 	temp[5] = SQACAMachineStatus.RemainingVend[1];
 
-	return (sendSQDataPacket(temp) );
+	return ( sendSQDataPacket(temp) );
+}
+
+bool sendSQACATopOffVendingTransaction(void)
+{
+	u8 temp[7] = {0};
+
+	temp[0] = ACA_VENDING_PAYMENT_BYTES;							//Number of bytes in Data Field = 6
+	temp[1] = ACA_VENDING_PAYMENT_PACKET;							//Vending Payment = 0x6A
+	temp[2] = SQACADryerProgramming.PaymSTopoffPrice[0];					//TopOff Vend Amount
+	temp[3] = SQACADryerProgramming.PaymSTopoffPrice[1];
+	temp[4] = SQACADryerProgramming.PaymSTopoffPrice[0];
+	temp[5] = SQACADryerProgramming.PaymSTopoffPrice[1];
+
+	return ( sendSQDataPacket(temp) );
 }
 
 bool sendSQAddTime(void)
@@ -770,9 +808,12 @@ bool sendSQAddTime(void)
 	temp[0] = ADD_TIME_PACKET_SIZE;
 	temp[1] = ADD_TIME_COMMAND;
 
-	return (sendSQDataPacket(temp) );
+	return ( sendSQDataPacket(temp) );
 }
 
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 bool sendSQCardErrorCode(u8 cardErrorCode)
 {
 	u8 temp[3] = {0};
@@ -781,9 +822,12 @@ bool sendSQCardErrorCode(u8 cardErrorCode)
 	temp[1] = CARD_ERROR_PACKET;
 	temp[2] = cardErrorCode;
 
-	return (sendSQDataPacket(temp) );
+	return ( sendSQDataPacket(temp) );
 }
 
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 bool sendSQAudioBeepRequest(u8 beepLength)
 {
 	u8 temp[3] = {0};
@@ -792,7 +836,7 @@ bool sendSQAudioBeepRequest(u8 beepLength)
 	temp[1] = AUDIO_BEEP_REQUEST;
 	temp[2] = beepLength;
 
-	return (sendSQDataPacket(temp) );
+	return ( sendSQDataPacket(temp) );
 }
 
 /**********************************************************************************************
@@ -803,7 +847,6 @@ Description: This function will be used to send text to the MDC 6 position 7 seg
 Led1 to led6 are limited to values defined in "display.h"
 ***********************************************************************************************
 */
-
 bool sendSQDisplayCommand(u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration)
 {
 	u8 temp[9]={0};
@@ -818,7 +861,7 @@ bool sendSQDisplayCommand(u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u
 	temp[7] = led6;
 	temp[8] = duration;				//Duration of display in seconds
 
-	return (sendSQDataPacket(temp) );
+	return ( sendSQDataPacket(temp) );
 }
 
 /*****************************************************************
@@ -826,7 +869,6 @@ This function will display the current version of reader firmware
 on the ACA display for a minimum of 2 seconds.
 ********************************************************************
 */
-
 bool displaySQReaderVersion(void)
 {
 	if( sendSQDisplayCommand(LED_r, msgNumber[__APP_MAJOR__],msgNumber[__APP_MINOR__],msgNumber[__APP_REVISION__], LED_BLANK,LED_BLANK,5) )
@@ -849,43 +891,44 @@ bool displaySQCardError(void)
 	}
 	return false;
 }
-
+/*
 bool cardRemoved(u8 cardType)
 {
-	if( cardType == CASH_CARD )
-	{
-		if( sendSQCashCardRemoved() )
-		{
-			CurrentAccount.CardState = CARD_OUT;
-			return true;
-		}
+if( cardType == CASH_CARD )
+{
+if( sendSQCashCardRemoved() )
+{
+CurrentAccount.CardState = CARD_OUT;
+return true;
+}
 
-	}
-	else
-	{
+}
+else
+{
 
-		//if ( sendSQCardRemoved() )				//PPOS
-		//{
-		//	CurrentAccount.CardState = CARD_OUT;
-		//	return true;
-		//}
-	}
-	return false;
+//if ( sendSQCardRemoved() )				//PPOS
+//{
+//	CurrentAccount.CardState = CARD_OUT;
+//	return true;
+//}
+}
+return false;
 }
 bool cardInserted(u8 cardType)
 {
-	if( (cardType == REGULAR_VEND) && sendSQCashCardInserted() )
-	{
-		CurrentAccount.CardState = CARD_IN;
-		return true;
-	}
-	else if ( (cardType == TOPOFF_VEND) && sendSQCashCardInsetedForTopoff() )
-	{
-		CurrentAccount.CardState = CARD_IN;
-		return true;
-	}
-	return false;
+if( (cardType == REGULAR_VEND) && sendSQCashCardInserted() )
+{
+CurrentAccount.CardState = CARD_IN;
+return true;
 }
+else if ( (cardType == TOPOFF_VEND) && sendSQCashCardInsetedForTopoff() )
+{
+CurrentAccount.CardState = CARD_IN;
+return true;
+}
+return false;
+}
+*/
 /**
 @brief Power-up Mode.
 The Payment System and Machine Control exchange critical information in the Initialization Communication sequence.
@@ -898,12 +941,10 @@ void SQACAInitializationSequence(void)
 {
 	if( IsACA() )
 	{
-		//set q flag
+		//set ACA flag
 		SQACAMachineStatus.MachineType[1] = ACA_SERIES;
-
 	}
 	
-
 	_delay_ms(2);
 	SQACAMachineStatusCommSequence();
 	deviceStatus.deviceType[0] = SQACAMachineStatus.MachineType[0];
@@ -914,9 +955,10 @@ bool isMachineCycleRunning()
 {
 	return (isSQCycleRunning() );
 }
+
+//Examine machine control with Machine Status
 bool waitForMachineStartKey()
 {
-
 	return waitSQStartKey();
 }
 
@@ -935,158 +977,161 @@ void SQACAMachineStatusCommSequence(void)
 	}
 	
 }
-
+/************************************************************************/
+/*   getSQReaderMachineSetup(void)                                      */
+/************************************************************************/
 bool getSQReaderMachineSetup(void)
 {
-	u8 temp[ACA_MAX_PACKET_SIZE] = {0};	
+	u8 temp[ACA_MAX_PACKET_SIZE] = {0};
 	
-switch( deviceStatus.deviceType[0] )
+	switch( deviceStatus.deviceType[0] )
 	{
 		case PROGRAMMING_DATA_TOPLOAD:
 
-			temp[0] = QTL_PROGRAMMING_DATA_SIZE;					//50 bytes
-			temp[1] = deviceStatus.deviceType[0];					//0x21 (TLW Prog)
-			temp[2] = SQACAToploadProgramming.ProductByte[0];
-			temp[3] = SQACAToploadProgramming.ProductByte[1];
-			temp[4] = SQACAToploadProgramming.ProductByte[2];
-			temp[5] = SQACAToploadProgramming.ProductByte[3];
-			temp[6] = SQACAToploadProgramming.ProductByte[4];
-			temp[7] = SQACAToploadProgramming.VendPrice1[0];
-			temp[8] = SQACAToploadProgramming.VendPrice1[1];
-			temp[9] = SQACAToploadProgramming.VendPrice2[0];
-			temp[10] = SQACAToploadProgramming.VendPrice2[1];
-			temp[11] = SQACAToploadProgramming.VendPrice3[0];
-			temp[12] = SQACAToploadProgramming.VendPrice3[1];
-			temp[13] = SQACAToploadProgramming.VendPrice4[0];
-			temp[14] = SQACAToploadProgramming.VendPrice4[1];
-			temp[15] = SQACAToploadProgramming.VendPrice5[0];
-			temp[16] = SQACAToploadProgramming.VendPrice5[1];
-			temp[17] = SQACAToploadProgramming.VendPrice6[0];
-			temp[18] = SQACAToploadProgramming.VendPrice6[1];
-			temp[19] = SQACAToploadProgramming.VendPrice7[0];
-			temp[20] = SQACAToploadProgramming.VendPrice7[1];
-			temp[21] = SQACAToploadProgramming.VendPrice8[0];
-			temp[22] = SQACAToploadProgramming.VendPrice8[1];
-			temp[23] = SQACAToploadProgramming.VendPrice9[0];
-			temp[24] = SQACAToploadProgramming.VendPrice9[1];
-			temp[25] = SQACAToploadProgramming.MediumCycle_VendPrice[0];
-			temp[26] = SQACAToploadProgramming.MediumCycle_VendPrice[1];
-			temp[27] = SQACAToploadProgramming.HeavyCycle_VendPrice[0];
-			temp[28] = SQACAToploadProgramming.HeavyCycle_VendPrice[1];
-			temp[29] = SQACAToploadProgramming.HeavyCycle_option;
-			temp[30] = SQACAToploadProgramming.MediumCycle_option;
-			temp[31] = SQACAToploadProgramming.MediumCycle_extraWashTime;
-			temp[32] = SQACAToploadProgramming.MediumCycle_extraRinseTime;
-			temp[33] = SQACAToploadProgramming.HeavyCycle_extraWashTime;
-			temp[34] = SQACAToploadProgramming.HeavyCycle_extraRinseTime;
-			temp[35] = SQACAToploadProgramming.NormalCycle_washAgitateTime;
-			temp[36] = SQACAToploadProgramming.NormalCycle_rinseAgitateTime;
-			temp[37] = SQACAToploadProgramming.NormalCycle_rinseAgitateTime;
-			temp[38] = SQACAToploadProgramming.NormalCycle_finalSpinTime;
-			temp[39] = SQACAToploadProgramming.PermPressCycle_washAgitateTime;
-			temp[40] = SQACAToploadProgramming.PermPressCycle_extraRinseAgitateTime;
-			temp[41] = SQACAToploadProgramming.PermPressCycle_rinseAgitateTime;
-			temp[42] = SQACAToploadProgramming.PermPressCycle_finalSpinTime;
-			temp[43] = SQACAToploadProgramming.DelicateCycle_washAgitateTime;
-			temp[44] = SQACAToploadProgramming.DelicateCycle_extraRinseAgitateTime;
-			temp[41] = SQACAToploadProgramming.DelicateCycle_rinseAgitateTime;
-			temp[46] = SQACAToploadProgramming.DelicateCycle_finalSpinTime;
-			temp[47] = SQACAToploadProgramming.DefaultCycle;
-			temp[48] = SQACAToploadProgramming.DefaultCycleModifier;
-			temp[49] = SQACAToploadProgramming.WarmRinse;
-			temp[50] = SQACAToploadProgramming.AudioSetting;
-			break;
-			case PROGRAMMING_DATA_FRONTLOAD:
-			temp[0] = QTL_PROGRAMMING_DATA_SIZE;					//37 bytes
-			temp[1] = deviceStatus.deviceType[0];					//0x22 (FLW Prog)
-			temp[2] = SQACAFrontloadProgramming.ProductByte[0];
-			temp[3] = SQACAFrontloadProgramming.ProductByte[1];
-			temp[4] = SQACAFrontloadProgramming.ProductByte[2];
-			temp[5] = SQACAFrontloadProgramming.ProductByte[3];
-			temp[6] = SQACAFrontloadProgramming.ProductByte[4];
-			temp[7] = SQACAFrontloadProgramming.VendPrice1[0];
-			temp[8] = SQACAFrontloadProgramming.VendPrice1[1];
-			temp[9] = SQACAFrontloadProgramming.VendPrice2[0];
-			temp[10] = SQACAFrontloadProgramming.VendPrice2[1];
-			temp[11] = SQACAFrontloadProgramming.VendPrice3[0];
-			temp[12] = SQACAFrontloadProgramming.VendPrice3[1];
-			temp[13] = SQACAFrontloadProgramming.VendPrice4[0];
-			temp[14] = SQACAFrontloadProgramming.VendPrice4[1];
-			temp[15] = SQACAFrontloadProgramming.VendPrice5[0];
-			temp[16] = SQACAFrontloadProgramming.VendPrice5[1];
-			temp[17] = SQACAFrontloadProgramming.VendPrice6[0];
-			temp[18] = SQACAFrontloadProgramming.VendPrice6[1];
-			temp[19] = SQACAFrontloadProgramming.VendPrice7[0];
-			temp[20] = SQACAFrontloadProgramming.VendPrice7[1];
-			temp[21] = SQACAFrontloadProgramming.VendPrice8[0];
-			temp[22] = SQACAFrontloadProgramming.VendPrice8[1];
-			temp[23] = SQACAFrontloadProgramming.VendPrice9[0];
-			temp[24] = SQACAFrontloadProgramming.VendPrice9[1];
-			temp[25] = SQACAFrontloadProgramming.MediumCycle_VendPrice[0];
-			temp[26] = SQACAFrontloadProgramming.MediumCycle_VendPrice[1];
-			temp[27] = SQACAFrontloadProgramming.HeavyCycle_VendPrice[0];
-			temp[28] = SQACAFrontloadProgramming.HeavyCycle_VendPrice[1];
-			temp[29] = SQACAFrontloadProgramming.HeavyCycle_option;
-			temp[30] = SQACAFrontloadProgramming.MediumCycle_option;
-			temp[31] = SQACAFrontloadProgramming.MediumCycle_extraWashTime;
-			temp[32] = SQACAFrontloadProgramming.MediumCycle_extraRinseTime;
-			temp[33] = SQACAFrontloadProgramming.HeavyCycle_extraWashTime;
-			temp[34] = SQACAFrontloadProgramming.HeavyCycle_extraRinseTime;
-			temp[35] = SQACAFrontloadProgramming.DefaultCycle;
-			temp[36] = SQACAFrontloadProgramming.DefaultCycleModifier;
-			temp[37] = SQACAFrontloadProgramming.AudioSetting;
-			break;
-			case PROGRAMMING_DATA_DRYER:									//DRYER PROGRAMMING
-			temp[0] = QDT_PROGRAMMING_DATA_SIZE;							//37 bytes
-			temp[1] = deviceStatus.deviceType[0];							//0x29 for Dryer Prog
-			temp[2] = SQACADryerProgramming.ProductByte[0];
-			temp[3] = SQACADryerProgramming.ProductByte[1];
-			temp[4] = SQACADryerProgramming.ProductByte[2];
-			temp[5] = SQACADryerProgramming.ProductByte[3];
-			temp[6] = SQACADryerProgramming.ProductByte[4];
-			temp[7] = SQACADryerProgramming.HeatVendPrice1[0];				//Heat Vend Price
-			temp[8] = SQACADryerProgramming.HeatVendPrice1[1];
-			temp[9] = SQACADryerProgramming.NoHeatVendPrice[0];				//No Heat Vend Price
-			temp[10] = SQACADryerProgramming.NoHeatVendPrice[1];
-			temp[13] = SQACADryerProgramming.PaymSTopoffOn;					//Top-Off On/Off
-			temp[11] = SQACADryerProgramming.PaymSTopoffPrice[0];			//Payment System Top-Off Vend Price
-			temp[12] = SQACADryerProgramming.PaymSTopoffPrice[1];
-			temp[14] = SQACADryerProgramming.PaymSTopoffMinutes;			//Payment System Top-Off Time
-			temp[15] = SQACADryerProgramming.PaymSTopoffSeconds;
-			temp[16] = SQACADryerProgramming.Coin1TopoffMinutes;			//Coin #1 Top-off Time
-			temp[17] = SQACADryerProgramming.Coin1TopoffSeconds;
-			temp[18] = SQACADryerProgramming.Coin2TopoffMinutes;			//Coin #2 Top-off Time
-			temp[19] = SQACADryerProgramming.Coin2TopoffSeconds;
-			temp[20] = SQACADryerProgramming.HeatCycleMinutes;				//Heat Cycle Time
-			temp[21] = SQACADryerProgramming.HeatCycleSeconds;
-			temp[22] = SQACADryerProgramming.NoHeatCycleMinutes;			//No Heat Cycle Time
-			temp[23] = SQACADryerProgramming.NoHeatCycleSeconds;
-			temp[24] = SQACADryerProgramming.HighCoolDownTime;				//High Temperature Cool Down Time (Minutes)
-			temp[25] = SQACADryerProgramming.MediumCoolDownTime;			//Medium Temperature Cool Down Time (Minutes)
-			temp[26] = SQACADryerProgramming.LowCoolDownTime;				//Low Temperature Cool Down Time (Minutes)
-			temp[27] = SQACADryerProgramming.DelicateCoolDownTime;			//Delicate Temperature Cool Down Time (Minutes)
-			temp[28] = SQACADryerProgramming.HighTempSetting;				//High Temperature
-			temp[29] = SQACADryerProgramming.MediumTempSetting;
-			temp[30] = SQACADryerProgramming.LowTempSetting;				//Low Temperature
-			temp[31] = SQACADryerProgramming.DelicateTempSetting;
-			temp[32] = SQACADryerProgramming.DefaultCycle;					//Default Cycle
-			temp[33] = SQACADryerProgramming.AudioSetting;					//Audio
-			temp[34] = SQACADryerProgramming.AudioEnable1;					//Anti-Wrinkle Audio Enable
-			temp[35] = SQACADryerProgramming.AudioEnable2;					//Extended Tumble Audio Enable
-			temp[36] = SQACADryerProgramming.DisplaySetting1;				//Fahrenheit / Celsius
-			temp[37] = SQACADryerProgramming.DisplaySetting2;				//Minutes / Minutes & Seconds Display
-			
-			break;
-		}
-	return (sendSQDataPacket(temp) );
+		temp[0] = QTL_PROGRAMMING_DATA_SIZE;					//50 bytes
+		temp[1] = deviceStatus.deviceType[0];					//0x21 (TLW Prog)
+		temp[2] = SQACAToploadProgramming.ProductByte[0];
+		temp[3] = SQACAToploadProgramming.ProductByte[1];
+		temp[4] = SQACAToploadProgramming.ProductByte[2];
+		temp[5] = SQACAToploadProgramming.ProductByte[3];
+		temp[6] = SQACAToploadProgramming.ProductByte[4];
+		temp[7] = SQACAToploadProgramming.VendPrice1[0];
+		temp[8] = SQACAToploadProgramming.VendPrice1[1];
+		temp[9] = SQACAToploadProgramming.VendPrice2[0];
+		temp[10] = SQACAToploadProgramming.VendPrice2[1];
+		temp[11] = SQACAToploadProgramming.VendPrice3[0];
+		temp[12] = SQACAToploadProgramming.VendPrice3[1];
+		temp[13] = SQACAToploadProgramming.VendPrice4[0];
+		temp[14] = SQACAToploadProgramming.VendPrice4[1];
+		temp[15] = SQACAToploadProgramming.VendPrice5[0];
+		temp[16] = SQACAToploadProgramming.VendPrice5[1];
+		temp[17] = SQACAToploadProgramming.VendPrice6[0];
+		temp[18] = SQACAToploadProgramming.VendPrice6[1];
+		temp[19] = SQACAToploadProgramming.VendPrice7[0];
+		temp[20] = SQACAToploadProgramming.VendPrice7[1];
+		temp[21] = SQACAToploadProgramming.VendPrice8[0];
+		temp[22] = SQACAToploadProgramming.VendPrice8[1];
+		temp[23] = SQACAToploadProgramming.VendPrice9[0];
+		temp[24] = SQACAToploadProgramming.VendPrice9[1];
+		temp[25] = SQACAToploadProgramming.MediumCycle_VendPrice[0];
+		temp[26] = SQACAToploadProgramming.MediumCycle_VendPrice[1];
+		temp[27] = SQACAToploadProgramming.HeavyCycle_VendPrice[0];
+		temp[28] = SQACAToploadProgramming.HeavyCycle_VendPrice[1];
+		temp[29] = SQACAToploadProgramming.HeavyCycle_option;
+		temp[30] = SQACAToploadProgramming.MediumCycle_option;
+		temp[31] = SQACAToploadProgramming.MediumCycle_extraWashTime;
+		temp[32] = SQACAToploadProgramming.MediumCycle_extraRinseTime;
+		temp[33] = SQACAToploadProgramming.HeavyCycle_extraWashTime;
+		temp[34] = SQACAToploadProgramming.HeavyCycle_extraRinseTime;
+		temp[35] = SQACAToploadProgramming.NormalCycle_washAgitateTime;
+		temp[36] = SQACAToploadProgramming.NormalCycle_rinseAgitateTime;
+		temp[37] = SQACAToploadProgramming.NormalCycle_rinseAgitateTime;
+		temp[38] = SQACAToploadProgramming.NormalCycle_finalSpinTime;
+		temp[39] = SQACAToploadProgramming.PermPressCycle_washAgitateTime;
+		temp[40] = SQACAToploadProgramming.PermPressCycle_extraRinseAgitateTime;
+		temp[41] = SQACAToploadProgramming.PermPressCycle_rinseAgitateTime;
+		temp[42] = SQACAToploadProgramming.PermPressCycle_finalSpinTime;
+		temp[43] = SQACAToploadProgramming.DelicateCycle_washAgitateTime;
+		temp[44] = SQACAToploadProgramming.DelicateCycle_extraRinseAgitateTime;
+		temp[41] = SQACAToploadProgramming.DelicateCycle_rinseAgitateTime;
+		temp[46] = SQACAToploadProgramming.DelicateCycle_finalSpinTime;
+		temp[47] = SQACAToploadProgramming.DefaultCycle;
+		temp[48] = SQACAToploadProgramming.DefaultCycleModifier;
+		temp[49] = SQACAToploadProgramming.WarmRinse;
+		temp[50] = SQACAToploadProgramming.AudioSetting;
+		break;
+		case PROGRAMMING_DATA_FRONTLOAD:
+		temp[0] = QTL_PROGRAMMING_DATA_SIZE;					//37 bytes
+		temp[1] = deviceStatus.deviceType[0];					//0x22 (FLW Prog)
+		temp[2] = SQACAFrontloadProgramming.ProductByte[0];
+		temp[3] = SQACAFrontloadProgramming.ProductByte[1];
+		temp[4] = SQACAFrontloadProgramming.ProductByte[2];
+		temp[5] = SQACAFrontloadProgramming.ProductByte[3];
+		temp[6] = SQACAFrontloadProgramming.ProductByte[4];
+		temp[7] = SQACAFrontloadProgramming.VendPrice1[0];
+		temp[8] = SQACAFrontloadProgramming.VendPrice1[1];
+		temp[9] = SQACAFrontloadProgramming.VendPrice2[0];
+		temp[10] = SQACAFrontloadProgramming.VendPrice2[1];
+		temp[11] = SQACAFrontloadProgramming.VendPrice3[0];
+		temp[12] = SQACAFrontloadProgramming.VendPrice3[1];
+		temp[13] = SQACAFrontloadProgramming.VendPrice4[0];
+		temp[14] = SQACAFrontloadProgramming.VendPrice4[1];
+		temp[15] = SQACAFrontloadProgramming.VendPrice5[0];
+		temp[16] = SQACAFrontloadProgramming.VendPrice5[1];
+		temp[17] = SQACAFrontloadProgramming.VendPrice6[0];
+		temp[18] = SQACAFrontloadProgramming.VendPrice6[1];
+		temp[19] = SQACAFrontloadProgramming.VendPrice7[0];
+		temp[20] = SQACAFrontloadProgramming.VendPrice7[1];
+		temp[21] = SQACAFrontloadProgramming.VendPrice8[0];
+		temp[22] = SQACAFrontloadProgramming.VendPrice8[1];
+		temp[23] = SQACAFrontloadProgramming.VendPrice9[0];
+		temp[24] = SQACAFrontloadProgramming.VendPrice9[1];
+		temp[25] = SQACAFrontloadProgramming.MediumCycle_VendPrice[0];
+		temp[26] = SQACAFrontloadProgramming.MediumCycle_VendPrice[1];
+		temp[27] = SQACAFrontloadProgramming.HeavyCycle_VendPrice[0];
+		temp[28] = SQACAFrontloadProgramming.HeavyCycle_VendPrice[1];
+		temp[29] = SQACAFrontloadProgramming.HeavyCycle_option;
+		temp[30] = SQACAFrontloadProgramming.MediumCycle_option;
+		temp[31] = SQACAFrontloadProgramming.MediumCycle_extraWashTime;
+		temp[32] = SQACAFrontloadProgramming.MediumCycle_extraRinseTime;
+		temp[33] = SQACAFrontloadProgramming.HeavyCycle_extraWashTime;
+		temp[34] = SQACAFrontloadProgramming.HeavyCycle_extraRinseTime;
+		temp[35] = SQACAFrontloadProgramming.DefaultCycle;
+		temp[36] = SQACAFrontloadProgramming.DefaultCycleModifier;
+		temp[37] = SQACAFrontloadProgramming.AudioSetting;
+		break;
+		case PROGRAMMING_DATA_DRYER:									//DRYER PROGRAMMING
+		temp[0] = QDT_PROGRAMMING_DATA_SIZE;							//37 bytes
+		temp[1] = deviceStatus.deviceType[0];							//0x29 for Dryer Prog
+		temp[2] = SQACADryerProgramming.ProductByte[0];
+		temp[3] = SQACADryerProgramming.ProductByte[1];
+		temp[4] = SQACADryerProgramming.ProductByte[2];
+		temp[5] = SQACADryerProgramming.ProductByte[3];
+		temp[6] = SQACADryerProgramming.ProductByte[4];
+		temp[7] = SQACADryerProgramming.HeatVendPrice1[0];				//Heat Vend Price
+		temp[8] = SQACADryerProgramming.HeatVendPrice1[1];
+		temp[9] = SQACADryerProgramming.NoHeatVendPrice[0];				//No Heat Vend Price
+		temp[10] = SQACADryerProgramming.NoHeatVendPrice[1];
+		temp[13] = SQACADryerProgramming.PaymSTopoffOn;					//Top-Off On/Off
+		temp[11] = SQACADryerProgramming.PaymSTopoffPrice[0];			//Payment System Top-Off Vend Price
+		temp[12] = SQACADryerProgramming.PaymSTopoffPrice[1];
+		temp[14] = SQACADryerProgramming.PaymSTopoffMinutes;			//Payment System Top-Off Time
+		temp[15] = SQACADryerProgramming.PaymSTopoffSeconds;
+		temp[16] = SQACADryerProgramming.Coin1TopoffMinutes;			//Coin #1 Top-off Time
+		temp[17] = SQACADryerProgramming.Coin1TopoffSeconds;
+		temp[18] = SQACADryerProgramming.Coin2TopoffMinutes;			//Coin #2 Top-off Time
+		temp[19] = SQACADryerProgramming.Coin2TopoffSeconds;
+		temp[20] = SQACADryerProgramming.HeatCycleMinutes;				//Heat Cycle Time
+		temp[21] = SQACADryerProgramming.HeatCycleSeconds;
+		temp[22] = SQACADryerProgramming.NoHeatCycleMinutes;			//No Heat Cycle Time
+		temp[23] = SQACADryerProgramming.NoHeatCycleSeconds;
+		temp[24] = SQACADryerProgramming.HighCoolDownTime;				//High Temperature Cool Down Time (Minutes)
+		temp[25] = SQACADryerProgramming.MediumCoolDownTime;			//Medium Temperature Cool Down Time (Minutes)
+		temp[26] = SQACADryerProgramming.LowCoolDownTime;				//Low Temperature Cool Down Time (Minutes)
+		temp[27] = SQACADryerProgramming.DelicateCoolDownTime;			//Delicate Temperature Cool Down Time (Minutes)
+		temp[28] = SQACADryerProgramming.HighTempSetting;				//High Temperature
+		temp[29] = SQACADryerProgramming.MediumTempSetting;
+		temp[30] = SQACADryerProgramming.LowTempSetting;				//Low Temperature
+		temp[31] = SQACADryerProgramming.DelicateTempSetting;
+		temp[32] = SQACADryerProgramming.DefaultCycle;					//Default Cycle
+		temp[33] = SQACADryerProgramming.AudioSetting;					//Audio
+		temp[34] = SQACADryerProgramming.AudioEnable1;					//Anti-Wrinkle Audio Enable
+		temp[35] = SQACADryerProgramming.AudioEnable2;					//Extended Tumble Audio Enable
+		temp[36] = SQACADryerProgramming.DisplaySetting1;				//Fahrenheit / Celsius
+		temp[37] = SQACADryerProgramming.DisplaySetting2;				//Minutes / Minutes & Seconds Display
+		
+		break;
+	}
+	return ( sendSQDataPacket(temp) );
 }
-
+/*
 bool startMachineCycle()
 {
-	u8 temp[2];
-	
-	return (sendSQDataPacket(temp) );
+u8 temp[2];
+
+return (sendSQDataPacket(temp) );
 }
+*/
 /**
 @brief SHORT AUDIT DATA REQUEST PACKET
 An Audit Collection Command may be sent by the Payment System to retrieve limited Audit information from the

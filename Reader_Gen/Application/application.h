@@ -48,7 +48,7 @@
 #define CARD_DETECTED				0x0C
 #define SCARD_REMOVED				0x0D
 #define START_CYCLE					0x0F
-#define CYCLE_STARTED				0x10
+#define CYCLE_RUNNING				0x10
 //#define KEYPAD_ENTRY_DETECTED     0x11
 #define UPDATE_READER_FIRMWARE      0x12
 #define VALIDATE_READER				0x13
@@ -56,7 +56,7 @@
 #define GET_FIRMWARE_VERSION	    0x15
 #define RESET_EEPROM                0x16
 
-#define BOW_ERROR					0x1A // error message received from BOW
+#define BOW_ERROR					0x1A	// error message received from BOW
 #define READER_NAME_SETUP			0x1B	//assign name to reader to allow id of physical machine
 #define READER_NAME_REQUEST			0x1C	//retrieve reader name
 #define READER_LABEL_SETUP			0x1D
@@ -78,28 +78,25 @@
 /* This is the EEPROM address that 
    contains the actual size of the 
    loaded application image */
-#define	  APP_IMAGE_SIZE    0x0FFC
+#define	  APP_IMAGE_SIZE			0x0FFC
 
 /* This is the EEPROM address that 
    contains the uint16_t CRC of the 
    application image */
-#define   APP_CRC			0x0FFA 
-
-//#define lowNibble 0
-//#define highNibble 1
+#define   APP_CRC					0x0FFA 
 
 //! Maximum number of retry when sending command/result.
-#define MAX_RETRY_TO_SEND_DATA 3
+#define MAX_RETRY_TO_SEND_DATA		 3
 //! Serial send and receive data buffer size.
-#define SERIAL_RECEIVE_MAX_BUFFER 192
+#define SERIAL_RECEIVE_MAX_BUFFER	 192
 
 // Wait time for BOW response to card present request, in sec.
-#define SERVER_RESPONSE_TIMEOUT    60
+#define SERVER_RESPONSE_TIMEOUT	    60  
 // Wait time for BOW response to setup validation request, in seconds.
 #define SETUP_VALIDATION_TIMEOUT	60 
 // Wait time for BOW response to setup request, in seconds.
-#define SETUP_REQUEST_TIMEOUT	120 
-// Wait time for BOW response to KeyPressWaitTime, in seconds. 25sec default value for Quantum
+#define SETUP_REQUEST_TIMEOUT		120 
+// Wait time response to KeyPressWaitTime, in seconds. 25sec default value for Quantum
 #define MACHINE_KEYPRESS_WAITTIME	30
 
 // Wait time to toggle led1, in msec
@@ -109,25 +106,21 @@
 #define HEARTBEAT   SLOW_HEARTBEAT
 
 // device connected to the reader
-#define ACA_MACHINE       1
-
+#define ACA_MACHINE				   1
 
 #define DEVICE_CONNECTED  ACA_MACHINE
 
-#if(DEVICE_CONNECTED == ACA_MACHINE) 
+#define DEVICE_POLL_PERIOD          300     //poll period in msec
 
-    #define DEVICE_POLL_PERIOD          300     //poll period in msec
-
-
-#endif
-
+//switches
 u8 ucDeviceStateFlag;
 u8 OP;
+u8 VENDTYPE;
 
 //Machine State def
-#define DEVICE_STATUS_DONE		0x00
-#define DEVICE_STATUS_NEEDED	0x01
-#define	MACHINE_STATUS_ON		0x02
+//#define DEVICE_STATUS_DONE			0x00
+#define DEVICE_STATUS_NEEDED		0x01
+#define	MACHINE_STATUS_ON			0x02
 
 u8 ucNumberOfRetry;
 u8 ucSendDataBuffer[SERIAL_RECEIVE_MAX_BUFFER];
@@ -138,8 +131,6 @@ void doPing(void);
 
 void String_to_hexa_convert ( u8 ucDataLength, u8 * pucDataBuffer );
 
-
-
 void Beeps(u8 nBeeps);
 //void Led1_toggle (void);
 void CommTimeOut();
@@ -147,7 +138,6 @@ void HeartBeat();
 void KeypressTimeOut();
 void SetupTimeout();
 
-//void ProcessServerResponse(void);
 void DevicePoll(void);
 void SetDeviceState(void);
 
@@ -183,8 +173,6 @@ u8 ucSerialReceiveDataBuffer[SERIAL_RECEIVE_MAX_BUFFER];
 u8 ucSerialReceiveDataIndex;
 u16  ENDNODE_SHORTADDRESS;
 
-
-
 //! Serial Data Parser State.
 serial_data_parse_state_t ucSerialDataParseState;
 u8 ucParseDataStart;
@@ -196,7 +184,6 @@ void String_to_hexa_convert ( u8 ucDataLength, u8 * pucDataBuffer );
 void Serial_send_data (u8 ucDataLength, u8* pucDataBuffer);
 void Hexa_to_string_convert ( u8 ucDataLength, u8* pucDataBuffer );
 void Serial_send_board_version ( void );
-
 
 u8 AppCheckCoordinatorCommand (u8 * ucSerialReceiveDataBuffer);
 
@@ -240,6 +227,7 @@ u8 AppCheckCoordinatorCommand (u8 * ucSerialReceiveDataBuffer);
 #define __APP_REVISION__       0
 
 #endif
+
 
 #endif // _APPLICATION_H_
 

@@ -55,24 +55,21 @@
 
 #define MACHINE_SETUP_MAX_BYTE			60  //maximum number of bytes per machine setup			PPOS170612 from 50 o 60
 
-//#if( DEVICE_CONNECTED == ACA_MACHINE)
-	#define MACHINE_SETUP_NUM_BYTE		22  // number of bytes needed to store washer setup in eeprom PPOS170601
+	#define MACHINE_SETUP_NUM_BYTE		22  // number of bytes needed to store setup in eeprom PPOS170601
 	//#define MACHINE_SETUP_NUM_BYTE			12  // number of bytes needed to store washer setup in eeprom 
 	//#define DRYER_SETUP_NUM_BYTE		7   //number of additional bytes needed dryer specific setup
 	//#define QUANTUM_SETUP_NUM_BYTE		5   //number of additional bytes needed Quantum specific setup
  
-//#endif
-
 #define VALIDATION_CODE_NUM_BYTE		8   //number of bytes needed to store validation code
 #define OFFLINE_TRANSACTION_NUM_BYTE	21	//number of bytes per offline transaction
 #define READER_STATE_FLAG_SIZE			2	//number of bytes for reader state flag
 #define MACHINE_NAME_SIZE				50	//number of bytes for reader name field
 #define MACHINE_LABEL_SIZE				10	//number of bytes for reader label field
-#define MACHINE_TYPE_SIZE				2	//number of bytes for reader label field
+#define MACHINE_TYPE_SIZE				2	//number of bytes for machine type
 //-----------------------------------ADDRESS OF SETUP INFO------------------------------------------// 
 
-#define READER_SETUP_ADDR					(u8*)0x61//(u8*)0x08
-#define MACHINE_TYPE_ADDR                   (u8*)0x1E//(u8*)0x20
+#define READER_SETUP_ADDR					(u8*)0x61	//(u8*)0x08
+#define MACHINE_TYPE_ADDR                   (u8*)0x1E	//(u8*)0x20
 #define READER_STATE_ADDR                   (u8*)0x22
 
 #define MACHINE_SETUP_ADDR				    (u8*)0x24

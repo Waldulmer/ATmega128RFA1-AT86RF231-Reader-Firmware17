@@ -31,7 +31,7 @@ u16 calcMachineCRC(u8 *msg, u8 len);
 u8 ucTopOffTime;
 u8 ucCardErrorCode;
 
-/*static*/ u16 ucCardBalance;// = 07D0;
+u16 ucCardBalance;
 u16 cardId;
 double vendPrice;
 
@@ -44,155 +44,6 @@ void WaitForMachine(void)
 	ucMachineWait = MACHINE_TIME_OUT;
 }
 
-/*
-u8 SerialGetMachineData(void)					//PPOS
-{
-static u8 ucACADataBuf[ACA_MAX_PACKET_SIZE];
-static u8 i,n,BCC;
-
-
-//get machine data
-i = serial_getchar();
-if( i == STX )//state byte detected
-{
-i = serial_getchar(); // get data field size.
-BCC = (i ^ STX);
-
-for(n = 0; n < i; n++)
-{
-
-ucACADataBuf[n]= serial_getchar();
-BCC = (BCC ^ ucACADataBuf[n]);
-}
-i = serial_getchar();	// get BCC
-if(BCC == i)
-{
-switch( ucACADataBuf[0])
-{
-case ACA_STATUS_RESPONSE_PACKET:
-SQACAMachineStatus.MachineType[0]			= (ucACADataBuf[1] + PROGRAMMING_DATA);
-SQACAMachineStatus.MachineType[1]			= 1;///temp. fix later, differentiate between MDC and Quantum
-//ACAStatus.KeypadData[0]				= ucACADataBuf[2];
-SQACAMachineStatus.CycleType				= ucACADataBuf[3];
-SQACAMachineStatus.CmdToReader				= ucACADataBuf[4];
-SQACAMachineStatus.MachineStatus[0]			= ucACADataBuf[5];
-SQACAMachineStatus.MachineStatus[1]			= ucACADataBuf[6];
-SQACAMachineStatus.unused1[0]				= ucACADataBuf[7];
-SQACAMachineStatus.unused1[1]				= ucACADataBuf[8];
-SQACAMachineStatus.RemainingCycleMinutes	= ucACADataBuf[9];
-SQACAMachineStatus.RemainingCycleSeconds	= ucACADataBuf[10];
-SQACAMachineStatus.RemainingVend[0]			= ucACADataBuf[11];
-SQACAMachineStatus.RemainingVend[1]			= ucACADataBuf[12];
-SQACAMachineStatus.VendenteredTotal[0]		= ucACADataBuf[13];
-SQACAMachineStatus.VendenteredTotal[1]		= ucACADataBuf[14];
-SQACAMachineStatus.VendenteredforCycleModifier[0]	= ucACADataBuf[15];
-SQACAMachineStatus.VendenteredforCycleModifier[1]	= ucACADataBuf[16];
-SQACAMachineStatus.VendenteredforTopOff[0]	= ucACADataBuf[17];
-SQACAMachineStatus.VendenteredforTopOff[1]	= ucACADataBuf[18];
-SQACAMachineStatus.NumberofCoins1			= ucACADataBuf[19];
-SQACAMachineStatus.NumberofCoins2			= ucACADataBuf[20];
-SQACAMachineStatus.KeypadData[0]	  		= ucACADataBuf[21];
-SQACAMachineStatus.KeypadData[1]  			= ucACADataBuf[22];
-SQACAMachineStatus.CurrentKey[0]			= ucACADataBuf[23];
-SQACAMachineStatus.CurrentKey[1]			= ucACADataBuf[24];
-break;
-
-
-case ACA_AUDIT_RESPONSE_TLWPACKET:
-
-SQACAAuditData.ProductByte[5] = ucACADataBuf[1];
-SQACAAuditData.ControlSVN = ucACADataBuf[2];
-SQACAAuditData.MachineCyclesCounter[0] = ucACADataBuf[3];
-SQACAAuditData.MachineCyclesCounter[1] = ucACADataBuf[4];
-SQACAAuditData.CycleModifierCounter[0] = ucACADataBuf[5];
-SQACAAuditData.CycleModifierCounter[1] = ucACADataBuf[6];
-SQACAAuditData.AvgFillTime[0] = ucACADataBuf[7];
-SQACAAuditData.AvgFillTime[1] = ucACADataBuf[8];
-SQACAAuditData.AvgDrainTime[0] = ucACADataBuf[9];
-SQACAAuditData.AvgDrainTime[1]= ucACADataBuf[10];
-SQACAAuditData.VendedTotal[0] = ucACADataBuf[7];
-SQACAAuditData.VendedTotal[1] = ucACADataBuf[8];
-SQACAAuditData.VendedTotalBaseVendPrice[0] = ucACADataBuf[9];
-SQACAAuditData.VendedTotalBaseVendPrice[1]= ucACADataBuf[10];
-SQACAAuditData.VendedTotalCycleModifiers[0] = ucACADataBuf[9];
-SQACAAuditData.VendedTotalCycleModifiers[1]= ucACADataBuf[10];
-SQACAAuditData.VendedTotalPS[0] = ucACADataBuf[9];
-SQACAAuditData.VendedTotalPS[1] = ucACADataBuf[10];
-SQACAAuditData.VendedTotalPSBaseVendPrice[0] = ucACADataBuf[9];
-SQACAAuditData.VendedTotalPSBaseVendPrice[1]= ucACADataBuf[10];
-SQACAAuditData.VendedTotalPSCycleModifiers[0] = ucACADataBuf[9];
-SQACAAuditData.VendedTotalPSCycleModifiers[1]= ucACADataBuf[10];
-SQACAAuditData.VendedTotalPSDiscounted[0] = ucACADataBuf[9];
-SQACAAuditData.VendedTotalPSDiscounted[1]= ucACADataBuf[10];
-/*
-case ACA_AUDIT_RESPONSE_FLWPACKET:
-case ACA_AUDIT_RESPONSE_DRPACKET:
-SQACAAuditData.MachineType[0] = ucACADataBuf[1];
-SQACAAuditData.ControlSVN = ucACADataBuf[2];
-SQACAAuditData.VendPrice[0] = ucACADataBuf[3];
-SQACAAuditData.VendPrice[1] = ucACADataBuf[4];
-SQACAAuditData.Coin1Value [0] = ucACADataBuf[5];
-SQACAAuditData.Coin1Value[1] = ucACADataBuf[6];
-SQACAAuditData.Coin2Value [0] = ucACADataBuf[7];
-SQACAAuditData.Coin2Value[1] = ucACADataBuf[8];
-SQACAAuditData.NumStartPulse[0] = ucACADataBuf[9];
-SQACAAuditData.NumStartPulse [1]= ucACADataBuf[10];
-SQACAAuditData.CycleConfig = ucACADataBuf[11];
-if (ucACADataBuf[0] == AUDIT_DATA_FRONTLOAD || ucACADataBuf[0] == AUDIT_DATA_TOPLOAD )
-{
-SQACAAuditData.ControlConfig = ucACADataBuf[12];
-SQACAAuditData.Coin1Counter[0] = ucACADataBuf[13];
-SQACAAuditData.Coin1Counter[1] = ucACADataBuf[14];
-SQACAAuditData.Coin2Counter[0] = ucACADataBuf[15];
-SQACAAuditData.Coin2Counter[1] = ucACADataBuf[16];
-SQACAAuditData.NumCycles[0] = ucACADataBuf[17];
-SQACAAuditData.NumCycles[1] = ucACADataBuf[18];
-SQACAAuditData.NumStartPulse[0] = ucACADataBuf[19];
-SQACAAuditData.NumStartPulse[1] = ucACADataBuf[20];
-SQACAAuditData.AvgFillTime[0] = ucACADataBuf[21];
-SQACAAuditData.AvgFillTime[1] = ucACADataBuf[22];
-SQACAAuditData.AvgDrainTime[0] = ucACADataBuf[23];
-SQACAAuditData.AvgDrainTime[1] = ucACADataBuf[24];
-}
-else if (ucMdcDataBuf[0] == AUDIT_DATA_DRYER)
-{
-MdcAuditData.CoolDownTime = ucMdcDataBuf[12];
-MdcAuditData.Coin1TopoffTime = ucMdcDataBuf[13];
-MdcAuditData.Coin2TopoffTime = ucMdcDataBuf[14];
-MdcAuditData.HighTempSetting = ucMdcDataBuf[15];
-MdcAuditData.MedTempSetting = ucMdcDataBuf[16];
-MdcAuditData.LowTempSetting = ucMdcDataBuf[17];
-MdcAuditData.DeliTempSetting = ucMdcDataBuf[18];
-MdcAuditData.ControlConfig = ucMdcDataBuf[19];
-MdcAuditData.Coin1Counter[0] = ucMdcDataBuf[20];
-MdcAuditData.Coin1Counter[1] = ucMdcDataBuf[21];
-MdcAuditData.Coin2Counter[0] = ucMdcDataBuf[22];
-MdcAuditData.Coin2Counter[1] = ucMdcDataBuf[23];
-MdcAuditData.NumCycles[0] = ucMdcDataBuf[24];
-MdcAuditData.NumCycles[1] = ucMdcDataBuf[25];
-MdcAuditData.Coin1TopoffCounter[0] = ucMdcDataBuf[26];
-MdcAuditData.Coin1TopoffCounter[1] = ucMdcDataBuf[27];
-MdcAuditData.Coin2TopoffCounter[0] = ucMdcDataBuf[28];
-MdcAuditData.Coin2TopoffCounter[1] = ucMdcDataBuf[29];
-MdcAuditData.NumStartPulse[0] = ucMdcDataBuf[30];
-MdcAuditData.NumStartPulse[1] = ucMdcDataBuf[31];
-MdcAuditData.NumTopoffStartPulses[0] = ucMdcDataBuf[32];
-MdcAuditData.NumTopoffStartPulses[1] = ucMdcDataBuf[33];
-}
-*/
-/*
-break;
-
-default:
-break;
-}
-
-return 1;
-}
-}
-return 0;
-}
-*/
 
 
 
@@ -224,30 +75,7 @@ ISR(TIMER0_COMPA_vect)
 ucTimerCount++;
 
 }
-/*
-void SetMachineSetupData(void)
-{
-//get setup data from EEPROM
-halGetEeprom(MACHINE_SETUP_ADDR, MACHINE_SETUP_NUM_BYTE, (u8*)&SQACAToploadProgramming);
-vendPrice = (SQACAToploadProgramming.VendPrice1[0] * 256 + SQACAToploadProgramming.VendPrice1[1]) / 100.0;
-/*
-if(SQACAMachineStatus.MachineType[0] == DRYER)
-halGetEeprom(MACHINE_SETUP_ADDR_DRYER, DRYER_SETUP_NUM_BYTE, &SQACAToploadProgramming.CoolDownTime);//*/
-/*
-if(SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-halGetEeprom(MACHINE_SETUP_ADDR_QUANTUM, QUANTUM_SETUP_NUM_BYTE, (u8*)&SQACAToploadProgramming);
 
-}
-
-void SaveMachineSetupData(void)
-{
-}
-
-//PPOS170621
-void SetDefaultMachineSetup(void)
-{
-}
-*/ 
 
 u8 sendMdcPacket(u8 *ucDataBuf)
 {

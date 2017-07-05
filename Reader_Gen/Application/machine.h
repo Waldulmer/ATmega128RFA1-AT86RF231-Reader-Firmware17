@@ -48,11 +48,11 @@ void getSQAuditData(void);
 //#define AUDIT_DATA_DRYER			0x39	
 
 #define CASH_CARD_INSERTED			0x40
-#define CARD_REMOVED				0x41
-#define	CASH_CARD_TOPOFF			0x42
+//#define CARD_REMOVED				0x41
+//#define	CASH_CARD_TOPOFF			0x42
 
-#define DEDUCT_VEND_COMMAND			0x01    //PPOS
-#define DEDUCT_TOPOFF_COMMAND		0x47	//Deduct TopOff cammand
+#define START_PAD_PRESSED			0x01    //PPOS Start Pad Pressed to Confirm Selection
+#define START_PAD_PRESSED_TOPOFF	0x47	//Deduct TopOff command
 //#define MACHINE_START_COMMAND		0x48
 #define ADD_TIME_COMMAND			0x49
 #define CARD_ERROR_PACKET			0x50
@@ -117,9 +117,9 @@ void getSQAuditData(void);
 #define HEAVY				0x02		//Heavy/C/Extra Rinse
 #define SMALLLOAD			0x03
 //Machine command to reader
-#define NORMAL_STATE			0x00
-#define DEDUCT_CYCLE_VEND		0x46
-#define DEDUCT_TOPOFF_VEND		0x47
+//#define NORMAL_STATE			0x00
+//#define DEDUCT_CYCLE_VEND		0x46
+//#define DEDUCT_TOPOFF_VEND		0x47
 
 
 //Machine Status 0x71 PRIMARY MODES
@@ -135,14 +135,11 @@ void getSQAuditData(void);
 #define MACHINE_END_MODE		0x0C
 #define MACHINE_ERROR_MODE		0x80
 //Machine Status 0x71 SECONDARY MODES
-#define MACHINE_MIMIC_LOCK_ACTIVE	0x20
-
-
-
+//#define MACHINE_MIMIC_LOCK_ACTIVE	0x20
 
 //Card Status
-#define CARD_OUT				0x00
-#define CARD_IN					0x80
+//#define CARD_OUT				0x00
+//#define CARD_IN					0x80
 
 #define NUMRETRIES				8
 
@@ -185,20 +182,20 @@ typedef struct{
 	//Machine Status packet = 0x71
 	u8 	MachineType[2];					//MachineType[0] = 33,34,29, MachineType[1] = 3
 	u8 	CycleType;						//normal, delicate, 
-	u8  CycleModifier;					//Add-on
-	u8 	CmdToReader;
-	u8 	MachineStatus[2];
+	u8  CycleModifier;					//Cycle Modifier Selections
+	u8 	CmdToReader;					//Command to Payment System
+	u8 	MachineStatus[2];				//Machine Status
 	u8 	unused1[2];
-	u8 	RemainingCycleMinutes;
+	u8 	RemainingCycleMinutes;			//Remaining Cycle Time
 	u8 	RemainingCycleSeconds;
-	u8	RemainingVend[2];
-	u8	VendenteredTotal[2];
+	u8	RemainingVend[2];				//Required/Remaining Vend
+	u8	VendenteredTotal[2];			//Vend Entered Total (all sources)
 	u8	VendenteredforCycleModifier[2];
-	u8	VendenteredforTopOff[2];
+	u8	VendenteredforTopOff[2];		//Vend Entered for Top-Off
 	u8	NumberofCoins1;
 	u8	NumberofCoins2;
 	u8 	KeypadData[2];
-	u8  CurrentKey[2];
+	u8  CurrentKey[2];					//Current Key Selections
 	u8  unused2;
 	
 

@@ -121,6 +121,14 @@ void displayMsg(u8 msg)
 	{
 		sendSQDisplayCommand(LED_BLANK,LED_BLANK,LED_BLANK,LED_BLANK,LED_BLANK,LED_BLANK,0);
 	}
+	else if (msg == PPOS_MSG)		//PPOS Test message
+	{
+		sendSQDisplayCommand(LED_t,LED_E,LED_S,LED_t,LED_BLANK,LED_BLANK,5);
+	}
+	else if (msg == TOPOFF_MSG)		//TopOff message
+	{
+		sendSQDisplayCommand(LED_t,LED_o,LED_P,LED_o,LED_F,LED_F,5);
+	}
 
 }
 

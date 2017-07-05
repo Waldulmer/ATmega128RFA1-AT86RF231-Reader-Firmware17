@@ -1,11 +1,11 @@
 /*
- * reader.c
- *
- *	This file contains GenReader related functionality, to be used across applications.
- * Created: 5/28/2011 3:10:54 PM
- *  Author: Paul Bastien
- *	Copyright (C) 2011
- */ 
+* reader.c
+*
+*	This file contains GenReader related functionality, to be used across applications.
+* Created: 5/28/2011 3:10:54 PM
+*  Author: Paul Bastien
+*	Copyright (C) 2011
+*/
 
 #include <stdlib.h>
 #include "mac.h"
@@ -16,32 +16,32 @@
 #include "eeprom_map.h"
 #include "system.h"
 
-/*
-*
-*	initReader()
-*
+/**
+	Init the reader, which includes calling for getSQSetupData() 
+	
+	Sets status flags for the reader and machine
+	READER_STATE_ADDR
+	MACHINE_TYPE_ADDR
+
 */
 void initReader(void)
 {
-
-halGetEeprom(READER_STATE_ADDR, READER_STATE_FLAG_SIZE, (u8*)&ReaderStateFlag); 
-halGetEeprom(MACHINE_TYPE_ADDR, MACHINE_TYPE_SIZE, (u8*)&deviceStatus.deviceType);
+	halGetEeprom(READER_STATE_ADDR, READER_STATE_FLAG_SIZE, (u8*)&ReaderStateFlag);
+	halGetEeprom(MACHINE_TYPE_ADDR, MACHINE_TYPE_SIZE, (u8*)&deviceStatus.deviceType);
 	
-ReaderSetup.customerId = 0;
-ReaderSetup.manufacturerId = 1;
-ReaderSetup.locationId = 1;
-//ReaderSetup.MaxOfflineTransaction = MAX_NUM_OFFLINE_TRANS; // to become variable once setup is done.
-ReaderStateFlag.Busy = false;
+	ReaderSetup.customerId = 0;
+	ReaderSetup.manufacturerId = 1;
+	ReaderSetup.locationId = 1;
+	//ReaderSetup.MaxOfflineTransaction = MAX_NUM_OFFLINE_TRANS; // to become variable once setup is done.
+	ReaderStateFlag.Busy = false;
 
-//check setup status then set reader state flag
+	//check setup status then set reader state flag	
 	
-#if (DEVICE_CONNECTED == ACA_MACHINE)
 	//Init machine variables
-
 	if (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE)
 	{
-        //a valid reader ID has been detected. check for valid setup
-        getSQSetupData();  
+		//a valid reader ID has been detected. check for valid setup
+		getSQSetupData();
 		ReaderStateFlag.ValidateSetup = VALIDATE_READER_SETUP;
 		halGetEeprom(READER_SETUP_ADDR, 1, (u8*)&ReaderSetup.maxOfflineTransaction);
 		if (ReaderSetup.maxOfflineTransaction)
@@ -53,7 +53,7 @@ ReaderStateFlag.Busy = false;
 				ReaderSetup.numOfSavedTransactions = 0;
 				halPutEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
 			}
-			 
+			
 		}
 		//clear buffers
 		memset(ReaderSetup.machineLabel,0,MACHINE_LABEL_SIZE+1);
@@ -61,19 +61,17 @@ ReaderStateFlag.Busy = false;
 		halGetEeprom(MACHINE_LABEL_ADDR, MACHINE_LABEL_SIZE, (u8*)&ReaderSetup.machineLabel);
 		halGetEeprom(MACHINE_DESCRIPTION_ADDR, MACHINE_NAME_SIZE, (u8*)&ReaderSetup.machineDescription);
 	}
-	else{
+	else
+	{
 		//SetDefaultMachineSetup();
 	}
-	
 
-#endif
+	
 }
 
 /*
 Store transactions,that occur when server is off line, in EEPROM.
 */
-
-#if(DEVICE_CONNECTED == ACA_MACHINE)
 u8 storeOfflineTransaction(u32 cardNum)
 {
 	u8 return_code = 1;
@@ -86,13 +84,12 @@ u8 storeOfflineTransaction(u32 cardNum)
 	addr[1] = temp >> 8;
 	addr[0] = temp;
 	
-	OfflineTransaction.CardId		= cardNum;	
-	OfflineTransaction.LocationId	= ReaderSetup.locationId;	
+	OfflineTransaction.CardId		= cardNum;
+	OfflineTransaction.LocationId	= ReaderSetup.locationId;
 	OfflineTransaction.MachineId[0] = SQACAMachineStatus.MachineType[0];
 	OfflineTransaction.MachineId[1] = SQACAMachineStatus.MachineType[1];
 	OfflineTransaction.CycleType	= SQACAMachineStatus.CycleType;
-	
-	OfflineTransaction.ManufactureId = ReaderSetup.manufacturerId;
+	OfflineTransaction.ManufactureId = ReaderSetup.manufacturerId;	
 	switch( deviceStatus.deviceType[0] )
 	{
 		case PROGRAMMING_DATA_TOPLOAD:
@@ -204,15 +201,15 @@ u8 storeOfflineTransaction(u32 cardNum)
 		}
 	}
 	//OfflineTransaction.vendPrice = SQACAToploadProgramming.VendPrice1[0];
-	//OfflineTransaction.vendPrice = (OfflineTransaction.vendPrice >> 8 ) | SQACAToploadProgramming.VendPrice1[1];	
+	//OfflineTransaction.vendPrice = (OfflineTransaction.vendPrice >> 8 ) | SQACAToploadProgramming.VendPrice1[1];
 	
 	OfflineTransaction.Date[0] = 0x00;
 	OfflineTransaction.Date[1] = 0x00;
 	OfflineTransaction.Date[2] = 0x00;
 	OfflineTransaction.Date[3] = 0x00;
 	
-	OfflineTransaction.Time[0] = 0x00;	
-	OfflineTransaction.Time[1] = 0x00;	
+	OfflineTransaction.Time[0] = 0x00;
+	OfflineTransaction.Time[1] = 0x00;
 	OfflineTransaction.Time[2] = 0x00;
 	
 	OfflineTransaction.isOffline = true;
@@ -220,7 +217,7 @@ u8 storeOfflineTransaction(u32 cardNum)
 	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
 	//store structure in the next EEPROM record address
 	if ((ReaderSetup.numOfSavedTransactions == 0xff) || (ReaderSetup.numOfSavedTransactions < ReaderSetup.maxOfflineTransaction))
-	{	
+	{
 		if (ReaderSetup.numOfSavedTransactions == 0xff || ReaderSetup.numOfSavedTransactions == 0x00)
 		{
 			ReaderSetup.numOfSavedTransactions = 0;
@@ -228,18 +225,18 @@ u8 storeOfflineTransaction(u32 cardNum)
 			//store first transaction records address.
 			halPutEeprom(OFFLINE_TRANSACTION_RECORD_START,2,addr);
 		}
-/*		else{
-			//start at end of existing records
-			halGetEeprom(OFFLINE_TRANSACTION_RECORD_START,2,addr);  
-		}	*/		
-					
+		/*		else{
+		//start at end of existing records
+		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START,2,addr);
+		}	*/
+		
 		halPutEeprom((u8*)(OFFLINE_TRANSACTION_ADDR_START + (ReaderSetup.numOfSavedTransactions * OFFLINE_TRANSACTION_NUM_BYTE)), OFFLINE_TRANSACTION_NUM_BYTE, (u8*)&OfflineTransaction);
 		ReaderSetup.numOfSavedTransactions++;
 		halPutEeprom((u8*)OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
 		if(ReaderStateFlag.OfflineTransactionExist == false)
 		{
 			ReaderStateFlag.OfflineTransactionExist = true;
-			halPutEeprom(READER_STATE_ADDR,READER_STATE_FLAG_SIZE,(u8*)&ReaderStateFlag);	
+			halPutEeprom(READER_STATE_ADDR,READER_STATE_FLAG_SIZE,(u8*)&ReaderStateFlag);
 		}
 		if (ReaderSetup.numOfSavedTransactions == ReaderSetup.maxOfflineTransaction)
 		{
@@ -254,25 +251,27 @@ u8 storeOfflineTransaction(u32 cardNum)
 		halPutEeprom(READER_STATE_ADDR,1,(u8*)&ReaderStateFlag);
 		return_code = 0;
 	}
-	return return_code;	
+	return return_code;
 }
 
+/************************************************************************/
+/*                                                                      */
+/************************************************************************/
 u8 sendStoredTransaction(void)
-{	
+{
 	//get total number of stored off line transactions from EEPROM.
 	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
 	
 	//build buffer of transactions to be transmitted.
 	if (ReaderSetup.numOfSavedTransactions > 0 && ReaderSetup.numOfSavedTransactions < 0xFF) // valid number of transactions stored, prepare to send to BOW
-	{		
+	{
 		structTransaction record;
 		u16 addr;
 		
 		//send data to BOW
-
-		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START,2,(u8*)&addr);		
+		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START,2,(u8*)&addr);
 		halGetEeprom((void*)addr,OFFLINE_TRANSACTION_NUM_BYTE,(u8*)&record); // get transaction record
-			
+		
 		if( sendBOWCCTransaction(&record) )
 		{//update current record address
 			addr = addr + OFFLINE_TRANSACTION_NUM_BYTE;
@@ -293,19 +292,13 @@ u8 sendStoredTransaction(void)
 }
 
 
-#else
-u8 sendStoredTransaction(void)
-{
-	return true;
-}
-#endif
-
 void getDate(structDate *date)
 {
 	date->month = 0;
 	date->day = 0;
 	date->year = 0;
 }
+
 void getTime(structTime *time)
 {
 	time->hours = 0;

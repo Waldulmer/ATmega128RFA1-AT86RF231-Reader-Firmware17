@@ -110,19 +110,17 @@ int main(void){
     // Init the timer system for the MAC
     timerInit();
 
-#if (DEVICE_CONNECTED == ACA_MACHINE)
-	InitTimerZero();	//timer for MDC machine comm.
-#endif
+	InitTimerZero();	//timer for ACA machine comm.
+
 
     sei();
-
-/*resetKeypad();
-while (1)
-{
-	getPressedKey();
-	_delay_ms(1000);	
-}*/
-    // Init the (sample) application
+	    
+	/**
+	Init the PPOS application on powerup
+	get Setup 
+	start scanning for a coordinator	
+	Initialize ACA Programming data		
+	*/
     appInit();
 
 #if( DEBUG )
@@ -142,6 +140,7 @@ while (1)
 
         // Task functions called from main loop.  Either add your own task loop
         // or edit the example appTask().
+		//Reader and machines are initialized
         appTask();
         macTask();
 

@@ -68,6 +68,9 @@ void displayVersion(void);
 #define SERVICE_MSG		3
 #define BUSY_MSG		4
 #define BLANK_MSG		5
+#define PPOS_MSG		6
+#define TOPOFF_MSG		7
+
 
 // message table lookup index
 enum{need = 0, ser, card};

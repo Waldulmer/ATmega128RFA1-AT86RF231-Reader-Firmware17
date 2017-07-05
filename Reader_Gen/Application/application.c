@@ -71,20 +71,13 @@ $Id: application.c,v 1.113.2.1 2009/02/06 21:27:26 bleverett Exp $
 
 u8 DataBuffer[128];
 u8 swipe = 0;
-u8 TOFlag =0;
+u8 TOFlag = 0;
 u8 KPTOFlag = 0;
-//u8 doItOnce = 1;			//PPOS
-//u16 LOOP_IN  =0;			//PPOS
-//u16 LOOP_OUT =0;			//PPOS
-//bool ADMIN_INIT = false;	//PPOS
-//bool ADMIN_CREDIT = false;	//PPOS
-//bool SEND_BALANCE = false;	//PPOS
+
 bool INSUFFCIENT_FUNDS;
 
-//extern u8 OP;
 extern u8 ucGetMachineStatusFlag;
 
-//u8 ucReturnBillTimeout=0;
 //
 bool SETUP_TIMEOUT = true;
 
@@ -173,13 +166,13 @@ address, then the MAC will call the appDataIndication()
 function, which can then process the incoming data.
 
 Detect a card scenario
-	1.case CARD_DETECTED
-	2.case SHOW_BALANCE_REQUEST
-	3.case SCARD_REMOVED
-	4.case SCANNING
+1.case CARD_DETECTED
+2.case SHOW_BALANCE_REQUEST
+3.case SCARD_REMOVED
+4.case SCANNING
 */
 
-// Set up function pointer to bootloader section.
+//Set up function pointer to bootloader section.
 void (*bootptr)( void ) = 0x1E000;
 
 #define TRACKDEMO 0
@@ -851,7 +844,7 @@ void appDataIndication(void)
 			low = NodeLongAddress & 0xffffffff;
 			high = NodeLongAddress >> 32;
 			
-			// Vigin Board Configuration Found,
+			// Virgin Board Configuration Found,
 			// Request Setup Info from Reader
 
 			if((low == 0xFFFFFFFF) && (high == 0xFFFFFFFF)){
@@ -913,18 +906,19 @@ void appDataIndication(void)
 
 
 	/**
-	Sample application function, which initializes the application.
+	Sample application function, which initializes the PPOS application.
 	This function is meant to be called on startup only.
+	Initializes reader with initReader()
+	Initializes ACA machines calling machine status
+	Set flags: VALIDATE_READER  
+				ucDeviceStateFlag	
 	*/
 	void appInit(void)
 	{
-		
-		//#if (DEVICE_CONNECTED == ACA_MACHINE)
 		u8 machineCode;
 		u8 tmp=0;
 		u8 machineTimerId;
-		//#endif
-		
+			
 		// Init the mac
 		LED_INIT();
 		Leds_on();
@@ -948,9 +942,8 @@ void appDataIndication(void)
 		initReader();
 
 		
-		#ifdef MACHINE_CONNECTED
+		#ifdef MACHINE_CONNECTED		
 		
-		#if (DEVICE_CONNECTED == ACA_MACHINE)
 		//wait up to 10 seconds for machine to become active
 		machineTimerId = macSetAlarm(MACHINE_WAIT_TIMEOUT,WaitForMachine);
 		
@@ -958,17 +951,21 @@ void appDataIndication(void)
 		{
 			if(ucDeviceStateFlag == DEVICE_STATUS_NEEDED)
 			{
+				//If True, Machine Status has been completed, ucDeviceStateFlag set to MACHINE_STATUS_ON
 				SQACAInitializationSequence();
 				
 				tmp = macSetAlarm(DEVICE_POLL_PERIOD,SetDeviceState);
 			}
-			else if(ucDeviceStateFlag == MACHINE_STATUS_ON){
+			else if(ucDeviceStateFlag == MACHINE_STATUS_ON)
+			{
+				//don't wait anymore
 				macTimerEnd(machineTimerId);
 				macTimerEnd(tmp);
 				
 				break;
 			}
-			else if( mac_event_pending() ){
+			else if( mac_event_pending() )
+			{
 				macTask();  //timer has timed out handle timer task.
 			}
 			
@@ -976,7 +973,7 @@ void appDataIndication(void)
 		macSetAlarm(DEVICE_POLL_PERIOD,SetDeviceState);
 		
 
-		#endif // DEVICE_CONNECTED
+		
 		#else
 		// FOR DEBUGGING USE ONLY
 		//MdcStatus.MachineType[0] = 0x21;		//PPOS
@@ -1017,7 +1014,7 @@ void appDataIndication(void)
 		// Init the mac and stuff
 		if (NODETYPE == COORD)
 		{
-			macFindClearChannel();
+			//macFindClearChannel(); PPOS
 		}
 		else
 		{
@@ -1034,21 +1031,21 @@ void appDataIndication(void)
 
 			#ifndef COORDNODE
 
-			#if (DEVICE_CONNECTED == ACA_MACHINE)
+			
 			if (ucDeviceStateFlag == MACHINE_STATUS_ON)
 			{
+				//display current Firmware version
 				displayVersion();
 				
 				//Send machine setup at every power up if reader has setup and machine is connected
 				if( ReaderStateFlag.ReaderSetup == READER_SETUP_DONE )
 				{
-					getSQReaderMachineSetup();			// get PROGRAMMING_DATA_TOPLOAD, _DRYER, _FRONTLOADER
-					ucCardStatus = CARD_OUT;
-					cardRemoved(REMOVE_CARD);
+					// get ACA Programming data
+					getSQReaderMachineSetup();			// get PROGRAMMING_DATA_TOPLOAD, _DRYER, _FRONTLOADER					
 					
 				}
 			}
-			#endif //ACA_MACHINE
+			
 
 			#endif
 
@@ -1088,7 +1085,6 @@ void appDataIndication(void)
 	\param ucDataLength is the data size.
 	\param pucDataBuffer is pointer to data to be converted.
 	*/
-
 	void String_to_hexa_convert ( u8 ucDataLength, u8 * pucDataBuffer )
 	{
 		u8 i, ucDataBuffer[ucDataLength * 2];
@@ -1133,7 +1129,12 @@ void appDataIndication(void)
 	GetParam
 	Ascii_to_nible
 	*/
-	void appTask(void)				//after appInit()
+	/**
+   @brief This is the main loop task for the Application.  Called by the main
+   "forever" loop.  This function processes application tasks
+   
+*/
+	void appTask(void)				//called by appInit()
 	{
 		//vars declaration
 		ucSendDataSize = 0;
@@ -1150,22 +1151,20 @@ void appDataIndication(void)
 		u8 k, l;
 		u8  Setup[30];
 		u8 n = 0;
-
 		
-
 		
 		#ifdef MACHINE_CONNECTED
-		#if (DEVICE_CONNECTED == ACA_MACHINE)
+		
 		if(ucDeviceStateFlag == DEVICE_STATUS_NEEDED)	//do machine status communication every 1/2 second
 		{
 			DevicePoll();
 			
 			
-			
-			if (ucDeviceStateFlag == MACHINE_STATUS_ON)			//machine status 33, 41 and online
+			//still online
+			if (ucDeviceStateFlag == MACHINE_STATUS_ON)			//machine status 33, 41 online
 			{
 				_delay_ms(5);
-				
+				//invalid machinecode
 				if (ReaderStateFlag.ReaderSetup == READER_SETUP_NEEDED)
 				{
 					//Display "No Setup" message on machine
@@ -1178,51 +1177,48 @@ void appDataIndication(void)
 				}
 				else if (ReaderStateFlag.Busy == true)
 				{
-					#if (DEVICE_CONNECTED == ACA_MACHINE)
+					
 					//Display busy message
 					if( OP != WAIT_FOR_SERVER ) // ****need to put op code in a queue****
 					{
 						OP = WAIT_FOR_SERVER;
 					}
 					displayMsg(BUSY_MSG);
-					#endif
+					
 				}
 			}
+			else
+			{
 			//PPOS ToDo: machine is not online, print error message
-			
-		}
-		#endif // ACA_MACHINE
+			displayMsg(PPOS_MSG);
+			}
+		}		
 		
 		#endif
 
-		if(macConfig.associated == true/*/false*/ || ReaderStateFlag.EnableOfflineTransaction == true) //  Don't bother running the app until the reader has associated
+		if(macConfig.associated == true || ReaderStateFlag.EnableOfflineTransaction == true) //  Don't bother running the app until the reader has associated
 		{
-			
-			switch(OP){
+			//
+			switch(OP)
+			{
 				//case #1 called by appInit
 				case VALIDATE_READER:
 				//TODO: fix machine type switch
-				//
-				#if (DEVICE_CONNECTED == ACA_MACHINE)
+				//				
 				if((ReaderStateFlag.EnableOfflineTransaction == true) && (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE))
 				{
 					OP = INIT_READER;
 				}
-				else{
-					#endif //ACA_MACHINE
+				else{	
 					
-					#if (DEVICE_CONNECTED == ACA_MACHINE)
-					if( ((ReaderStateFlag.ReaderSetup == READER_SETUP_NEEDED) || ( ReaderStateFlag.FirstRun == VIRGIN_READER)) && (SQACAMachineStatus.MachineType[0] != INVALID_MACHINE) ){
-						
+					if( ((ReaderStateFlag.ReaderSetup == READER_SETUP_NEEDED) || ( ReaderStateFlag.FirstRun == VIRGIN_READER)) && (SQACAMachineStatus.MachineType[0] != INVALID_MACHINE) )
+					{						
 						SETUP_TIMEOUT = true;
 						OP = SETUP_REQUEST; //enable when setup supported by server
-						
-						
-						#endif
-						
+											
 					}
-					else if( (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE) && (ReaderStateFlag.ValidateSetup == VALIDATE_READER_SETUP) ){
-						
+					else if( (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE) && (ReaderStateFlag.ValidateSetup == VALIDATE_READER_SETUP) )
+					{						
 						VALIDATION_TIMEOUT = false;
 						sendBOWValidationRequest();
 						// Clear Rx Buffer
@@ -1234,46 +1230,40 @@ void appDataIndication(void)
 						OP = VALIDATE_SETUP;
 						
 					}
-					else if( ReaderStateFlag.ReaderSetup == READER_SETUP_DONE){
+					else if( ReaderStateFlag.ReaderSetup == READER_SETUP_DONE)
+					{
 						OP = INIT_READER;
-					}
-					#if( DEVICE_CONNECTED == ACA_MACHINE)
-				}
-				#endif //ACA_MACHINE
+					}					
+				}				
 				break;
+
 				//case #2
 				case INIT_READER:
-				#if (DEVICE_CONNECTED == ACA_MACHINE)
-				
+								
 				if( isMachineCycleRunning() )
 				{
-					OP = CYCLE_STARTED;
+					OP = CYCLE_RUNNING;
 				}
 				else
 				{
 					OP = SCANNING;
 				}
-				
-				#endif
-				
-				
+								
 				break;
-				//case #3
-				case SCANNING: //scan for card swipe
 
+				//case #3 called by case #2 scan for card swipe
+				case SCANNING: 
 				// Enable Heart beat routine
 				if (uiFunctionEntered < (20 * (F_CPU/4000000)))
 				{
 					uiFunctionEntered++;
 				}
 				else
-				{
-					
+				{					
 					Led1_toggle();
 					
 					uiFunctionEntered = 0;
 				}
-
 				
 				if(!Request(ISO14443_3_REQALL, tmp))
 				{
@@ -1295,12 +1285,10 @@ void appDataIndication(void)
 						}
 						OP = CARD_DETECTED;
 						ledoff1();
-					}
-					
+					}			
 					
 				}
 				break;
-
 				
 				//case #4
 				case CARD_DETECTED:
@@ -1329,11 +1317,11 @@ void appDataIndication(void)
 							memset(DataBuffer,0,sizeof(DataBuffer));
 							
 							OP = WAIT_FOR_SERVER;
+							//set busy msg flag
 							ReaderStateFlag.Busy = true;
 							
 						}
-						#if (DEVICE_CONNECTED == ACA_MACHINE)
-
+						//not associated
 						else if((macConfig.associated == false) && (ReaderStateFlag.EnableOfflineTransaction == true) && (ReaderStateFlag.MaxNumTransReached == false))
 						{
 							//allow cycle to start when BOW is down
@@ -1354,28 +1342,29 @@ void appDataIndication(void)
 								
 							}
 						}
-						else{
+						else
+						{
 							OP = SCANNING;
-						}
-						#endif
+						}						
 						
 						#if (DEBUG)
 						Beeps(1);
 						#endif
 
-						//Set Timeout timer
+						//Set Timeout timer 60secs for every read
 						TOFlag = 0;
 						ucTimerID = macSetLongAlarm(SERVER_RESPONSE_TIMEOUT,CommTimeOut);
 					}
-					else
+					else  //card read
 					{
 						#if (DEBUG)
 						debugMsgStr("\r\nInvalid CardID\r\n");
-						#endif
-						OP = SCARD_REMOVED;						
+						#endif						
+						OP = SCANNING;
 					}
 				}
 				break;
+
 				//case #5
 				case SEND_OFFLINE_TRANSACTIONS:
 				
@@ -1387,8 +1376,10 @@ void appDataIndication(void)
 				break;
 				
 				case SHOW_BALANCE_REQUEST:
-				//case #6
-				case WAIT_FOR_SERVER: //wait for response from server
+
+				//case #6 called by case 4# wait for response from server after card swipe
+				case WAIT_FOR_SERVER: 
+
 
 				if(DataBuffer[0] != '\0')
 				{
@@ -1400,12 +1391,9 @@ void appDataIndication(void)
 					debugMsgStr("\r\n");
 					#endif
 
-					OP = SCARD_REMOVED;	
-
-					#if (DEVICE_CONNECTED == ACA_MACHINE )
+					OP = SCANNING;
 					
-					
-					//Extract the Card Id
+					//Extract the Card Id from the incoming message
 					if( (uctempBuf = strstr((char *)DataBuffer,"sN: ")) )
 					{
 						CurrentAccount.ID = strtoul((const char*)(uctempBuf+4),NULL,10);	//save active card's id
@@ -1414,14 +1402,14 @@ void appDataIndication(void)
 						double fBalance = 0.0;
 						
 						uctempBuf = strstr((char *)DataBuffer,"Balance: ");
-												
+						
 						uctempBuf += 9;
 						ptr = strchr(uctempBuf,'.');
 						k = ptr - uctempBuf;
 						fBalance = atof(uctempBuf);
 						
 						// Format the Balance to XX.XX
-						//capture numeric into string 
+						//capture numeric into string
 						if (k <2)
 						sprintf(uctempBuf,"0%.2f",fBalance);
 						else if(k == 2)
@@ -1431,56 +1419,65 @@ void appDataIndication(void)
 						
 						/*Format the Display Balance
 						"1" is just a character as far as the LCD is concerned. It's not a number. The LCD wants you to send the "code" for each character you want to display.
-						The codes for characters "0" through "9" are 48 through 57. So just adding 48 to any single-digit number will give you the code for the character that 
+						The codes for characters "0" through "9" are 48 through 57. So just adding 48 to any single-digit number will give you the code for the character that
 						corresponds to that digit, f.e. uctempBuf[0]=49. digit 1=uctempBuf[0]-0x30 .
 						*/
 						//split string into individual values, skip decimal point
 						CurrentAccount.Value = (uctempBuf[0]-0x30) * 1000 + (uctempBuf[1]-0x30) * 100 + (uctempBuf[3]-0x30) * 10 + uctempBuf[4]-0x30;
-														
-						#if(DEVICE_CONNECTED == ACA_MACHINE)
 						
 						// give display control back to front end controller. Important! Don't forget!!!!
-						//displayMsg(BLANK_MSG);
-						
-						//sendSQDisplayCommand(0x06,0x5B,0x7D,msgNumber[uctempBuf[0]-0x30],msgNumber[uctempBuf[1]-0x30],msgNumber[uctempBuf[3]-0x30],10);
 						
 						sendSQDisplayCommand(msgNumber[uctempBuf[0]-0x30], msgNumber[uctempBuf[1]-0x30], msgNumber[uctempBuf[3]-0x30], msgNumber[uctempBuf[4]-0x30], LED_BLANK, LED_BLANK,10);
 						_delay_ms(2000);
-
-						//display vend price
-						if( SQACAMimicQuantumSequence(REGULAR_VEND) )
-						{
+						
+						/** \brief Mimic Quantum Vending Interface Packet
+						The PS sends the Mimic Quantum Vending Interface Packet since the user has to press the
+						Start Pad before having the account charged. The Start Pad will now be flashing one second on, one second off for
+						30 seconds. Mimic Quantum Lock Cycle Selections will now be seen in the next Machine Status packet.
+						*/
+						//regular vend
+						if( (SQACAMachineStatus.MachineStatus[0] & MACHINE_READY_MODE) ) 
+						{						
+						 SQACAMimicQuantumSequence(REGULAR_VEND);
+						
 							#if(DEBUG_BOW)
 							debugMsgStr("\r\nSQACAMimicQuantumSequence(REGULAR_VEND)\r\n");
-							#endif
-							
-							OP = WAIT_FOR_SELECTION;
+							#endif	
+							OP = WAIT_FOR_SELECTION; 	// ...wait for Start Pad Selection
 							
 							//Sound Buzzer
 							#if (DEBUG)
 							Beeps(2);
 							#endif
-
-							KPTOFlag = 0;
 							
+							KPTOFlag = 0;								//KeyPressTimeout false
+							//Examine machine control and the current status of the machine (Primary and Secondary Modes)
 							if( waitForMachineStartKey() )
 							{
-								macSetLongAlarm(MACHINE_KEYPRESS_WAITTIME,KeypressTimeOut);
-							}
-							else
-							macSetAlarm(500, KeypressTimeOut); // if connected to a washer while cycle is running and a card is swiped, just display the balance and continue scanning.
+								macSetLongAlarm(MACHINE_KEYPRESS_WAITTIME, KeypressTimeOut);		//30secs ACA specs								
+								
+							}							
+							else								
+							// code to avoid multiple button press						
+							macSetAlarm(500, KeypressTimeOut);		//if connected to a washer while cycle is running and a card is swiped, just display the balance and continue scanning.		
+							
+													
 						}
-						#endif	//ACA_MACHINE
+						//initiate TopOff	
+						else if( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) && (SQACAMachineStatus.MachineType[0] == PROGRAMMING_DATA_DRYER) )		
+						{
+							OP = CYCLE_RUNNING;
+						}											
 					}	//serial number found in server database
+					//force timeout condition
 					else //serial number error from server database
 					{
-						CommTimeOut();//TOFlag = 1;	//force timeout condition
-					}
-					#endif//ACA_MACHINE
+						CommTimeOut();					//TOFlag = 1;	
+					}					
 
-				}
-
-				else if(TOFlag == 1 || macConfig.associated == false) // server fails to respond in time
+				} // end if
+				//still case 6# server fails to respond in time no balance 
+				else if(TOFlag == 1 || macConfig.associated == false) 
 				{
 					#if(DEBUG_BOW)
 					debugMsgStr("\r\nTOFlag == 1\r\n");
@@ -1488,91 +1485,98 @@ void appDataIndication(void)
 
 					// Error Occured
 					// Re-enter SCANNING mode
-
-					#if(DEVICE_CONNECTED == ACA_MACHINE)
-					if ( cardRemoved(REMOVE_CARD) )
-					{
-						//TOFlag = 1;
-						ReaderStateFlag.Busy = false;
-						//send error message to machine display
-						displayMsg(CARD_ERR_MSG);
-						OP = IDLE;
-					}
-					#endif
+					
+					ReaderStateFlag.Busy = false;
+					//send error message to machine display
+					displayMsg(CARD_ERR_MSG);
+					OP = IDLE;
+					
 					#if (DEBUG_BOW)
 					debugMsgStr("\r\nServer Communication Error\r\n");
-					#endif
-					
+					#endif					
 				}
-
 				//asm("nop");
 				break;
-				//case #7
-				case WAIT_FOR_SELECTION: //wait to see if cycle start has been requested by user
 
-				#if(DEVICE_CONNECTED == ACA_MACHINE)
-				if( (SQACAMachineStatus.CmdToReader == DEDUCT_VEND_COMMAND || SQACAMachineStatus.CmdToReader == DEDUCT_TOPOFF_COMMAND) )
+				//case #7 called by case #6 SCANNING
+				case WAIT_FOR_SELECTION:			//wait to see if cycle start has been requested by user
+				//either press the start button		
+				_delay_ms(2000);		
+				if( SQACAMachineStatus.CmdToReader == 0x01 )				
 				{
-					OP = START_CYCLE; // set only if vend price deduction successful.
+					OP = START_CYCLE;				//Start Pad was pressed ...you have 10secs to pay to start in Run mode
+				}				
 
-				}
-				else if(KPTOFlag == 1)
-				{
-					if ( cardRemoved(CASH_CARD) )
-					{						
-						OP = SCANNING;
-					}
-				}
-				#endif
-				
+				else if(KPTOFlag == 1)  //...or not, but tell it
+				{				
+					OP = SCANNING;					
+				}								
 				break;
-				//case #8
-				case START_CYCLE:	// send start cycle command to machine
 
-				#if(DEVICE_CONNECTED == ACA_MACHINE)
-
-				if( sendSQACAVendingTransactions()  )
-				{
-					structTransaction vend;					
+				//case #8  called by case #7 WAIT_FOR_SELECTION
+				case START_CYCLE:
+				
+				//The Payment System sends this packet to the Machine Control to perform a vending transaction.
+				if( sendSQACAVendingTransaction() )
+				{					
+					vendPrice = SQACAMachineStatus.RemainingVend[1] * 256 + SQACAMachineStatus.RemainingVend[0];
+					structTransaction vend;
 					
 					vend.CardId			= CurrentAccount.ID;
-					vend.vendPrice		= vendPrice * 100;
+					vend.vendPrice		= vendPrice ;
 					vend.LocationId		= ReaderSetup.locationId;
 					vend.ManufactureId	= ReaderSetup.manufacturerId;
 					vend.MachineId[0]	= deviceStatus.deviceType[0];
 					vend.MachineId[1]	= deviceStatus.deviceType[1];
-					
-					
 					
 					if((macConfig.associated == false) && (ReaderStateFlag.EnableOfflineTransaction == true))
 					{//must be offline transaction, store a record.
 						vend.isOffline = true;
 						storeOfflineTransaction(CurrentAccount.ID);
 					}
-					else{
+					//The reader sends this packet to the BOW to record a vending transaction.
+					else
+					{
 						vend.isOffline = false;
-						CurrentAccount.Value -= (vendPrice*100);
+						CurrentAccount.Value -= vendPrice;
 						sendBOWCCTransaction(&vend);
 					}
-					OP = CYCLE_STARTED;
-					
-					//let server know machine is in use.
-
+					OP = SCANNING;						//let server know machine is in use.
 				}
 				
-				cardRemoved(CASH_CARD);
-				
-				#endif
 				break;
 
-				case CYCLE_STARTED: // WASH COMPLETED
+				//case #9  called by case #6 SCANNING
+				case CYCLE_RUNNING:				
+				//The Payment System sends this packet to the Machine Control to perform a TopOff vending transaction.				
+				displayMsg(TOPOFF_MSG);
+				if( sendSQACATopOffVendingTransaction() )
+				{
+					vendPrice = SQACADryerProgramming.PaymSTopoffPrice[1] * 256 + SQACADryerProgramming.PaymSTopoffPrice[0];
+					
+					structTransaction vend;					
+					vend.CardId			= CurrentAccount.ID;
+					vend.vendPrice		= vendPrice ;
+					vend.LocationId		= ReaderSetup.locationId;
+					vend.ManufactureId	= ReaderSetup.manufacturerId;
+					vend.MachineId[0]	= deviceStatus.deviceType[0];
+					vend.MachineId[1]	= deviceStatus.deviceType[1];
+					
+					if((macConfig.associated == false) && (ReaderStateFlag.EnableOfflineTransaction == true))
+					{//must be offline transaction, store a record.
+						vend.isOffline = true;
+						storeOfflineTransaction(CurrentAccount.ID);
+					}
+					//The reader sends this packet to the BOW to record a vending transaction.
+					else
+					{
+						vend.isOffline = false;
+						CurrentAccount.Value -= vendPrice;
+						sendBOWCCTransaction(&vend);
+					}
+					OP = SCANNING;						//let server know machine is in use.
+				}
 				
-				#if(DEVICE_CONNECTED == ACA_MACHINE)
-				
-				OP = SCANNING;
-				
-				
-				#endif
 				break;
 
 				//case #10
@@ -1584,15 +1588,13 @@ void appDataIndication(void)
 				
 				if( SETUP_TIMEOUT == true)
 				{
-					#if(DEVICE_CONNECTED == ACA_MACHINE)
-					
 					#ifdef MACHINE_CONNECTED
 					DevicePoll();
 					
 					#else
 					deviceStatus.deviceType[0] = 33;
 					deviceStatus.deviceType[1] = 1;
-					#endif
+					
 					#endif //DEVICE_CONNECTED
 					sendBOWSetupRequest();
 					
@@ -1607,7 +1609,6 @@ void appDataIndication(void)
 
 				if((ptr = GetParam((char *)DataBuffer,"<ValidationResponse>","<")) != NULL)
 				{
-
 					u8 addr[8];
 					static u8 Len =0;
 					n = strlen(ptr);
@@ -1635,7 +1636,7 @@ void appDataIndication(void)
 					}
 					else
 					{
-					
+						
 						OP = SETUP_REQUEST; // validation failed, request new setup info
 						SETUP_TIMEOUT = true;
 						
@@ -1660,31 +1661,17 @@ void appDataIndication(void)
 				
 				break;
 
-				//case #14
-				
-				case IDLE:
-				
-				OP = SCANNING;
-				
-				
+				//case #14				
+				case IDLE:				
+				OP = SCANNING;		
 				break;
-				//case #15
-				case SCARD_REMOVED:
 
-				//#if(DEVICE_CONNECTED == ACA_MACHINE)
-				ucCardStatus = CARD_OUT;
-				cardRemoved(REMOVE_CARD);
-				
-				//#endif
-				
-				OP = SCANNING;
-				
-				break;
 				//case #16
 				case BOW_ERROR:
 				OP = IDLE;
 				break;
-				//case #17
+
+				//case #17 Re-associate with COORD using new ReaderID
 				case APP_INIT:
 				appInit();
 				break;
@@ -1698,21 +1685,29 @@ void appDataIndication(void)
 
 	}//appTask
 
+	/************************************************************************/
+	/*                                                                      */
+	/************************************************************************/
 	void ValidationTimeout()
-	{ VALIDATION_TIMEOUT = true;}
+	{ 
+		VALIDATION_TIMEOUT = true;
+	}
 
+	/************************************************************************/
+	/*                                                                      */
+	/************************************************************************/
 	char * GetParam(char *ptrBuffer, char *tmpstr, char *EndChar)
 	{
-
 		char *pStr;
 		char *pStr2;
 		u8 tmpstrlen =0;
 
-
 		tmpstrlen = strlen(tmpstr);
 
-		if((pStr = strstr(ptrBuffer,tmpstr)) != NULL){ //1
-			if((pStr2 = strstr(pStr + tmpstrlen,EndChar)) != NULL){ //2 "<"
+		if((pStr = strstr(ptrBuffer,tmpstr)) != NULL)
+		{ //1
+			if((pStr2 = strstr(pStr + tmpstrlen,EndChar)) != NULL)
+			{ //2 "<"
 				memcpy(ParamStr,pStr + tmpstrlen, pStr2-(pStr+tmpstrlen));
 				ParamStr[pStr2-(pStr + tmpstrlen)]  ='\0';
 
@@ -1723,60 +1718,8 @@ void appDataIndication(void)
 		return '\0';
 	}
 
-	/**
-	Callback function, called when the MAC finds no clear channel.
-	This function will send packet again until the maximum retry number is reached.
-	*/
-	void appResendPacket(void)
-	{
-		#if (NODETYPE == COORD)
-		associatedNodes_t *node;
-		u64 *ulLongAddress;
-		u8 ucResult[2];
-
-		// Command has not been sent because clear channel was not found, try to re-send.
-		if (ucNumberOfRetry < MAX_RETRY_TO_SEND_DATA)
-		{
-			node = macGetNode(1);
-			ulLongAddress = &(node->nodeLongAddress); // Get node 1 long address
-			macDataRequest(macGetNodeAddr(ulLongAddress), ucSerialReceiveDataBuffer[0] + 1, (u8*) ucSerialReceiveDataBuffer);
-			ucNumberOfRetry++;
-			debugMsgStr("Send command again\n\r");
-			// Re-start timer to wait for result.
-			Timer2_set ( 0x00, 0x07 );
-		}
-		else
-		{
-			// Can not send command.
-			Timer2_stop ();
-			ucResult[0] = CAN_NOT_SEND_CMD;
-			Hexa_to_string_convert(1, ucResult);
-			// Send error code
-			// When sending data to serial, the total of data must not be multiple
-			// of 16 bytes otherwise the data will not directly displayed by serial
-			// terminal.
-			Serial_send_data (1, ucResult);
-			ucSendCmdState = START;
-		}
-
-		#elif (NODETYPE == ENDDEVICE)
-		// Command has not been sent because clear channel was not found, try to re-send.
-		if (ucNumberOfRetry < MAX_RETRY_TO_SEND_DATA)
-		{
-			macDataRequest(DEFAULT_COORD_ADDR, ucSendDataSize, ucSendDataBuffer);
-			#if (DEBUG)
-			debugMsgStr("Send result again\n\r");
-			#endif
-		}
-		else
-		{
-			#if (DEBUG)
-			// Can not send result.
-			debugMsgStr("Can't send result\n\r");
-			#endif
-		}
-		#endif
-	}
+	
+	
 	/** @} */
 
 	#ifndef COORDNODE
@@ -1795,7 +1738,6 @@ void appDataIndication(void)
 			_delay_ms(25);
 		}
 	}
-
 
 	void CommTimeOut()
 	{
@@ -1854,8 +1796,8 @@ void appDataIndication(void)
 			debugMsgStr("\n\rCARD_DETECTED:\n\r");
 			break;
 
-			case CYCLE_STARTED:
-			debugMsgStr("\n\rCYCLE_STARTED:\n\r");
+			case CYCLE_RUNNING:
+			debugMsgStr("\n\rCYCLE_RUNNING:\n\r");
 			break;
 
 			case SCAN_ENABLE:
@@ -1897,31 +1839,31 @@ void appDataIndication(void)
 
 	}
 	#endif // (DEBUG_BOW)
-		
+	
+	/**
+	Initialize 
+	*/
 	void SetDeviceState(void)
 	{
 		ucDeviceStateFlag = DEVICE_STATUS_NEEDED;
 	}
 
+	/**
+	 Initialize communication with the ACA machines 
+	*/
 	void DevicePoll(void)
 	{
-		#if (DEVICE_CONNECTED == ACA_MACHINE )
-
 		SQACAMachineStatusCommSequence();					//SQ Payment System Driven Vending
-		macSetAlarm(DEVICE_POLL_PERIOD,SetDeviceState);
-		
-		
-		#endif
-
+		macSetAlarm(DEVICE_POLL_PERIOD,SetDeviceState);		//300ms	
 	}
+
 	/**
 	\brief The PadLeft method right-aligns and pads a string so that its rightmost character is the specified distance from the beginning of the string.
 	PadLeft return newString objects that can either be padded with empty spaces or with custom characters.
 	\param string is the string size.
 	\param paddedLength is the data size.
 	\param pad is pointer to data to be converted.
-	*/
-	
+	*/	
 	char * padLeft(char * string, u8 paddedLength, const char * pad)
 	{
 		size_t stringLength = strlen(string);

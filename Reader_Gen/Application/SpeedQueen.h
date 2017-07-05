@@ -57,12 +57,12 @@
 #define ACA_VENDING_PAYMENT_PACKET	0x6A		//Vending Payment = 0x6A
 #define ACA_VENDING_PAYMENT_BYTES	6			//Number of bytes in Data Field = 6
 
-#define Mimic_Quantum_Lock_Active	0x20
+#define MIMIC_QUANTUM_LOCK_ACTIVE	0x20
 
 #define REGULAR_VEND	1
 #define TOPOFF_VEND		2
 
-#define CASH_CARD		1
+//#define CASH_CARD		1
 #define REMOVE_CARD		2
 
 #define READER_CONTROL_VEND_PRICE	0x10
@@ -72,8 +72,6 @@
 #define ACA_BAUD_57600			0x10
 #define ACA_BAUD_115200			0x20
 
-//bool isQuantum(void);
-//bool isMDC(void);
 bool sendSQDataPacket(u8 *buf);
 bool getSQDataPacket(u8 *buf);
 
@@ -94,24 +92,18 @@ bool SQACAAuditDataSequence(void);
 bool getSQACAAuditData(void);
 bool waitSQStartKey(void);
 bool isSQCycleRunning(void);
-//bool sendSQCashCardInserted(void);			//PPOS
-//bool sendSQCashCardInsetedForTopoff(void);	//PPOS
-//bool sendSQCashCardRemoved(void);				//PPOS
-//bool sendSQCardRemoved(void);					//PPOS
-//bool sendSQStart(void);						//PPOS
-//bool sendSQAddTime(void);						//PPOS
+
 bool sendSQCardErrorCode(u8 cardErrorCode);
 bool sendSQAudioBeepRequest(u8 beepLength);
 bool sendSQDisplayCommand(u8 led1, u8 led2, u8 led3, u8 led4, u8 led5, u8 led6, u8 duration);
 //bool displaySQReaderVersion(void);	//PPOS
 bool displaySQCardError(void);
-//bool cardRemoved(u8 cardType);		//PPOS
-//bool cardInserted(u8 cardType);		//PPOS
+
 
 //Send machine setup at every power up if reader has setup and machine is connected
 bool getSQReaderMachineSetup(void);
 
-//bool startMachineCycle(void);			//PPOS
+
 //send Mimic Quantum Vending 0x64
 bool sendSQACAMimicQuantumVending(void);
 
@@ -122,8 +114,10 @@ bool isMachineCycleRunning();
 void SQACAInitializationSequence(void);
 //Sequence of 70,71,72
 void SQACAMachineStatusCommSequence(void);
+
 //Mimic Quantum Interface = 0x64
-bool sendSQACAVendingTransactions(void);
+bool sendSQACAVendingTransaction(void);
+
 /** @} */
 /** @} */
 

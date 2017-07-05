@@ -25,7 +25,7 @@
 /**
    @addtogroup pposbow
    @{
-   @section bow BOW Communicaion
+   @section bow BOW Communication
    @{
 	   This code demonstrates BOW
 */

@@ -153,18 +153,7 @@ bool constructOutgoingString(u8 strType, char *tempStr)
 			,ReaderSetup.numOfSavedTransactions);
 			
 			break;
-			/*							//PPOS
-         #if ENABLE_KEYPAD	
-      case REQUEST_KEYPAD_ACCOUNT:
-         
-         sprintf(tempStr+1, "<KeypadInfo>"
-         "<aCC>%s</aCC>"
-         "<pC>%s</pC>"
-         ,keypad.accountNumber,keypad.passcode);
-         
-         break;
-         #endif
-		 */
+			
 		default:
 		
 			break;
@@ -186,9 +175,9 @@ bool constructOutgoingString(u8 strType, char *tempStr)
 \brief Locate a substring.
 
 The extractIncomingMessage(const char *dataBuffer) function returns a pointer to the beginning of the substring.
-
-\returns a pointer to the beginning of
-the substring, or \c NULL if the substring is not found.  */
+\ or \c NULL if the substring is not found.  
+Sets flag READER_SETUP_DONE
+*/
 u8 extractIncomingMessage(char *dataBuffer)
 {
 	u8 TemplongAddr[8] = {0};
@@ -276,7 +265,7 @@ u8 extractIncomingMessage(char *dataBuffer)
 					//Update Reader to eeprom in Hex format
 					halPutMacAddr(TemplongAddr);
 
-					// Verifry write opertaion
+					// Verify write operation
 					halGetMacAddr(MaclongAddr);
 
 		}//1
@@ -327,8 +316,6 @@ u8 extractIncomingMessage(char *dataBuffer)
 	}
 	else if(strstr(dataBuffer, "EnterBootloader") != NULL)
 	{
-
-
 		// Store Active CHANNEL to EEPROM Address 0xFF2
 		// eeprom_write(CHANNEL_ADDR, macConfig.currentChannel[0]);
 		halPutEeprom((u16*)CHANNEL_ADDR, 1, &macConfig.currentChannel);
@@ -338,10 +325,7 @@ u8 extractIncomingMessage(char *dataBuffer)
 
 		// Store Active SHORT SOURCE ADDR to EEPROM Address 0xFF6
 		halPutEeprom((u16*)SRCADDR_ADDR,2, (u8*)&macConfig.shortAddress);
-
-		// Store Active DESTINATION ADDR to EEPROM Address 0xFF8
-		// halPutEeprom(DESTADDR_ADDR, 2, &MdcStatus.MachineType);
-
+		
 		i = 0x01;
 		halPutEeprom((u16*)BOOT_INIT_ADDR,1,(u8*)&i);
 				
