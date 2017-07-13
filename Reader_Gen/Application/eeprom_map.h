@@ -53,7 +53,7 @@
 //setup info only apply to ACA
 //field start addresses must be recalculated for new field size
 
-#define MACHINE_SETUP_MAX_BYTE			60  //maximum number of bytes per machine setup			PPOS170612 from 50 o 60
+#define MACHINE_SETUP_MAX_BYTE			50  //maximum number of bytes per machine setup			
 
 	#define MACHINE_SETUP_NUM_BYTE		22  // number of bytes needed to store setup in eeprom PPOS170601
 	//#define MACHINE_SETUP_NUM_BYTE			12  // number of bytes needed to store washer setup in eeprom 

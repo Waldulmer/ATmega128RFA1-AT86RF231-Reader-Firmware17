@@ -173,7 +173,7 @@ Detect a card scenario
 */
 
 //Set up function pointer to bootloader section.
-void (*bootptr)( void ) = 0x1E000;
+//void (*bootptr)( void ) = 0x1E000;
 
 #define TRACKDEMO 0
 
@@ -210,7 +210,6 @@ void blink1(void)
 {
 	LED_ON(1);
 	macSetAlarm(25, ledoff1);
-	
 }
 
 /**
@@ -910,15 +909,15 @@ void appDataIndication(void)
 	This function is meant to be called on startup only.
 	Initializes reader with initReader()
 	Initializes ACA machines calling machine status
-	Set flags: VALIDATE_READER  
-				ucDeviceStateFlag	
+	Set flags: VALIDATE_READER
+	ucDeviceStateFlag
 	*/
 	void appInit(void)
 	{
 		u8 machineCode;
 		u8 tmp=0;
 		u8 machineTimerId;
-			
+		
 		// Init the mac
 		LED_INIT();
 		Leds_on();
@@ -942,7 +941,7 @@ void appDataIndication(void)
 		initReader();
 
 		
-		#ifdef MACHINE_CONNECTED		
+		#ifdef MACHINE_CONNECTED
 		
 		//wait up to 10 seconds for machine to become active
 		machineTimerId = macSetAlarm(MACHINE_WAIT_TIMEOUT,WaitForMachine);
@@ -1041,7 +1040,7 @@ void appDataIndication(void)
 				if( ReaderStateFlag.ReaderSetup == READER_SETUP_DONE )
 				{
 					// get ACA Programming data
-					getSQReaderMachineSetup();			// get PROGRAMMING_DATA_TOPLOAD, _DRYER, _FRONTLOADER					
+					getSQReaderMachineSetup();			// get PROGRAMMING_DATA_TOPLOAD, _DRYER, _FRONTLOADER
 					
 				}
 			}
@@ -1050,11 +1049,7 @@ void appDataIndication(void)
 			#endif
 
 		}
-		//ping coord every few seconds
-		//pingTimer = 0;
-		//doPing();
 		
-
 		asm("nop");
 	}
 
@@ -1129,16 +1124,16 @@ void appDataIndication(void)
 	GetParam
 	Ascii_to_nible
 	*/
+
 	/**
-   @brief This is the main loop task for the Application.  Called by the main
-   "forever" loop.  This function processes application tasks
-   
-*/
+	@brief This is the main loop task for the Application.  Called by the main
+	"forever" loop.  This function processes application tasks
+	*/
 	void appTask(void)				//called by appInit()
 	{
 		//vars declaration
 		ucSendDataSize = 0;
-		unsigned char tmp[16];
+		unsigned char tmp[16];  	//PPOS TRF7970A
 
 		u8 ucTimerID=0xff;
 		char *uctempBuf;
@@ -1189,10 +1184,10 @@ void appDataIndication(void)
 			}
 			else
 			{
-			//PPOS ToDo: machine is not online, print error message
-			displayMsg(PPOS_MSG);
+				//PPOS ToDo: machine is not online, print error message
+				displayMsg(PPOS_MSG);
 			}
-		}		
+		}
 		
 		#endif
 
@@ -1204,21 +1199,21 @@ void appDataIndication(void)
 				//case #1 called by appInit
 				case VALIDATE_READER:
 				//TODO: fix machine type switch
-				//				
+				//
 				if((ReaderStateFlag.EnableOfflineTransaction == true) && (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE))
 				{
 					OP = INIT_READER;
 				}
-				else{	
+				else{
 					
 					if( ((ReaderStateFlag.ReaderSetup == READER_SETUP_NEEDED) || ( ReaderStateFlag.FirstRun == VIRGIN_READER)) && (SQACAMachineStatus.MachineType[0] != INVALID_MACHINE) )
-					{						
+					{
 						SETUP_TIMEOUT = true;
 						OP = SETUP_REQUEST; //enable when setup supported by server
-											
+						
 					}
 					else if( (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE) && (ReaderStateFlag.ValidateSetup == VALIDATE_READER_SETUP) )
-					{						
+					{
 						VALIDATION_TIMEOUT = false;
 						sendBOWValidationRequest();
 						// Clear Rx Buffer
@@ -1233,13 +1228,13 @@ void appDataIndication(void)
 					else if( ReaderStateFlag.ReaderSetup == READER_SETUP_DONE)
 					{
 						OP = INIT_READER;
-					}					
-				}				
+					}
+				}
 				break;
 
 				//case #2
 				case INIT_READER:
-								
+				
 				if( isMachineCycleRunning() )
 				{
 					OP = CYCLE_RUNNING;
@@ -1248,18 +1243,18 @@ void appDataIndication(void)
 				{
 					OP = SCANNING;
 				}
-								
+				
 				break;
 
 				//case #3 called by case #2 scan for card swipe
-				case SCANNING: 
+				case SCANNING:
 				// Enable Heart beat routine
 				if (uiFunctionEntered < (20 * (F_CPU/4000000)))
 				{
 					uiFunctionEntered++;
 				}
 				else
-				{					
+				{
 					Led1_toggle();
 					
 					uiFunctionEntered = 0;
@@ -1271,6 +1266,7 @@ void appDataIndication(void)
 					u8 cardKey[6] = {0xff,0xff,0xff,0xff,0xff,0xff};
 					
 					/*anti-collision and select the card*/
+					
 					if(!AnticollSelect(0, tmp, &cardType))
 					{
 						if(cardType == MIFARE_1K)
@@ -1285,9 +1281,10 @@ void appDataIndication(void)
 						}
 						OP = CARD_DETECTED;
 						ledoff1();
-					}			
+					}
 					
 				}
+				
 				break;
 				
 				//case #4
@@ -1345,7 +1342,7 @@ void appDataIndication(void)
 						else
 						{
 							OP = SCANNING;
-						}						
+						}
 						
 						#if (DEBUG)
 						Beeps(1);
@@ -1359,7 +1356,7 @@ void appDataIndication(void)
 					{
 						#if (DEBUG)
 						debugMsgStr("\r\nInvalid CardID\r\n");
-						#endif						
+						#endif
 						OP = SCANNING;
 					}
 				}
@@ -1378,7 +1375,7 @@ void appDataIndication(void)
 				case SHOW_BALANCE_REQUEST:
 
 				//case #6 called by case 4# wait for response from server after card swipe
-				case WAIT_FOR_SERVER: 
+				case WAIT_FOR_SERVER:
 
 
 				if(DataBuffer[0] != '\0')
@@ -1428,21 +1425,15 @@ void appDataIndication(void)
 						// give display control back to front end controller. Important! Don't forget!!!!
 						
 						sendSQDisplayCommand(msgNumber[uctempBuf[0]-0x30], msgNumber[uctempBuf[1]-0x30], msgNumber[uctempBuf[3]-0x30], msgNumber[uctempBuf[4]-0x30], LED_BLANK, LED_BLANK,10);
-						_delay_ms(2000);
-						
-						/** \brief Mimic Quantum Vending Interface Packet
-						The PS sends the Mimic Quantum Vending Interface Packet since the user has to press the
-						Start Pad before having the account charged. The Start Pad will now be flashing one second on, one second off for
-						30 seconds. Mimic Quantum Lock Cycle Selections will now be seen in the next Machine Status packet.
-						*/
-						//regular vend
-						if( (SQACAMachineStatus.MachineStatus[0] & MACHINE_READY_MODE) ) 
-						{						
-						 SQACAMimicQuantumSequence(REGULAR_VEND);
-						
+						_delay_ms(100);
+
+						if( (SQACAMachineStatus.MachineStatus[0] & MACHINE_READY_MODE) )
+						{
+							SQACAMimicQuantumSequence(REGULAR_VEND);
+							
 							#if(DEBUG_BOW)
 							debugMsgStr("\r\nSQACAMimicQuantumSequence(REGULAR_VEND)\r\n");
-							#endif	
+							#endif
 							OP = WAIT_FOR_SELECTION; 	// ...wait for Start Pad Selection
 							
 							//Sound Buzzer
@@ -1454,30 +1445,30 @@ void appDataIndication(void)
 							//Examine machine control and the current status of the machine (Primary and Secondary Modes)
 							if( waitForMachineStartKey() )
 							{
-								macSetLongAlarm(MACHINE_KEYPRESS_WAITTIME, KeypressTimeOut);		//30secs ACA specs								
+								macSetLongAlarm(MACHINE_KEYPRESS_WAITTIME, KeypressTimeOut);		//30secs ACA specs
 								
-							}							
-							else								
-							// code to avoid multiple button press						
-							macSetAlarm(500, KeypressTimeOut);		//if connected to a washer while cycle is running and a card is swiped, just display the balance and continue scanning.		
+							}
+							else
+							// code to avoid multiple button press
+							macSetAlarm(500, KeypressTimeOut);		//if connected to a washer while cycle is running and a card is swiped, just display the balance and continue scanning.
 							
-													
+							
 						}
-						//initiate TopOff	
-						else if( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) && (SQACAMachineStatus.MachineType[0] == PROGRAMMING_DATA_DRYER) )		
+						//initiate TopOff
+						else if( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) && (SQACAMachineStatus.MachineType[0] == PROGRAMMING_DATA_DRYER) )
 						{
 							OP = CYCLE_RUNNING;
-						}											
+						}
 					}	//serial number found in server database
 					//force timeout condition
 					else //serial number error from server database
 					{
-						CommTimeOut();					//TOFlag = 1;	
-					}					
+						CommTimeOut();					//TOFlag = 1;
+					}
 
 				} // end if
-				//still case 6# server fails to respond in time no balance 
-				else if(TOFlag == 1 || macConfig.associated == false) 
+				//still case 6# server fails to respond in time no balance
+				else if(TOFlag == 1 || macConfig.associated == false)
 				{
 					#if(DEBUG_BOW)
 					debugMsgStr("\r\nTOFlag == 1\r\n");
@@ -1493,24 +1484,24 @@ void appDataIndication(void)
 					
 					#if (DEBUG_BOW)
 					debugMsgStr("\r\nServer Communication Error\r\n");
-					#endif					
+					#endif
 				}
 				//asm("nop");
 				break;
 
 				//case #7 called by case #6 SCANNING
 				case WAIT_FOR_SELECTION:			//wait to see if cycle start has been requested by user
-				//either press the start button		
-				_delay_ms(2000);		
-				if( SQACAMachineStatus.CmdToReader == 0x01 )				
+				//either press the start button
+				//_delay_ms(2000); //PPOS 170706 without this delay the Start button will not work
+				if( SQACAMachineStatus.CmdToReader == START_PAD_PRESSED )
 				{
 					OP = START_CYCLE;				//Start Pad was pressed ...you have 10secs to pay to start in Run mode
-				}				
+				}
 
-				else if(KPTOFlag == 1)  //...or not, but tell it
-				{				
-					OP = SCANNING;					
-				}								
+				else if(KPTOFlag == 1)  //...or not, but say it
+				{
+					OP = SCANNING;
+				}
 				break;
 
 				//case #8  called by case #7 WAIT_FOR_SELECTION
@@ -1518,7 +1509,7 @@ void appDataIndication(void)
 				
 				//The Payment System sends this packet to the Machine Control to perform a vending transaction.
 				if( sendSQACAVendingTransaction() )
-				{					
+				{
 					vendPrice = SQACAMachineStatus.RemainingVend[1] * 256 + SQACAMachineStatus.RemainingVend[0];
 					structTransaction vend;
 					
@@ -1547,14 +1538,14 @@ void appDataIndication(void)
 				break;
 
 				//case #9  called by case #6 SCANNING
-				case CYCLE_RUNNING:				
-				//The Payment System sends this packet to the Machine Control to perform a TopOff vending transaction.				
+				case CYCLE_RUNNING:
+				//The Payment System sends this packet to the Machine Control to perform a TopOff vending transaction.
 				displayMsg(TOPOFF_MSG);
 				if( sendSQACATopOffVendingTransaction() )
 				{
 					vendPrice = SQACADryerProgramming.PaymSTopoffPrice[1] * 256 + SQACADryerProgramming.PaymSTopoffPrice[0];
 					
-					structTransaction vend;					
+					structTransaction vend;
 					vend.CardId			= CurrentAccount.ID;
 					vend.vendPrice		= vendPrice ;
 					vend.LocationId		= ReaderSetup.locationId;
@@ -1610,16 +1601,16 @@ void appDataIndication(void)
 				if((ptr = GetParam((char *)DataBuffer,"<ValidationResponse>","<")) != NULL)
 				{
 					u8 addr[8];
-					static u8 Len =0;
+					static u8 Len = 0;
 					n = strlen(ptr);
 					k = 0;
 					l = 0;
 					
 					// Get length of Validation code
-					halGetEeprom(VALIDATION_CODE_ADDR,1,&Len);
+					halGetEeprom(VALIDATION_CODE_ADDR, 1, &Len);
 					
 					// 	Get Validation Code from EEPROM
-					halGetEeprom(((u8*)VALIDATION_CODE_ADDR+1),Len,addr);
+					halGetEeprom(((u8*)VALIDATION_CODE_ADDR+1), Len, addr);
 					
 					while (k < n)
 					{
@@ -1655,18 +1646,17 @@ void appDataIndication(void)
 				
 				
 				break;
-				//case #13
+				//case #13 process firmware update request from BOW
 				case UPDATE_READER_FIRMWARE:
-				//process firmware update request from BOW
 				
 				break;
 
-				//case #14				
-				case IDLE:				
-				OP = SCANNING;		
+				//case #14
+				case IDLE:
+				OP = SCANNING;
 				break;
 
-				//case #16
+				//case #16 BOW sending error codes
 				case BOW_ERROR:
 				OP = IDLE;
 				break;
@@ -1674,6 +1664,11 @@ void appDataIndication(void)
 				//case #17 Re-associate with COORD using new ReaderID
 				case APP_INIT:
 				appInit();
+				break;
+
+				//case #18
+				case AUDITDATA_REQUEST:
+				sendBOWAuditDataRequest() ;
 				break;
 				
 				default:
@@ -1689,7 +1684,7 @@ void appDataIndication(void)
 	/*                                                                      */
 	/************************************************************************/
 	void ValidationTimeout()
-	{ 
+	{
 		VALIDATION_TIMEOUT = true;
 	}
 
@@ -1841,7 +1836,7 @@ void appDataIndication(void)
 	#endif // (DEBUG_BOW)
 	
 	/**
-	Initialize 
+	Initialize
 	*/
 	void SetDeviceState(void)
 	{
@@ -1849,12 +1844,12 @@ void appDataIndication(void)
 	}
 
 	/**
-	 Initialize communication with the ACA machines 
+	Initialize communication with the ACA machines
 	*/
 	void DevicePoll(void)
 	{
 		SQACAMachineStatusCommSequence();					//SQ Payment System Driven Vending
-		macSetAlarm(DEVICE_POLL_PERIOD,SetDeviceState);		//300ms	
+		macSetAlarm(DEVICE_POLL_PERIOD,SetDeviceState);		//300ms
 	}
 
 	/**
@@ -1863,7 +1858,7 @@ void appDataIndication(void)
 	\param string is the string size.
 	\param paddedLength is the data size.
 	\param pad is pointer to data to be converted.
-	*/	
+	*/
 	char * padLeft(char * string, u8 paddedLength, const char * pad)
 	{
 		size_t stringLength = strlen(string);

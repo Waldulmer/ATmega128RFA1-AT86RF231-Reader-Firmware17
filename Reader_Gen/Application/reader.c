@@ -17,12 +17,12 @@
 #include "system.h"
 
 /**
-	Init the reader, which includes calling for getSQSetupData() 
-	
-	Sets status flags for the reader and machine
+	@brief Initializes the reader on startup. A function to read data out of eeprom
+	and sets status flags for the reader and machine
 	READER_STATE_ADDR
 	MACHINE_TYPE_ADDR
-
+	stores the parameter for how many offline transactions are to save
+	and calls funtion getSQSetupData(), programming data for the machine
 */
 void initReader(void)
 {
@@ -69,13 +69,15 @@ void initReader(void)
 	
 }
 
-/*
-Store transactions,that occur when server is off line, in EEPROM.
-*/
+/**
+	@brief  Function to store data into eeprom.
+	structTransaction OfflineTransaction defines the data container.
+ 
+ */ 
 u8 storeOfflineTransaction(u32 cardNum)
 {
 	u8 return_code = 1;
-	//u8 ReaderSetup.numOfSavedTransactions; //number of off line transaction records stored in EEPROM
+	// ReaderSetup.numOfSavedTransactions number of off line transaction records stored in EEPROM
 	u8 addr[2];
 	u16 temp;
 	structTransaction OfflineTransaction;
@@ -254,9 +256,11 @@ u8 storeOfflineTransaction(u32 cardNum)
 	return return_code;
 }
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
+/**
+   @brief Build serial transmit buffer 
+
+   
+*/
 u8 sendStoredTransaction(void)
 {
 	//get total number of stored off line transactions from EEPROM.
@@ -269,8 +273,8 @@ u8 sendStoredTransaction(void)
 		u16 addr;
 		
 		//send data to BOW
-		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START,2,(u8*)&addr);
-		halGetEeprom((void*)addr,OFFLINE_TRANSACTION_NUM_BYTE,(u8*)&record); // get transaction record
+		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START, 2, (u8*)&addr);
+		halGetEeprom((void*)addr, OFFLINE_TRANSACTION_NUM_BYTE, (u8*)&record); // get transaction record
 		
 		if( sendBOWCCTransaction(&record) )
 		{//update current record address

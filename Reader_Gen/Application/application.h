@@ -31,7 +31,7 @@
  */
 #ifndef _APPLICATION_H_
 #define _APPLICATION_H_
-
+//Operation commands
 #define INIT_READER 				0x01
 #define SCANNING					0x02	
 //#define ENABLE_SCAN					0x03	//PPOS
@@ -55,6 +55,7 @@
 #define VALIDATE_SETUP				0x14
 #define GET_FIRMWARE_VERSION	    0x15
 #define RESET_EEPROM                0x16
+#define AUDITDATA_REQUEST           0x17
 
 #define BOW_ERROR					0x1A	// error message received from BOW
 #define READER_NAME_SETUP			0x1B	//assign name to reader to allow id of physical machine

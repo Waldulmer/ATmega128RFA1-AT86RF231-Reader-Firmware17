@@ -71,7 +71,7 @@
 #include "ErrCode.h"
 #include "spi.h"
 
-
+#include "machine.h"
 
 // Make the compiler accept these unused function names
 #define usb_task_init()
@@ -79,8 +79,7 @@
 #define usb_task()
 #define cdc_task()
 
-#include "machine.h"
-///bool OP;
+
 
 /**
    @brief Main function of the program.

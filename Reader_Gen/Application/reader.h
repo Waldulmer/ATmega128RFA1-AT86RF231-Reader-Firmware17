@@ -69,8 +69,7 @@ typedef struct {
 	u8	maxOfflineTransaction;
 	u8  numOfSavedTransactions;
 	u8 machineDescription[MACHINE_NAME_SIZE+1];
-	u8 machineLabel[MACHINE_LABEL_SIZE+1];
-	
+	u8 machineLabel[MACHINE_LABEL_SIZE+1];		
 }	__attribute__((packed)) structReaderSetup;
 
 structReaderSetup ReaderSetup;
@@ -111,18 +110,10 @@ typedef struct {
 	u8 Time[3];			//number of seconds from 12AM; 12:00:00AM == 0 seconds, 11:59:59PM == 86399 seconds.
 	u8 isOffline;
 }  __attribute__((packed)) structTransaction;
-/*
-typedef struct
-{
-	u32 cardId;
-	u8 cashValue;
-	structDate date;			//date of transaction based on time received from server. BCD (mm,dd,yyyy).
-	structTime time;			//time of transaction.
-} __attribute__((packed))structBATransaction;
-*/
+
 void initReader(void);
-void getDate(structDate *date);
-void getTime(structTime *time);
+//void getDate(structDate *date);
+//void getTime(structTime *time);
 u8 storeOfflineTransaction(u32 cardNum);
 
 u8 sendStoredTransaction(void);

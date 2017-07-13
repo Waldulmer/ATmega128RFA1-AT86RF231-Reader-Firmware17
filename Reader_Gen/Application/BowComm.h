@@ -29,7 +29,7 @@
    @{
 	   This code demonstrates BOW
 */
-//Reader/BOW command types
+//BOW command types outgoing
 
 #define FIRMWARE_VERSION		1
 #define REQUEST_SETUP			2
@@ -66,10 +66,9 @@ bool sendBOWReaderFirmwareVersion(void);
 bool sendBOWSetupRequest(void);
 bool sendBOWValidationRequest(void);
 bool sendBOWMachineDescription(void);
-bool sendMachineLabel(void);
+bool sendBOWMachineLabel(void);
 bool sendNumberOfOLT(void);
-//bool getReaderSetupInfo(void);			//PPOS
-//bool getKeypadAccountInfo(void);			//PPOS
+
 bool sendBOWAuditDataRequest(void);
 
 u8 extractIncomingMessage(char *dataBuffer);

@@ -114,7 +114,7 @@ static timerEventT longTimerEvents[LONG_TIMER_EVENTS_MAX];
 #endif
 
 static void timerStart(void);
-//static void timerStop(void);
+
 static u8 getUniqueID(void);
 static u16 secondTimer = 1000/MS_PER_TICK;
 

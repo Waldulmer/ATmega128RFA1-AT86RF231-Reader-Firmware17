@@ -37,9 +37,8 @@
 
 #include "timer_enddevice.h"
 
-//#ifdef CMC
 #include <avr/wdt.h>
-//#endif
+
 
 
 /** \brief Function to start Timer 2.
@@ -149,13 +148,13 @@ void WDT_Off ( void )
 }
 
 /** \brief Start Watchdog Timer.
- */
+*/
 void WDT_Start ( void )
 {
     WDTFlag = 0;        
     wdt_intr_enable(WDTO_1S);        //Set Watchdog Timer to 1 second    
 }
 
-//#endif // CMC
+
 
 #endif // (NODETYPE == ENDDEVICE)

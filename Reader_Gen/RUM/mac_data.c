@@ -233,7 +233,7 @@ void macWakeRequest(u16 addr, u16 child)
 
 /**
    @brief Send an other-the-air (OTA) debug frame.  This contains a
-   string payload that is displayed on the coordintor end.
+   string payload that is displayed on the coordinator end.
 */
 void macOtaDebugRequest(u8 *str)
 {

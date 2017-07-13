@@ -366,7 +366,7 @@ typedef struct{
 structMachineAudit SQACAAuditData;
 
 
-u8 sendMdcPacket(u8 *ucDataBuf);
+//u8 sendMdcPacket(u8 *ucDataBuf);
 
 
 #endif //Machine type 

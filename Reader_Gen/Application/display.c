@@ -38,7 +38,7 @@
 #include <util/delay.h>
 
 u8 msgTable[] = {
-/*
+
                         LED_n, LED_E, LED_E, LED_d, 
                         LED_S, LED_E, LED_r, LED_BLANK,
                         LED_C, LED_A, LED_r, LED_d,
@@ -62,10 +62,9 @@ u8 msgTable[] = {
                         LED_P, LED_A, LED_U, LED_S,
                         LED_P, LED_A, LED_S, LED_S,
                         LED_F, LED_A, LED_I, LED_L,
-                        LED_BLANK, LED_S, LED_t, LED_BLANK,
-						*/
-                        LED_BLANK, LED_b, LED_A, LED_L, LED_BLANK, LED_BLANK
-                        /*LED_BLANK, LED_BLANK, LED_BLANK, LED_BLANK*/ 
+                        LED_BLANK, LED_S, LED_t, LED_BLANK,						
+                        LED_BLANK, LED_b, LED_A, LED_L, LED_BLANK, LED_BLANK,
+                        LED_BLANK, LED_BLANK, LED_BLANK, LED_BLANK, 
 
 };                      // defined messages
 

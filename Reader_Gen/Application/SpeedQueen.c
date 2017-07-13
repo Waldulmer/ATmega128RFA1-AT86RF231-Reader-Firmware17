@@ -25,28 +25,29 @@
 #include "SpeedQueen.h"
 #include "mac_event.h"
 #include "reader.h"
-/**
-@addtogroup pposreader
-@{
-@name Speedqueen related functions
-@{
-*/
-/**
-@brief FULL PROGRAMMING
-A Programming Command may be sent to program a limited set of parameters in the Machine Control. When a
-valid Programming Command is received, the Machine Control will verify the data in the packet. If the data is
-valid, the Machine Control will write the data to the appropriate location in memory.
-If all data is valid (all bytes in range), the Machine Control will now program these parameters into its own nonvolatile
-memory and respond with an ACK. If any part of the data is invalid, the Machine control will return an INV
-byte, display an error message, and will discard the programming information it just received.
 
-@ingroup pposreader
+/**
+   @addtogroup pposreader
+   @{
+   @name Speedqueen related functions
+   @{
 */
-//Retrieve SQ setup info from eeprom
+
+/**
+   @brief FULL PROGRAMMING
+   A Programming Command may be sent to program a limited set of parameters in the Machine Control. When a
+   valid Programming Command is received, the Machine Control will verify the data in the packet. If the data is
+   valid, the Machine Control will write the data to the appropriate location in memory.
+   If all data is valid (all bytes in range), the Machine Control will now program these parameters into its own nonvolatile
+   memory and respond with an ACK. If any part of the data is invalid, the Machine control will return an INV
+   byte, display an error message, and will discard the programming information it just received.
+
+   @ingroup pposreader
+*/
 void getSQSetupData(void)
 {
 	u8 tmp[ACA_MAX_PACKET_SIZE] = {0};								//60 Bytes
-	
+	//Retrieve SQ setup info from eeprom
 	switch( deviceStatus.deviceType[0])								//switch MachineType[0] = 21,22,29, MachineType[1] = 3
 	{
 		case PROGRAMMING_DATA_TOPLOAD:
@@ -162,9 +163,9 @@ void getSQSetupData(void)
 		break;
 
 		case PROGRAMMING_DATA_DRYER:
-		halGetEeprom(MACHINE_SETUP_ADDR, 17, (u8*)&tmp);			//write machine setup string 18-1 Bytes for dryer to eeprom PPOS170601
-		//halGetEeprom(MACHINE_SETUP_ADDR, 18, (u8*)&tmp);			//write machine setup string 18 Bytes for dryer to eeprom
-		vendPrice = (tmp[1] * 256 + tmp[2]) / 100.0;
+		halGetEeprom(MACHINE_SETUP_ADDR, 17, (u8*)&tmp);			//write machine setup string 17 Bytes for dryer to eeprom PPOS170601
+		
+		//vendPrice = (tmp[1] * 256 + tmp[2]) / 100.0;
 		
 		SQACADryerProgramming.ProductByte[0];
 		SQACADryerProgramming.ProductByte[1];
@@ -179,10 +180,10 @@ void getSQSetupData(void)
 		SQACADryerProgramming.HeatVendPrice4[1] = 0;
 		SQACADryerProgramming.NoHeatVendPrice[0] = tmp[9];			//No Heat Cycle Vend Price (cents)
 		SQACADryerProgramming.NoHeatVendPrice[1] = 0;
-		SQACADryerProgramming.PaymSTopoffOn = tmp[13];				//Top Off Enabled, default=1
+		SQACADryerProgramming.PaymSTopoffOn = tmp[15];				//Top Off Enabled, default=1
 		SQACADryerProgramming.PaymSTopoffPrice[0] = tmp[11];		//Top Off Price (cents)
 		SQACADryerProgramming.PaymSTopoffPrice[1] = 0;
-		SQACADryerProgramming.PaymSTopoffMinutes = tmp[14];			//Top Off Time (minutes)
+		SQACADryerProgramming.PaymSTopoffMinutes = tmp[13];			//Top Off Time (minutes)
 		SQACADryerProgramming.PaymSTopoffSeconds = 38;
 		SQACADryerProgramming.Coin1TopoffMinutes = 5;
 		SQACADryerProgramming.Coin1TopoffSeconds = 38;
@@ -212,22 +213,22 @@ void getSQSetupData(void)
 
 
 /**
-@brief Machine Status Communication
-The Payment System must initiate a Machine Status Communication Sequence a minimum of once every 500 msec, and a
-maximum of once every 250 msec, so that critical machine status information can be passed to the Payment System.
-Payment System Driven Vend Prices are to be used, and the final packet in the sequence will be the Vend Price Packet from the Payment System to
-the Machine Control. This packet sends the Payment Systems current vend price to the Machine Control. This vend
-price will be shown on the display, and used in a vending sequence. The Payment System will initiate the communication sequence by sending the Status Request Command Packet.
-Assuming the control received the packet correctly, it will respond with an ACK, followed by the Machine Status
-Packet. Assuming the Payment System received the packet correctly, it will then respond with an ACK, and then with the
-Vend Price Packet. The Machine Control will respond with an ACK, and the Payment System and Machine Control will terminate the
-communication sequence. The Machine Control will accept the vend price passed in this packet as the current vend
-price to be written to the display, and used in a vending transaction.
-The Machine Status Communication Sequence in the Payment System Driven Vend Price option must be completed as shown.
-PS: <0x70 – Status Request> <ACK> <0x72 – Vend Price>
-MC: <ACK> <0x71 – Machine Status> <ACK>
+	@brief Machine Status Communication
+	The Payment System must initiate a Machine Status Communication Sequence a minimum of once every 500 msec, and a
+	maximum of once every 250 msec, so that critical machine status information can be passed to the Payment System.
+	Payment System Driven Vend Prices are to be used, and the final packet in the sequence will be the Vend Price Packet from the Payment System to
+	the Machine Control. This packet sends the Payment Systems current vend price to the Machine Control. This vend
+	price will be shown on the display, and used in a vending sequence. The Payment System will initiate the communication sequence by sending the Status Request Command Packet.
+	Assuming the control received the packet correctly, it will respond with an ACK, followed by the Machine Status
+	Packet. Assuming the Payment System received the packet correctly, it will then respond with an ACK, and then with the
+	Vend Price Packet. The Machine Control will respond with an ACK, and the Payment System and Machine Control will terminate the
+	communication sequence. The Machine Control will accept the vend price passed in this packet as the current vend
+	price to be written to the display, and used in a vending transaction.
+	The Machine Status Communication Sequence in the Payment System Driven Vend Price option must be completed as shown.
+	PS: <0x70 – Status Request> <ACK> <0x72 – Vend Price>
+	MC: <ACK> <0x71 – Machine Status> <ACK>
 
-@ingroup pposreader
+	@ingroup pposreader
 */
 bool SQACAMachineStatusSequence(void)
 {
@@ -255,6 +256,9 @@ bool SQACAMachineStatusSequence(void)
 	return false;
 }
 
+/**
+   The Machine Status Packet must be performed every 250msec to 500msec during operation.
+*/
 bool getSQACAStatusData(void)
 {
 	if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
@@ -298,7 +302,10 @@ bool getSQACAStatusData(void)
 	return false;
 }
 
-//The Payment System sends the Machine Control the active vend price for a machine cycle.
+/**
+   @brief Vend Price Packet is sent to the Machine Control
+   The Payment System sends the Machine Control the active vend price for a machine cycle.
+*/
 bool sendSQACAVendPrice(void)
 {
 	u8 temp[11]= {0};
@@ -469,9 +476,11 @@ bool sendSQACAVendPrice(void)
 	return ( sendSQDataPacket(temp) );
 }
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
+/** @brief The Payment System must perform an Initialization Communication sequence ten seconds after power-up.
+ 
+   If the packet is received properly, the Machine Control will respond with an ACK, and then return with its Machine Control Initialization Packet.
+   
+ */
 bool IsACA(void)
 {
 	//Initialization Packet = 0x73
@@ -497,16 +506,15 @@ bool IsACA(void)
 }
 
 /**
-@brief MACHINE CONTROL INITIALIZATION PACKET
-The Payment System must perform an Initialization Communication sequence ten seconds after power-up.
-The Payment System must honor this request(Initialization Command = 0x73)when it is received.
-If the Vend Price Option Byte contains an invalid value, or a value which does not match that already initialized into the
-control, the control will respond to this entire packet with an <INV> (0x09). If the packet is received properly, the
-Machine Control will respond with an ACK, and then return with its Machine Control Initialization Packet(Initialization Response = 0x74).
+	@brief MACHINE CONTROL INITIALIZATION PACKET
+	The Payment System must perform an Initialization Communication sequence ten seconds after power-up.
+	The Payment System must honor this request(Initialization Command = 0x73)when it is received.
+	If the Vend Price Option Byte contains an invalid value, or a value which does not match that already initialized into the
+	control, the control will respond to this entire packet with an <INV> (0x09). If the packet is received properly, the
+	Machine Control will respond with an ACK, and then return with its Machine Control Initialization Packet(Initialization Response = 0x74).
 
-@ingroup pposreader
+	@ingroup pposreader
 */
-//retrieve initial data from ACA machines and save it to mdcstatus structure
 bool getSQACAInitData()
 {
 	u8 buf[ACA_INIT_RESPONSE_BYTES] = {0};
@@ -527,9 +535,11 @@ bool getSQACAInitData()
 	return false;
 }
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
+/** @brief Sends an ASCIIZ string for transmitting via UART.
+ 
+   @param ucDataBuf to be placed in the serial output buffer and
+   then transmitted over the serial port.
+ */
 bool sendSQDataPacket(u8 *buf)
 {
 	u8 n, numberOfBytes, BCC, i;
@@ -578,9 +588,10 @@ bool sendSQDataPacket(u8 *buf)
 	return false;
 }
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
+/**
+   @brief Returns a data packet from the serial port.  
+   @return Character from serial buffer.
+*/
 bool getSQDataPacket(u8 *buf)
 {
 	u8 i,n,BCC;
@@ -618,16 +629,16 @@ bool getSQDataPacket(u8 *buf)
 }
 
 /**
-Callback function, called to examine machine status to determine if the machine is in MACHINE_READY_MODE(0x01) and MIMIC_QUANTUM_LOCK_ACTIVE(0x20)
+   Callback function, called to examine machine status to determine if the machine is in MACHINE_READY_MODE(0x01) and MIMIC_QUANTUM_LOCK_ACTIVE(0x20)
 
-@param waitSQStartKey True if Machine Status MACHINE_READY_MODE and MIMIC_QUANTUM_LOCK_ACTIVE bit is set,
-Machine Status = Ready Mode = 0x01
-Machine Status Secondary Modes = 0x20 (Mimic Quantum Lock Cycle Selections Active)
-or false if bits are not set.
-The MACHINE_READY_MODE bit and the MIMIC_QUANTUM_LOCK_ACTIVE bit is set when the machine is not running a cycle, and is waiting for a vend to be
-performed. In this mode of operation, the display shows the currently selected cycle, the full current vend price for that cycle.
-If the full vend amount is entered, the control will go to Start Mode.
-MachineType[0] = 33,34,29 MachineType[1] = 3 = ACA
+   @param waitSQStartKey True if Machine Status MACHINE_READY_MODE and MIMIC_QUANTUM_LOCK_ACTIVE bit is set,
+   Machine Status = Ready Mode = 0x01
+   Machine Status Secondary Modes = 0x20 (Mimic Quantum Lock Cycle Selections Active)
+   or false if bits are not set.
+   The MACHINE_READY_MODE bit and the MIMIC_QUANTUM_LOCK_ACTIVE bit is set when the machine is not running a cycle, and is waiting for a vend to be
+   performed. In this mode of operation, the display shows the currently selected cycle, the full current vend price for that cycle.
+   If the full vend amount is entered, the control will go to Start Mode.
+   MachineType[0] = 33,34,29 MachineType[1] = 3 = ACA
 */
 bool waitSQStartKey(void)
 {	
@@ -651,83 +662,14 @@ bool isSQCycleRunning(void)
 	//return ( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) || SQACAMachineStatus.MachineStatus[1] == MACHINE_RUN_MODE ); PPOS
 	return ( (SQACAMachineStatus.MachineStatus[0] == MACHINE_RUN_MODE) );
 }
-/*
-bool sendSQCashCardInserted(void)
-{
-u8 temp[6] = {0};
 
-if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-{
-temp[0] = 3;
-temp[1] = CASH_CARD_INSERTED;
-temp[2] = CurrentAccount.Value >> 8;
-temp[3] = CurrentAccount.Value;
-}
-else
-{
-temp[0] = CASH_CARD_SIZE;
-temp[1] = CASH_CARD_INSERTED;
-temp[2] = CurrentAccount.Value >> 8;
-temp[3] = CurrentAccount.Value;
-temp[4] = SQACAToploadProgramming.VendPrice1[0];
-temp[5] = SQACAToploadProgramming.VendPrice1[1];
-}
 
-return (sendSQDataPacket(temp) );
-}
-
-bool sendSQCashCardInsetedForTopoff(void)
-{
-u8 temp[7] = {0};
-
-if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-{
-temp[0] = 3;
-temp[1] = CASH_CARD_TOPOFF;
-temp[2] = CurrentAccount.Value >> 8;
-temp[3] = CurrentAccount.Value;
-}
-else
-{
-temp[0] = CASH_CARD_TOPOFF_SIZE;
-temp[1] = CASH_CARD_TOPOFF;
-temp[2] = CurrentAccount.Value >> 8;
-temp[3] = CurrentAccount.Value;
-temp[4] = SQACAToploadProgramming.VendPrice1[0];
-temp[5] = SQACAToploadProgramming.VendPrice1[1];
-
-}
-
-return (sendSQDataPacket(temp) );
-}
-
-bool sendSQCashCardRemoved(void)
-{
-u8 temp[7] = {0};
-
-if( SQACAMachineStatus.MachineType[1] == ACA_SERIES)
-{
-temp[0] = 3;
-temp[1] = CARD_REMOVED;
-temp[2] = CurrentAccount.Value >> 8;
-temp[3] = CurrentAccount.Value;
-}
-else
-{
-temp[0] = CASH_CARD_REMOVED_SIZE;
-temp[1] = CARD_REMOVED;
-temp[2] = CurrentAccount.Value >> 8;
-temp[3] = CurrentAccount.Value;
-temp[4] = SQACAToploadProgramming.VendPrice1[0];
-temp[5] = SQACAToploadProgramming.VendPrice1[1];
-}
-return (sendSQDataPacket(temp) );
-}
+						
+/** \brief Mimic Quantum Vending Interface Packet
+	The PS sends the Mimic Quantum Vending Interface Packet since the user has to press the
+	Start Pad before having the account charged. The Start Pad will now be flashing one second on, one second off for
+	30 seconds. Mimic Quantum Lock Cycle Selections will now be seen in the next Machine Status packet.
 */
-
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
 bool SQACAMimicQuantumSequence(u8 cardType)
 {
 	//If True, the Start Pad will now be flashing one second on, one second off for 30 seconds
@@ -740,16 +682,16 @@ bool SQACAMimicQuantumSequence(u8 cardType)
 
 /**
 @brief MIMIC QUANTUM VENDING INTERFACE
-The Payment System should send the Mimic Quantum Vending Interface Packet if they wish to have the user press the
-Start Pad before having their account charged. If the Mimic Quantum Vending Interface – Lock Cycle Selections is
-active, the next Start Pad press will lock cycle selections for 10 seconds. If the full vend amount is received within the
-10 seconds, the control will bypass Start Mode and enter Run Mode.
-The Payment System initiates the Mimic Quantum Vending Interface (user is ready to purchase a cycle).
-The machine control will respond with an ACK. The Start Pad will now be flashing one second on, one second off for
-30 seconds. If the “start mode” audio is enabled, the control will beep one second on, one second off for 10 seconds.
-Mimic Quantum Lock Cycle Selections will now be seen in the next Machine Status packet.
+   The Payment System should send the Mimic Quantum Vending Interface Packet if they wish to have the user press the
+   Start Pad before having their account charged. If the Mimic Quantum Vending Interface – Lock Cycle Selections is
+   active, the next Start Pad press will lock cycle selections for 10 seconds. If the full vend amount is received within the
+   10 seconds, the control will bypass Start Mode and enter Run Mode.
+   The Payment System initiates the Mimic Quantum Vending Interface (user is ready to purchase a cycle).
+   The machine control will respond with an ACK. The Start Pad will now be flashing one second on, one second off for
+   30 seconds. If the “start mode” audio is enabled, the control will beep one second on, one second off for 10 seconds.
+   Mimic Quantum Lock Cycle Selections will now be seen in the next Machine Status packet.
 
-@ingroup pposreader
+   @ingroup pposreader
 */
 bool sendSQACAMimicQuantumVending(void)
 {
@@ -762,16 +704,17 @@ bool sendSQACAMimicQuantumVending(void)
 	
 	return ( sendSQDataPacket(temp) );
 }
+
 /**
-@brief The Payment System sends this packet to the Machine Control to perform a vending transaction.
-Once this vend is received by the machine control, the Start Pad LED will no longer flash. As long as the door has been
-closed the entire time and the 10 seconds has not expired, the control will begin the purchased cycle. If either of these
-are not true, the control will enter Start Mode which will prompt the user to press Start again.
-If the packet is received without error, the Machine Control will respond with an <ACK>. The updated vending
-information internal to the control will be updated in the Machine Status Packet in the next Machine Status
-communication.
-If the vend could not be performed as presented in the Vending Payment Packet, as would be the case when the UnAvailable bit is set,
-the Machine Control will respond with an <INV>.
+@brief  Sends a vending transaction to the Machine Control.
+   Once this vend is received by the machine control, the Start Pad LED will no longer flash. As long as the door has been
+   closed the entire time and the 10 seconds has not expired, the control will begin the purchased cycle. If either of these
+   are not true, the control will enter Start Mode which will prompt the user to press Start again.
+   If the packet is received without error, the Machine Control will respond with an <ACK>. The updated vending
+   information internal to the control will be updated in the Machine Status Packet in the next Machine Status
+   communication.
+   If the vend could not be performed as presented in the Vending Payment Packet, as would be the case when the UnAvailable bit is set,
+   the Machine Control will respond with an <INV>.
 */
 bool sendSQACAVendingTransaction(void)
 {
@@ -787,6 +730,10 @@ bool sendSQACAVendingTransaction(void)
 	return ( sendSQDataPacket(temp) );
 }
 
+/** @brief Sends a vending transaction to the Machine Control
+ 
+   This function sends this packet to the Machine Control to perform a Top-Off dryer vending transaction.
+*/
 bool sendSQACATopOffVendingTransaction(void)
 {
 	u8 temp[7] = {0};
@@ -811,9 +758,13 @@ bool sendSQAddTime(void)
 	return ( sendSQDataPacket(temp) );
 }
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
+/** @brief Card Error Communication 
+   This function determines that there has been an error condition when reading a card, it may inform the
+   user of this error by sending the error code to the Machine Control, so that the Machine Control can display the error
+   code. These errors may be caused by inability to read the card due to a damaged card or reader, or by invalid data on
+   the card. The Payment System will send the Card Error Packet, and the Machine Control will display the appropriate
+   error message.
+*/
 bool sendSQCardErrorCode(u8 cardErrorCode)
 {
 	u8 temp[3] = {0};
@@ -825,9 +776,10 @@ bool sendSQCardErrorCode(u8 cardErrorCode)
 	return ( sendSQDataPacket(temp) );
 }
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
+/** @brief Audio Beep Request packet.  
+ 
+   This function turns the control audio signal on or off.
+*/
 bool sendSQAudioBeepRequest(u8 beepLength)
 {
 	u8 temp[3] = {0};
@@ -839,14 +791,13 @@ bool sendSQAudioBeepRequest(u8 beepLength)
 	return ( sendSQDataPacket(temp) );
 }
 
-/**********************************************************************************************
-bool sendSQDisplayCommand(u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration)
 
-Parameter:  u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration
-Description: This function will be used to send text to the MDC 6 position 7 segment display.
-Led1 to led6 are limited to values defined in "display.h"
-***********************************************************************************************
-*/
+/** @brief Payment System Display Request. 
+   Function to control the Machine Control display.  This function will be used to send text to the MDC 6 position 7 segment display.
+   Led1 to led6 are limited to values defined in "display.h"
+
+   Parameter:  u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration
+ */
 bool sendSQDisplayCommand(u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration)
 {
 	u8 temp[9]={0};
@@ -864,11 +815,13 @@ bool sendSQDisplayCommand(u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u
 	return ( sendSQDataPacket(temp) );
 }
 
-/*****************************************************************
-This function will display the current version of reader firmware
-on the ACA display for a minimum of 2 seconds.
-********************************************************************
-*/
+
+/** @brief Payment System Display Request. 
+   This function will display the current version of reader firmware
+   on the ACA display for a minimum of 2 seconds.
+
+   Parameter:  u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration
+ */
 bool displaySQReaderVersion(void)
 {
 	if( sendSQDisplayCommand(LED_r, msgNumber[__APP_MAJOR__],msgNumber[__APP_MINOR__],msgNumber[__APP_REVISION__], LED_BLANK,LED_BLANK,5) )
@@ -879,6 +832,9 @@ bool displaySQReaderVersion(void)
 	return false;
 }
 
+/** @brief Payment System Display Request. 
+   
+ */
 bool displaySQCardError(void)
 {
 	if( sendSQDisplayCommand(LED_C,LED_A,LED_r,LED_d,LED_BLANK,LED_BLANK,4) )
@@ -891,49 +847,11 @@ bool displaySQCardError(void)
 	}
 	return false;
 }
-/*
-bool cardRemoved(u8 cardType)
-{
-if( cardType == CASH_CARD )
-{
-if( sendSQCashCardRemoved() )
-{
-CurrentAccount.CardState = CARD_OUT;
-return true;
-}
 
-}
-else
-{
-
-//if ( sendSQCardRemoved() )				//PPOS
-//{
-//	CurrentAccount.CardState = CARD_OUT;
-//	return true;
-//}
-}
-return false;
-}
-bool cardInserted(u8 cardType)
-{
-if( (cardType == REGULAR_VEND) && sendSQCashCardInserted() )
-{
-CurrentAccount.CardState = CARD_IN;
-return true;
-}
-else if ( (cardType == TOPOFF_VEND) && sendSQCashCardInsetedForTopoff() )
-{
-CurrentAccount.CardState = CARD_IN;
-return true;
-}
-return false;
-}
-*/
-/**
-@brief Power-up Mode.
-The Payment System and Machine Control exchange critical information in the Initialization Communication sequence.
-Ten seconds after power-up he Payment System must perform an Initialization Communication sequence.
-The Payment System terminates the sequence by responding with an ACK and the Machine Status Communication sequences should now be performed regularly.
+/**	@brief Power-up Mode.
+	The Payment System and Machine Control exchange critical information in the Initialization Communication sequence.
+	Ten seconds after power-up he Payment System must perform an Initialization Communication sequence.
+	The Payment System terminates the sequence by responding with an ACK and the Machine Status Communication sequences should now be performed regularly.
 
 @ingroup pposreader
 */
@@ -960,13 +878,14 @@ bool isMachineCycleRunning()
 bool waitForMachineStartKey()
 {
 	return waitSQStartKey();
+	_delay_ms(1000); //PPOS 170706 without this delay the Start button will not work	
 }
 
-/**
-@brief Machine Status completed and online
-The Machine Status Communication Sequence is completed. The Machine Control will accept the vend price passed in this packet as the current vend
-price to be written to the display and used in a vending transaction. The ucDeviceStateFlag is set to be online.
-*/
+/** @brief Machine Status completed and associated to the network.
+
+   The Machine Status Communication Sequence is completed. The Machine Control will accept the vend price passed in this packet as the current vend
+   price to be written to the display and used in a vending transaction. The ucDeviceStateFlag is set to be online.
+ */
 void SQACAMachineStatusCommSequence(void)
 {
 	
@@ -977,9 +896,12 @@ void SQACAMachineStatusCommSequence(void)
 	}
 	
 }
-/************************************************************************/
-/*   getSQReaderMachineSetup(void)                                      */
-/************************************************************************/
+
+/** @brief Programming Data packet.
+ 
+   When a valid Programming Command is sent into the Payment System, the reader will initiate a programming
+   sequence by sending the Programming Data packet.
+ */
 bool getSQReaderMachineSetup(void)
 {
 	u8 temp[ACA_MAX_PACKET_SIZE] = {0};
@@ -987,7 +909,6 @@ bool getSQReaderMachineSetup(void)
 	switch( deviceStatus.deviceType[0] )
 	{
 		case PROGRAMMING_DATA_TOPLOAD:
-
 		temp[0] = QTL_PROGRAMMING_DATA_SIZE;					//50 bytes
 		temp[1] = deviceStatus.deviceType[0];					//0x21 (TLW Prog)
 		temp[2] = SQACAToploadProgramming.ProductByte[0];
@@ -1040,6 +961,7 @@ bool getSQReaderMachineSetup(void)
 		temp[49] = SQACAToploadProgramming.WarmRinse;
 		temp[50] = SQACAToploadProgramming.AudioSetting;
 		break;
+
 		case PROGRAMMING_DATA_FRONTLOAD:
 		temp[0] = QTL_PROGRAMMING_DATA_SIZE;					//37 bytes
 		temp[1] = deviceStatus.deviceType[0];					//0x22 (FLW Prog)
@@ -1080,6 +1002,7 @@ bool getSQReaderMachineSetup(void)
 		temp[36] = SQACAFrontloadProgramming.DefaultCycleModifier;
 		temp[37] = SQACAFrontloadProgramming.AudioSetting;
 		break;
+
 		case PROGRAMMING_DATA_DRYER:									//DRYER PROGRAMMING
 		temp[0] = QDT_PROGRAMMING_DATA_SIZE;							//37 bytes
 		temp[1] = deviceStatus.deviceType[0];							//0x29 for Dryer Prog
@@ -1124,21 +1047,14 @@ bool getSQReaderMachineSetup(void)
 	}
 	return ( sendSQDataPacket(temp) );
 }
-/*
-bool startMachineCycle()
-{
-u8 temp[2];
 
-return (sendSQDataPacket(temp) );
-}
-*/
 /**
-@brief SHORT AUDIT DATA REQUEST PACKET
-An Audit Collection Command may be sent by the Payment System to retrieve limited Audit information from the
-Machine Control. When audit data is retrieved from the control, there will be no visible change to the display to
-indicate that an audit has taken place. Audit data is collected for each machine type.
+	@brief SHORT AUDIT DATA REQUEST PACKET
+	An Audit Collection Command may be sent by the Payment System to retrieve limited Audit information from the
+	Machine Control. When audit data is retrieved from the control, there will be no visible change to the display to
+	indicate that an audit has taken place. Audit data is collected for each machine type.
 
-@ingroup pposreader
+	@ingroup pposreader
 */
 bool SQACAAuditDataSequence(void)
 {
@@ -1158,6 +1074,11 @@ bool SQACAAuditDataSequence(void)
 	return false;
 }
 
+/**
+	@brief SHORT AUDIT DATA PACKET
+	See the following sections fordetails on the Audit Data for each machine type.
+	
+*/
 bool getSQACAAuditData(void)
 {
 	u8 buf[ACA_AUDIT_RESPONSE_BYTES] = {0};
