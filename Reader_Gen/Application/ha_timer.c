@@ -5,7 +5,7 @@
 
 #include "reader.h"
 #include "serial.h"
-#include "machine.h"
+#include "ha_timer.h"
 #include "avr_timer.h"
 #include "timer_enddevice.h"
 #include <avr/wdt.h>
@@ -84,7 +84,7 @@ ISR(TIMER0_COMPA_vect)
 
 }
 
-
+/* PPOS
 u8 sendMdcPacket(u8 *ucDataBuf)
 {
 	u8 buf_size,i,n;
@@ -138,7 +138,7 @@ u8 sendMdcPacket(u8 *ucDataBuf)
 
 	return 0;
 }
-
+*/
 
 #endif // (MACHINE_TYPE)
 

@@ -40,7 +40,7 @@
 #define ZONE_SIZE                   0x04 // mifare Ultra light
 #define DISABLE_SCAN				0x05
 #define TIME_OUT					0x06
-#define WAIT_FOR_SERVER				0x07
+#define GET_BALANCE_FROM_SERVER		0x07
 #define WAIT_FOR_SELECTION  		0x08
 #define SETUP_PACKAGE     			0x09
 #define SETUP_REQUEST       		0x0A
@@ -56,6 +56,7 @@
 #define GET_FIRMWARE_VERSION	    0x15
 #define RESET_EEPROM                0x16
 #define AUDITDATA_REQUEST           0x17
+#define DRYERCYCLE_RUNNING			0x18
 
 #define BOW_ERROR					0x1A	// error message received from BOW
 #define READER_NAME_SETUP			0x1B	//assign name to reader to allow id of physical machine
@@ -126,6 +127,7 @@ u8 VENDTYPE;
 u8 ucNumberOfRetry;
 u8 ucSendDataBuffer[SERIAL_RECEIVE_MAX_BUFFER];
 u8 ucSendDataSize;
+
 
 void appStartScan(void);
 void doPing(void);

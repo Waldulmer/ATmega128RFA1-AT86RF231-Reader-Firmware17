@@ -11,23 +11,23 @@
 #include "mac.h"
 #include "reader.h"
 #include "application.h"
-#include "machine.h"
+#include "ha_timer.h"
 #include "hal_avr.h"
 #include "eeprom_map.h"
 #include "system.h"
 
 /**
-	@brief Initializes the reader on startup. A function to read data out of eeprom
-	and sets status flags for the reader and machine
-	READER_STATE_ADDR
-	MACHINE_TYPE_ADDR
-	stores the parameter for how many offline transactions are to save
-	and calls funtion getSQSetupData(), programming data for the machine
+@brief Initializes the reader on startup. A function to read data out of eeprom
+and sets status flags for the reader and machine
+READER_STATE_ADDR
+MACHINE_TYPE_ADDR
+stores the parameter for how many offline transactions are to save
+and calls funtion getSQSetupData(), programming data for the machine
 */
 void initReader(void)
 {
-	halGetEeprom(READER_STATE_ADDR, READER_STATE_FLAG_SIZE, (u8*)&ReaderStateFlag);
-	halGetEeprom(MACHINE_TYPE_ADDR, MACHINE_TYPE_SIZE, (u8*)&deviceStatus.deviceType);
+	halGetEeprom(READER_STATE_ADDR,2,(u8*)&ReaderStateFlag);
+	halGetEeprom(MACHINE_TYPE_ADDR, MACHINE_TYPE_SIZE,(u8*)&deviceStatus.deviceType);
 	
 	ReaderSetup.customerId = 0;
 	ReaderSetup.manufacturerId = 1;
@@ -35,7 +35,7 @@ void initReader(void)
 	//ReaderSetup.MaxOfflineTransaction = MAX_NUM_OFFLINE_TRANS; // to become variable once setup is done.
 	ReaderStateFlag.Busy = false;
 
-	//check setup status then set reader state flag	
+	//check setup status then set reader state flag
 	
 	//Init machine variables
 	if (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE)
@@ -43,7 +43,7 @@ void initReader(void)
 		//a valid reader ID has been detected. check for valid setup
 		getSQSetupData();
 		ReaderStateFlag.ValidateSetup = VALIDATE_READER_SETUP;
-		halGetEeprom(READER_SETUP_ADDR, 1, (u8*)&ReaderSetup.maxOfflineTransaction);
+		halGetEeprom(MAXNUM_OFFLINE_ADDR,1,(u8*)&ReaderSetup.maxOfflineTransaction);
 		if (ReaderSetup.maxOfflineTransaction)
 		{
 			ReaderStateFlag.EnableOfflineTransaction = true;
@@ -70,10 +70,10 @@ void initReader(void)
 }
 
 /**
-	@brief  Function to store data into eeprom.
-	structTransaction OfflineTransaction defines the data container.
- 
- */ 
+@brief  Function to store data into eeprom.
+structTransaction OfflineTransaction defines the data container.
+
+*/
 u8 storeOfflineTransaction(u32 cardNum)
 {
 	u8 return_code = 1;
@@ -91,7 +91,7 @@ u8 storeOfflineTransaction(u32 cardNum)
 	OfflineTransaction.MachineId[0] = SQACAMachineStatus.MachineType[0];
 	OfflineTransaction.MachineId[1] = SQACAMachineStatus.MachineType[1];
 	OfflineTransaction.CycleType	= SQACAMachineStatus.CycleType;
-	OfflineTransaction.ManufactureId = ReaderSetup.manufacturerId;	
+	OfflineTransaction.ManufactureId = ReaderSetup.manufacturerId;
 	switch( deviceStatus.deviceType[0] )
 	{
 		case PROGRAMMING_DATA_TOPLOAD:
@@ -238,17 +238,17 @@ u8 storeOfflineTransaction(u32 cardNum)
 		if(ReaderStateFlag.OfflineTransactionExist == false)
 		{
 			ReaderStateFlag.OfflineTransactionExist = true;
-			halPutEeprom(READER_STATE_ADDR,READER_STATE_FLAG_SIZE,(u8*)&ReaderStateFlag);
+			halPutEeprom(READER_STATE_ADDR,2,(u8*)&ReaderStateFlag);
 		}
 		if (ReaderSetup.numOfSavedTransactions == ReaderSetup.maxOfflineTransaction)
 		{
 			ReaderStateFlag.MaxNumTransReached = true;
-			halPutEeprom(READER_STATE_ADDR,READER_STATE_FLAG_SIZE,(u8*)&ReaderStateFlag);
+			halPutEeprom(READER_STATE_ADDR,2,(u8*)&ReaderStateFlag);
 		}
 	}
 	else if(ReaderSetup.numOfSavedTransactions >= ReaderSetup.maxOfflineTransaction){
 		halGetEeprom(READER_STATE_ADDR, 1, (u8*)&ReaderStateFlag);
-		ReaderStateFlag.EnableOfflineTransaction = false; // stop conducting off line transaction, EEPROM is full.
+		ReaderStateFlag.EnableOfflineTransaction = false; // stop conducting offline transaction, EEPROM is full.
 		ReaderStateFlag.MaxNumTransReached = true;
 		halPutEeprom(READER_STATE_ADDR,1,(u8*)&ReaderStateFlag);
 		return_code = 0;
@@ -257,14 +257,14 @@ u8 storeOfflineTransaction(u32 cardNum)
 }
 
 /**
-   @brief Build serial transmit buffer 
+@brief Build serial transmit buffer
 
-   
+
 */
 u8 sendStoredTransaction(void)
 {
 	//get total number of stored off line transactions from EEPROM.
-	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
+	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
 	
 	//build buffer of transactions to be transmitted.
 	if (ReaderSetup.numOfSavedTransactions > 0 && ReaderSetup.numOfSavedTransactions < 0xFF) // valid number of transactions stored, prepare to send to BOW
@@ -273,8 +273,8 @@ u8 sendStoredTransaction(void)
 		u16 addr;
 		
 		//send data to BOW
-		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START, 2, (u8*)&addr);
-		halGetEeprom((void*)addr, OFFLINE_TRANSACTION_NUM_BYTE, (u8*)&record); // get transaction record
+		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START,2,(u8*)&addr);
+		halGetEeprom((void*)addr, OFFLINE_TRANSACTION_NUM_BYTE,(u8*)&record); // get transaction record
 		
 		if( sendBOWCCTransaction(&record) )
 		{//update current record address
@@ -282,7 +282,7 @@ u8 sendStoredTransaction(void)
 			
 			ReaderSetup.numOfSavedTransactions--;
 			halPutEeprom(OFFLINE_TRANSACTION_RECORD_START,2,(u8*)&addr);
-			halPutEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
+			halPutEeprom(OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
 		}
 	}
 	if (ReaderSetup.numOfSavedTransactions == 0)
@@ -308,6 +308,19 @@ void getTime(structTime *time)
 	time->hours = 0;
 	time->minutes = 0;
 	time->seconds = 0;
+}
+
+/**
+@brief  Function to store SetupString into Eeprom for testing purposes.
+*/
+void defaultSetupString()
+{
+	u8 n;	
+	char nibbleStr[50] = {"00770076007500740073007200710070006F00190503"};
+	char *ptr = &nibbleStr[0] ;
+	n = asciiStringToNibble(ptr, nibbleStr); //position at eeprom address 0x24
+	
+	halPutEeprom(MACHINE_SETUP_ADDR, n, (u8*)ptr);
 }
 /** @} */
 /** @} */

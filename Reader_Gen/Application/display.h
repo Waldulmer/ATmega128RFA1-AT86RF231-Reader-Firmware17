@@ -12,10 +12,6 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
-
-void displayMsg(u8 msg);
-void displayVersion(void);
-
 //led defines
 #define LED_0     0x3f
 #define LED_1     0x06
@@ -68,7 +64,7 @@ void displayVersion(void);
 #define SERVICE_MSG		3
 #define BUSY_MSG		4
 #define BLANK_MSG		5
-#define PPOS_MSG		6
+#define CABLE_MSG		6
 #define TOPOFF_MSG		7
 
 
@@ -77,5 +73,13 @@ enum{need = 0, ser, card};
 	
 //external types
 extern u8 msgNumber[];
+
+void displayMsg(u8 msg);
+//void displayVersion(void);
+bool sendSQDisplayCommand(u8 led1, u8 led2, u8 led3, u8 led4, u8 led5, u8 led6, u8 duration);
+bool displaySQReaderVersion(void);
+bool displaySQCardError(void);
+bool displaySQBalance(float amount);
+bool displaySQTopOffvend(double vend);
 	
 #endif /* DISPLAY_H_ */

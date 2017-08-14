@@ -156,6 +156,7 @@ u8 Nible_to_ascii ( u8 ucData );
 u8 Ascii_to_nible ( u8 ucData );
 void serial_put_hex ( u8 ucData );
 void init_rx_buf(void);
+u8 asciiStringToNibble( char *inStr, char *outStr);
 
 
 

@@ -111,6 +111,7 @@ param inStr is the ASCII value to be converted.
 
 return outStr is the nibble value with number of characters received.
 */
+/*
 u8 asciiStringToNibble( char *inStr, char *outStr)
 {
 	u8 n, k;
@@ -129,6 +130,7 @@ u8 asciiStringToNibble( char *inStr, char *outStr)
 	}
 	return n/2;
 }
+*/
 
 /**
 Construct a frame for transmission.
@@ -262,8 +264,8 @@ u8 extractIncomingMessage(char *dataBuffer)
 
 			halPutEeprom(MACHINE_SETUP_ADDR, n, (u8*)nibbleStr); //write machine setup string to eeprom; Maurice's Fix
 			
-			ReaderSetup.maxOfflineTransaction = nibbleStr[n];  //PPOS170712
-			halPutEeprom(READER_SETUP_ADDR, 1, (u8*)&ReaderSetup.maxOfflineTransaction); //write machine setup string to eeprom minus "number of offline transactions"
+			ReaderSetup.maxOfflineTransaction = nibbleStr[n-1];  //PPOS170712
+			halPutEeprom(MAXNUM_OFFLINE_ADDR, 1, (u8*)&ReaderSetup.maxOfflineTransaction); //write machine setup string to eeprom minus "number of offline transactions"
 			
 			ReaderStateFlag.ReaderSetup = READER_SETUP_DONE;
 			halPutEeprom(READER_STATE_ADDR, 1, (u8*)&ReaderStateFlag);

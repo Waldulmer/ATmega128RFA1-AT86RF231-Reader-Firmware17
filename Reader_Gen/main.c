@@ -71,7 +71,7 @@
 #include "ErrCode.h"
 #include "spi.h"
 
-#include "machine.h"
+#include "ha_timer.h"
 
 // Make the compiler accept these unused function names
 #define usb_task_init()

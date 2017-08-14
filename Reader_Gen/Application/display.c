@@ -31,7 +31,7 @@
  */ 
 #include "mac.h"
 #include "application.h"
-#include "machine.h"
+#include "ha_timer.h"
 #include "display.h"
 #include "SpeedQueen.h"
 
@@ -90,6 +90,7 @@ u8 msgNumber[] = {
 
 
 #if (DEVICE_CONNECTED == ACA_MACHINE)
+
 /**********************************************************************************************
 void displayMsg(u8 msg) 
 
@@ -97,7 +98,6 @@ Description: This function will be used to send text to the ACA 6 position 7 seg
 Led1 to led6 are limited to values defined in "display.h"
 ***********************************************************************************************
 */
-
 void displayMsg(u8 msg) 
 {
 	if (msg == CARD_ERR_MSG)
@@ -120,26 +120,110 @@ void displayMsg(u8 msg)
 	{
 		sendSQDisplayCommand(LED_BLANK,LED_BLANK,LED_BLANK,LED_BLANK,LED_BLANK,LED_BLANK,0);
 	}
-	else if (msg == PPOS_MSG)		//PPOS Test message
+	else if (msg == CABLE_MSG)		//PPOS Test message
 	{
-		sendSQDisplayCommand(LED_t,LED_E,LED_S,LED_t,LED_BLANK,LED_BLANK,5);
-	}
-	else if (msg == TOPOFF_MSG)		//TopOff message
-	{
-		sendSQDisplayCommand(LED_t,LED_o,LED_P,LED_o,LED_F,LED_F,5);
-	}
+		sendSQDisplayCommand(LED_C,LED_A,LED_b,LED_L,LED_E,LED_BLANK,5);
+	}	
 
 }
 
-/*****************************************************************
-This function will display the current version of reader firmware
-on the MDC display for a minimum of 2 seconds.
+/** @brief Payment System Display Request. 
+   Function to control the Machine Control display.  This function will be used to send text to the MDC 6 position 7 segment display.
+   Led1 to led6 are limited to values defined in "display.h"
 
-*/
+   Parameter:  u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration
+ */
+bool sendSQDisplayCommand(u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration)
+{
+	u8 temp[9]={0};
 
-void displayVersion(void)
-{	
-	displaySQReaderVersion();
+	temp[0] = DISPLAY_REQUEST_BYTES;	//Number of actual data bytes to be transferred to the ACA including command data exclude bbc byte
+	temp[1] = DISPLAY_REQUEST;		//ACA command to be requested
+	temp[2] = led1;					//Left most digit display character 6
+	temp[3] = led2;					//Display character 5
+	temp[4] = led3;					//Display character 4
+	temp[5] = led4;					//Display character 3
+	temp[6] = led5;
+	temp[7] = led6;
+	temp[8] = duration;				//Duration of display in seconds
+
+	return ( sendSQDataPacket(temp) );
 }
+/** @brief Payment System Display Request. 
+   This function will display the current version of reader firmware
+   on the ACA display for a minimum of 5 seconds.
+
+   Parameter:  u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u8 duration
+ */
+bool displaySQReaderVersion(void)
+{
+	if( sendSQDisplayCommand(LED_r, msgNumber[__APP_MAJOR__],msgNumber[__APP_MINOR__],msgNumber[__APP_REVISION__], LED_BLANK,LED_BLANK,5) )
+	{
+		_delay_ms(2000);
+		return true;
+	}
+	return false;
+}
+
+/** @brief Payment System Display Request for Account Balance. 
+   This function will display the individual account balance 
+   on the ACA machine control display for a minimum of 5 seconds.
+   Format the Display Balance: "1" is just a character as far as the LCD is concerned. 
+   It's not a number. The LCD wants you to send the "code" for each character you want to display.
+   The codes for characters "0" through "9" are 48 through 57. So just adding 48 to any single-digit 
+   number will give you the code for the character that	corresponds to that digit, f.e. uctempBuf[0]=49. digit 1=uctempBuf[0]-0x30 .
+
+   Parameter:  float balance
+ */
+bool displaySQBalance(float amount)
+{	 
+	u8 temp[9]={0};
+	 uint8_t * balance = (uint8_t *) &amount;
+			
+	temp[0] = DISPLAY_REQUEST_BYTES;	//Number of actual data bytes to be transferred to the ACA including command data exclude bbc byte
+	temp[1] = DISPLAY_REQUEST;			//ACA command to be requested
+	temp[2] = balance[0];
+	temp[3] = balance[1];
+	temp[4] = balance[2];
+	temp[5] = balance[3];	
+	temp[8] = 5;					//Duration of display in seconds
+	
+	return ( sendSQDataPacket(temp) );
+}
+
+/** @brief Payment System Display Request for TopOff vend. 
+   This function will display the TopOff vend price purchased after a regular vend 
+   on the ACA Dryer display for a minimum of 5 seconds.
+
+   Parameter:  double vend
+
+   maybe I use the above funct instead
+ */
+bool displaySQTopOffvend(double vend)
+{
+	if( sendSQDisplayCommand(LED_t, LED_o, LED_P, LED_BLANK, LED_BLANK,LED_BLANK, 5) )
+	{
+		_delay_ms(2000);
+		return true;
+	}
+	return false;
+}
+
+/** @brief Payment System Display Request. 
+   
+ */
+bool displaySQCardError(void)
+{
+	if( sendSQDisplayCommand(LED_C,LED_A,LED_r,LED_d,LED_BLANK,LED_BLANK,4) )
+	{
+		_delay_ms(2000);
+		if( sendSQDisplayCommand(LED_E, LED_r,LED_r,LED_BLANK,LED_BLANK,LED_BLANK,3) )
+		_delay_ms(2000);
+
+		return true;
+	}
+	return false;
+}
+
 #endif
                                                          
