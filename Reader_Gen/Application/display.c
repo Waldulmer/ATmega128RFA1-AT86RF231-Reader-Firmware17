@@ -7,35 +7,37 @@
  * Author:     Paul Bastien
  * Date:       07/30/11
  *
- ********************************************************************************************************************
- *
- *                          Copyright (C) 2011
- *  All rights reserved. No part of this program or publication
- *  may be reproduced, transmitted, transcribed, stored in a
- *  retrieval system, or translated to any language or computer
- *  language, in any form or by any means, electronic, mechanical,
- *  magnetic, optical, chemical, manual, or otherwise, without prior
- *  written permission from:
- * 		Paul Bastien
- *		
- *	
- *
- ********************************************************************************************************************
+ ******************************************************************************************************************** 
  *
  *
  * Revision   r001 original version
  * History:  VER      SCR #    Author         Date       Description
  *           -----    -----    ------         ----       -----------
  *
- ***************************************************************************************************************************
+ **********************************************************************************************************************
  */ 
 #include "mac.h"
 #include "application.h"
-#include "ha_timer.h"
+#include "reader.h"
 #include "display.h"
 #include "SpeedQueen.h"
 
 #include <util/delay.h>
+
+/**
+	@addtogroup pposreader
+	@{
+   @addtogroup machinedisplay Machine Control Display
+   @{
+   This file implements an interface for the Machine Control Display.
+   The Payment System may control the Machine Control display via a Display Request Package.
+   The Machine control will respond with an <ACK> to indicate the packet was received, 
+   and will display the characters passed in for the specified time.
+   The Payment System may write information to the machine control display, 
+   and may specify how long the given display is to remain active. This command
+   allows the user to specify what will be displayed in each of the digits on 
+   the machine control display. The duration of the display is adjustable from 1 to 255 seconds.   
+*/
 
 u8 msgTable[] = {
 
@@ -66,8 +68,9 @@ u8 msgTable[] = {
                         LED_BLANK, LED_b, LED_A, LED_L, LED_BLANK, LED_BLANK,
                         LED_BLANK, LED_BLANK, LED_BLANK, LED_BLANK, 
 
-};                      // defined messages
-
+};
+                      
+// defined messages
 u8 msgNumber[] = {
                            LED_0,
                            LED_1,
@@ -91,12 +94,10 @@ u8 msgNumber[] = {
 
 #if (DEVICE_CONNECTED == ACA_MACHINE)
 
-/**********************************************************************************************
-void displayMsg(u8 msg) 
-
-Description: This function will be used to send text to the ACA 6 position 7 segment display.
-Led1 to led6 are limited to values defined in "display.h"
-***********************************************************************************************
+/** @brief function to identify text message to send to the machine control display  
+   This function will be used to send text to the ACA 6 position 7 segment display. 
+   Led1 to led6 are limited to values defined in "display.h"
+   @param msg short parameter of the message.
 */
 void displayMsg(u8 msg) 
 {
@@ -123,7 +124,7 @@ void displayMsg(u8 msg)
 	else if (msg == CABLE_MSG)		//PPOS Test message
 	{
 		sendSQDisplayCommand(LED_C,LED_A,LED_b,LED_L,LED_E,LED_BLANK,5);
-	}	
+	}
 
 }
 
@@ -149,6 +150,7 @@ bool sendSQDisplayCommand(u8 led1, u8 led2,u8 led3, u8 led4, u8 led5, u8 led6, u
 
 	return ( sendSQDataPacket(temp) );
 }
+
 /** @brief Payment System Display Request. 
    This function will display the current version of reader firmware
    on the ACA display for a minimum of 5 seconds.
@@ -165,6 +167,7 @@ bool displaySQReaderVersion(void)
 	return false;
 }
 
+
 /** @brief Payment System Display Request for Account Balance. 
    This function will display the individual account balance 
    on the ACA machine control display for a minimum of 5 seconds.
@@ -176,9 +179,9 @@ bool displaySQReaderVersion(void)
    Parameter:  float balance
  */
 bool displaySQBalance(float amount)
-{	 
-	u8 temp[9]={0};
+{
 	 uint8_t * balance = (uint8_t *) &amount;
+	u8 temp[9]={0};
 			
 	temp[0] = DISPLAY_REQUEST_BYTES;	//Number of actual data bytes to be transferred to the ACA including command data exclude bbc byte
 	temp[1] = DISPLAY_REQUEST;			//ACA command to be requested
@@ -224,6 +227,7 @@ bool displaySQCardError(void)
 	}
 	return false;
 }
+
 
 #endif
                                                          

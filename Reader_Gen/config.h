@@ -58,8 +58,7 @@
    @{
 */
 
-//_____ I N C L U D E S ____________________________________________________
-
+//I N C L U D E S
 
 #include "compiler.h" //!< Compiler definitions
 

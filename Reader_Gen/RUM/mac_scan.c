@@ -69,7 +69,7 @@
    -# Send a beacon request.
    -# Set a timeout timer for @ref SCANDURATION.
    -# If a beacon is received before the timer expires, save the
-     relevent information about the node sending the beacon.
+     relevant information about the node sending the beacon.
    -# When the timer expires, move on to the next channel.
 
    The coordinator performs a channel scan, not to look for available

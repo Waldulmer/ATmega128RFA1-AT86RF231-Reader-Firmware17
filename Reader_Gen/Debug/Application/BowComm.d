@@ -1,5 +1,5 @@
-RUM/sixlowpan_wake.d RUM/sixlowpan_wake.o: ../RUM/sixlowpan_wake.c \
- ../RUM/mac.h \
+Application/BowComm.d Application/BowComm.o: ../Application/BowComm.c \
+ ../Application/BowComm.h ../RUM/mac.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  ../stdboolrum.h \
@@ -25,7 +25,18 @@ RUM/sixlowpan_wake.d RUM/sixlowpan_wake.o: ../RUM/sixlowpan_wake.c \
  ../Radio/atmega128rfa1.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
- ../RUM/sensors.h ../Application/system.h ../RUM/mac.h
+ ../RUM/sensors.h ../RUM/mac.h ../Radio/hal_avr.h \
+ ../Application/application.h ../Application/reader.h \
+ ../Application/eeprom_map.h ../UART/serial.h \
+ ../Application/application.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
+ ../Application/ppos_types.h ../Application/SpeedQueen.h \
+ ../Application/display.h ../Application/system.h ../Timer/avr_timer.h \
+ ../Application/system.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h
+
+../Application/BowComm.h:
 
 ../RUM/mac.h:
 
@@ -85,6 +96,34 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../RUM/sensors.h:
 
+../RUM/mac.h:
+
+../Radio/hal_avr.h:
+
+../Application/application.h:
+
+../Application/reader.h:
+
+../Application/eeprom_map.h:
+
+../UART/serial.h:
+
+../Application/application.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
+
+../Application/ppos_types.h:
+
+../Application/SpeedQueen.h:
+
+../Application/display.h:
+
 ../Application/system.h:
 
-../RUM/mac.h:
+../Timer/avr_timer.h:
+
+../Application/system.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h:

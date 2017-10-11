@@ -28,10 +28,6 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(addsf3x.o) (__fp_split3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_zero.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(addsf3x.o) (__fp_zero)
-c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3.o)
-                              Application/application.o (__mulsf3)
-c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3x.o)
-                              c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3.o) (__mulsf3x)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodhi4.o)
                               mifare/Mifare.o (__udivmodhi4)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_divmodhi4.o)
@@ -49,7 +45,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_ashrdi3.o)
                               Application/application.o (__lshrdi3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(malloc.o)
-                              Application/application.o (malloc)
+                              Application/zstring.o (malloc)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(rand.o)
                               Radio/radio.o (rand)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strtoul.o)
@@ -75,7 +71,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strcpy.o)
                               Application/application.o (strcpy)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strncpy.o)
-                              Application/application.o (strncpy)
+                              Application/zstring.o (strncpy)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strnlen.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a(vfprintf_flt.o) (strnlen)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strstr.o)
@@ -104,6 +100,10 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strtod.o) (__eqsf2)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fp_cmp.o)
                               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(cmpsf2.o) (__fp_cmp)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3.o)
+                              c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strtod.o) (__mulsf3)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3x.o)
+                              c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3.o) (__mulsf3x)
 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
                               Radio/hal_avr.o (eeprom_read_block)
 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
@@ -132,7 +132,6 @@ event_queue         0x5c              RUM/mac_event.o
 ParamStr            0x64              Application/application.o
 SQACAFrontloadProgramming
                     0x26              Application/application.o
-INSUFFCIENT_FUNDS   0x1               Application/application.o
 SQACAToploadProgramming
                     0x33              Application/application.o
 SQACAAuditData      0x2e              Application/application.o
@@ -143,27 +142,27 @@ mac_buffer_tx       0x82              RUM/mac.o
 ucSendCmdState      0x1               UART/serial.o
 macConfig           0x19              RUM/mac.o
 CurrentAccount      0xa               Application/application.o
-cardId              0x2               Application/machine.o
+cardId              0x2               Application/reader.o
 ucNumberOfRetry     0x1               Application/application.o
 ucParseDataStart    0x1               UART/serial.o
-ucTopOffTime        0x1               Application/machine.o
-appInterval         0x2               RUM/sensors.o
-frameInterval       0x2               RUM/sensors.o
+ucTopOffTime        0x1               Application/reader.o
 __brkval            0x2               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(malloc.o)
 ReaderStateFlag     0x2               Application/application.o
 MInfo               0x8               mifare/Mifare.o
 rx_mode             0x1               Radio/radio.o
 DataBuffer          0x80              Application/application.o
-ucCardErrorCode     0x1               Application/machine.o
+vendType            0x1               Application/application.o
+ucCardErrorCode     0x1               Application/reader.o
 OP                  0x1               Application/application.o
 ucMachineWait       0x1               Application/application.o
 ucDeviceStateFlag   0x1               Application/application.o
 ReaderSetup         0x48              Application/application.o
+VENDTYPE            0x1               Application/application.o
 SerialFrame         0x2               UART/serial.o
 ucSerialReceiveDataIndex
                     0x1               UART/serial.o
 timeout             0x1               Application/application.o
-ucTimerCount        0x1               Application/machine.o
+ucTimerCount        0x1               Application/reader.o
 panDescriptor       0x16              RUM/mac_scan.o
 SQACADryerProgramming
                     0x2c              Application/application.o
@@ -178,17 +177,16 @@ __flp               0x2               c:/program files (x86)/atmel/studio/7.0/to
 gotPanCoordPing     0x1               Application/application.o
 SQACAMachineStatus  0x1a              Application/application.o
 ucSendDataSize      0x1               Application/application.o
-vendPrice           0x4               Application/machine.o
+vendPrice           0x4               Application/reader.o
 deviceFlag          0x1               Application/application.o
 ENDNODE_SHORTADDRESS
                     0x2               UART/serial.o
-ucCardBalance       0x2               Application/machine.o
+ucCardBalance       0x2               Application/reader.o
 
 Discarded input sections
 
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51/crtatmega128rfa1.o
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51/crtatmega128rfa1.o
- .group         0x00000000        0x8 Application/application.o
  .group         0x00000000        0x8 Application/application.o
  .group         0x00000000        0x8 Application/application.o
  .group         0x00000000        0x8 Application/application.o
@@ -266,14 +264,9 @@ Discarded input sections
                 0x00000000        0x2 Application/application.o
  .text.appClearChanFound
                 0x00000000        0x2 Application/application.o
- .text.String_to_hexa_convert
-                0x00000000       0xd2 Application/application.o
- .text.appResendPacket
-                0x00000000        0x2 Application/application.o
  .text.Beeps    0x00000000       0x44 Application/application.o
- .bss.ucHeartBeatTimer.4508
+ .bss.ucHeartBeatTimer.4485
                 0x00000000        0x1 Application/application.o
- .data.bootptr  0x00000000        0x2 Application/application.o
  .bss.ucLed1State
                 0x00000000        0x1 Application/application.o
  .bss.pingTimer
@@ -323,11 +316,12 @@ Discarded input sections
  .group         0x00000000        0x8 Application/BowComm.o
  .group         0x00000000        0x8 Application/BowComm.o
  .group         0x00000000        0x8 Application/BowComm.o
+ .group         0x00000000        0x8 Application/BowComm.o
+ .group         0x00000000        0x8 Application/BowComm.o
+ .group         0x00000000        0x8 Application/BowComm.o
  .text          0x00000000        0x0 Application/BowComm.o
  .data          0x00000000        0x0 Application/BowComm.o
  .bss           0x00000000        0x0 Application/BowComm.o
- .text.sendBOWAuditDataRequest
-                0x00000000        0x4 Application/BowComm.o
  .debug_macro   0x00000000      0xb08 Application/BowComm.o
  .debug_macro   0x00000000      0x1c9 Application/BowComm.o
  .debug_macro   0x00000000       0x22 Application/BowComm.o
@@ -354,12 +348,15 @@ Discarded input sections
  .debug_macro   0x00000000       0x43 Application/BowComm.o
  .debug_macro   0x00000000       0x83 Application/BowComm.o
  .debug_macro   0x00000000      0x10e Application/BowComm.o
- .debug_macro   0x00000000      0x17c Application/BowComm.o
+ .debug_macro   0x00000000      0x17f Application/BowComm.o
  .debug_macro   0x00000000       0xb8 Application/BowComm.o
  .debug_macro   0x00000000       0x87 Application/BowComm.o
  .debug_macro   0x00000000       0x10 Application/BowComm.o
  .debug_macro   0x00000000      0x175 Application/BowComm.o
  .debug_macro   0x00000000       0x4a Application/BowComm.o
+ .debug_macro   0x00000000       0x19 Application/BowComm.o
+ .debug_macro   0x00000000      0x11e Application/BowComm.o
+ .debug_macro   0x00000000      0x1c0 Application/BowComm.o
  .debug_macro   0x00000000       0x28 Application/BowComm.o
  .debug_macro   0x00000000       0x1c Application/BowComm.o
  .debug_macro   0x00000000       0x68 Application/BowComm.o
@@ -401,11 +398,15 @@ Discarded input sections
  .group         0x00000000        0x8 Application/display.o
  .group         0x00000000        0x8 Application/display.o
  .group         0x00000000        0x8 Application/display.o
+ .group         0x00000000        0x8 Application/display.o
+ .group         0x00000000        0x8 Application/display.o
+ .group         0x00000000        0x8 Application/display.o
+ .group         0x00000000        0x8 Application/display.o
  .text          0x00000000        0x0 Application/display.o
  .data          0x00000000        0x0 Application/display.o
  .bss           0x00000000        0x0 Application/display.o
  .data.msgTable
-                0x00000000        0x6 Application/display.o
+                0x00000000       0x6a Application/display.o
  .debug_macro   0x00000000      0xb08 Application/display.o
  .debug_macro   0x00000000      0x1c9 Application/display.o
  .debug_macro   0x00000000       0x22 Application/display.o
@@ -438,12 +439,15 @@ Discarded input sections
  .debug_macro   0x00000000       0x43 Application/display.o
  .debug_macro   0x00000000       0x83 Application/display.o
  .debug_macro   0x00000000      0x10e Application/display.o
- .debug_macro   0x00000000      0x17c Application/display.o
- .debug_macro   0x00000000       0x1c Application/display.o
- .debug_macro   0x00000000      0x112 Application/display.o
- .debug_macro   0x00000000       0xd6 Application/display.o
- .debug_macro   0x00000000      0x1af Application/display.o
- .group         0x00000000        0x8 Application/SpeedQueen.o
+ .debug_macro   0x00000000      0x17f Application/display.o
+ .debug_macro   0x00000000       0xb8 Application/display.o
+ .debug_macro   0x00000000       0x87 Application/display.o
+ .debug_macro   0x00000000       0x10 Application/display.o
+ .debug_macro   0x00000000      0x175 Application/display.o
+ .debug_macro   0x00000000       0x4a Application/display.o
+ .debug_macro   0x00000000       0x19 Application/display.o
+ .debug_macro   0x00000000      0x11e Application/display.o
+ .debug_macro   0x00000000      0x1c0 Application/display.o
  .group         0x00000000        0x8 Application/SpeedQueen.o
  .group         0x00000000        0x8 Application/SpeedQueen.o
  .group         0x00000000        0x8 Application/SpeedQueen.o
@@ -488,20 +492,10 @@ Discarded input sections
  .text          0x00000000        0x0 Application/SpeedQueen.o
  .data          0x00000000        0x0 Application/SpeedQueen.o
  .bss           0x00000000        0x0 Application/SpeedQueen.o
- .text.sendSQCashCardInserted
-                0x00000000       0x66 Application/SpeedQueen.o
- .text.sendSQCashCardInsetedForTopoff
-                0x00000000       0x6c Application/SpeedQueen.o
- .text.sendSQAddTime
-                0x00000000       0x24 Application/SpeedQueen.o
- .text.sendSQCardErrorCode
-                0x00000000       0x2a Application/SpeedQueen.o
+ .text.isSQCycleRunning
+                0x00000000        0xe Application/SpeedQueen.o
  .text.sendSQAudioBeepRequest
                 0x00000000       0x2a Application/SpeedQueen.o
- .text.cardInserted
-                0x00000000       0x24 Application/SpeedQueen.o
- .text.startMachineCycle
-                0x00000000       0x1c Application/SpeedQueen.o
  .text.getSQACAAuditData
                 0x00000000      0x156 Application/SpeedQueen.o
  .text.SQACAAuditDataSequence
@@ -538,16 +532,21 @@ Discarded input sections
  .debug_macro   0x00000000       0x43 Application/SpeedQueen.o
  .debug_macro   0x00000000       0x83 Application/SpeedQueen.o
  .debug_macro   0x00000000      0x10e Application/SpeedQueen.o
- .debug_macro   0x00000000      0x17c Application/SpeedQueen.o
- .debug_macro   0x00000000       0x1c Application/SpeedQueen.o
- .debug_macro   0x00000000      0x112 Application/SpeedQueen.o
- .debug_macro   0x00000000       0xd6 Application/SpeedQueen.o
- .debug_macro   0x00000000      0x1af Application/SpeedQueen.o
+ .debug_macro   0x00000000      0x17f Application/SpeedQueen.o
  .debug_macro   0x00000000       0x87 Application/SpeedQueen.o
  .debug_macro   0x00000000       0x10 Application/SpeedQueen.o
  .debug_macro   0x00000000      0x175 Application/SpeedQueen.o
  .debug_macro   0x00000000       0x4a Application/SpeedQueen.o
+ .debug_macro   0x00000000      0x11e Application/SpeedQueen.o
+ .debug_macro   0x00000000      0x1c0 Application/SpeedQueen.o
  .debug_macro   0x00000000       0xb8 Application/SpeedQueen.o
+ .debug_macro   0x00000000       0x19 Application/SpeedQueen.o
+ .group         0x00000000        0x8 Application/reader.o
+ .group         0x00000000        0x8 Application/reader.o
+ .group         0x00000000        0x8 Application/reader.o
+ .group         0x00000000        0x8 Application/reader.o
+ .group         0x00000000        0x8 Application/reader.o
+ .group         0x00000000        0x8 Application/reader.o
  .group         0x00000000        0x8 Application/reader.o
  .group         0x00000000        0x8 Application/reader.o
  .group         0x00000000        0x8 Application/reader.o
@@ -594,6 +593,11 @@ Discarded input sections
  .bss           0x00000000        0x0 Application/reader.o
  .text.getDate  0x00000000        0xc Application/reader.o
  .text.getTime  0x00000000        0xa Application/reader.o
+ .rodata        0x00000000       0x32 Application/reader.o
+ .text.defaultSetupString
+                0x00000000       0x62 Application/reader.o
+ .text.calcMachineCRC
+                0x00000000       0x84 Application/reader.o
  .debug_macro   0x00000000      0xb08 Application/reader.o
  .debug_macro   0x00000000       0x1c Application/reader.o
  .debug_macro   0x00000000       0x66 Application/reader.o
@@ -627,13 +631,45 @@ Discarded input sections
  .debug_macro   0x00000000       0x43 Application/reader.o
  .debug_macro   0x00000000       0x83 Application/reader.o
  .debug_macro   0x00000000      0x10e Application/reader.o
- .debug_macro   0x00000000      0x17c Application/reader.o
+ .debug_macro   0x00000000      0x17f Application/reader.o
  .debug_macro   0x00000000       0xb8 Application/reader.o
- .debug_macro   0x00000000       0x1c Application/reader.o
- .debug_macro   0x00000000      0x112 Application/reader.o
- .debug_macro   0x00000000       0xd6 Application/reader.o
- .debug_macro   0x00000000      0x1af Application/reader.o
+ .debug_macro   0x00000000       0x87 Application/reader.o
+ .debug_macro   0x00000000       0x10 Application/reader.o
+ .debug_macro   0x00000000      0x175 Application/reader.o
  .debug_macro   0x00000000       0x4a Application/reader.o
+ .debug_macro   0x00000000       0x19 Application/reader.o
+ .debug_macro   0x00000000      0x11e Application/reader.o
+ .debug_macro   0x00000000      0x1c0 Application/reader.o
+ .debug_macro   0x00000000       0x4a Application/reader.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .group         0x00000000        0x8 Application/zstring.o
+ .text          0x00000000        0x0 Application/zstring.o
+ .data          0x00000000        0x0 Application/zstring.o
+ .bss           0x00000000        0x0 Application/zstring.o
+ .debug_macro   0x00000000      0xb08 Application/zstring.o
+ .debug_macro   0x00000000      0x1c9 Application/zstring.o
+ .debug_macro   0x00000000      0x2fc Application/zstring.o
+ .debug_macro   0x00000000       0x58 Application/zstring.o
+ .debug_macro   0x00000000       0x10 Application/zstring.o
+ .debug_macro   0x00000000       0x97 Application/zstring.o
+ .debug_macro   0x00000000       0xf2 Application/zstring.o
+ .debug_macro   0x00000000       0x1c Application/zstring.o
+ .debug_macro   0x00000000       0x97 Application/zstring.o
+ .debug_macro   0x00000000       0x66 Application/zstring.o
+ .debug_macro   0x00000000       0x16 Application/zstring.o
+ .debug_macro   0x00000000       0x20 Application/zstring.o
+ .debug_macro   0x00000000       0x2e Application/zstring.o
  .group         0x00000000        0x8 mifare/Mifare.o
  .group         0x00000000        0x8 mifare/Mifare.o
  .group         0x00000000        0x8 mifare/Mifare.o
@@ -854,11 +890,11 @@ Discarded input sections
                 0x00000000       0x4e TWI/twi.o
  .text.Twi_send_only
                 0x00000000       0x1e TWI/twi.o
- .bss.i.3614    0x00000000        0x1 TWI/twi.o
- .bss.x.3592    0x00000000        0x1 TWI/twi.o
- .bss.i.3591    0x00000000        0x1 TWI/twi.o
+ .bss.i.3618    0x00000000        0x1 TWI/twi.o
+ .bss.x.3596    0x00000000        0x1 TWI/twi.o
+ .bss.i.3595    0x00000000        0x1 TWI/twi.o
  .data.pTWI     0x00000000        0x2 TWI/twi.o
- .debug_info    0x00000000      0x9bf TWI/twi.o
+ .debug_info    0x00000000      0x9d1 TWI/twi.o
  .debug_abbrev  0x00000000      0x30d TWI/twi.o
  .debug_loc     0x00000000      0x5d3 TWI/twi.o
  .debug_aranges
@@ -904,10 +940,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 TWI/twi.o
  .debug_macro   0x00000000       0x16 TWI/twi.o
  .debug_macro   0x00000000       0x40 TWI/twi.o
- .debug_macro   0x00000000      0x17c TWI/twi.o
+ .debug_macro   0x00000000      0x17f TWI/twi.o
  .debug_macro   0x00000000       0xcd TWI/twi.o
  .debug_line    0x00000000      0x875 TWI/twi.o
- .debug_str     0x00000000    0x19540 TWI/twi.o
+ .debug_str     0x00000000    0x19568 TWI/twi.o
  .comment       0x00000000       0x31 TWI/twi.o
  .debug_frame   0x00000000      0x1b8 TWI/twi.o
  .group         0x00000000        0x8 main.o
@@ -999,7 +1035,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x10e main.o
  .debug_macro   0x00000000       0x4a main.o
  .debug_macro   0x00000000       0x28 main.o
- .debug_macro   0x00000000      0x17c main.o
+ .debug_macro   0x00000000      0x17f main.o
  .debug_macro   0x00000000       0x87 main.o
  .debug_macro   0x00000000       0x10 main.o
  .debug_macro   0x00000000       0x35 main.o
@@ -1012,10 +1048,10 @@ Discarded input sections
  .debug_macro   0x00000000      0x269 main.o
  .debug_macro   0x00000000       0xea main.o
  .debug_macro   0x00000000       0x28 main.o
- .debug_macro   0x00000000       0x1c main.o
- .debug_macro   0x00000000      0x112 main.o
- .debug_macro   0x00000000       0xd6 main.o
- .debug_macro   0x00000000      0x1af main.o
+ .debug_macro   0x00000000       0xb8 main.o
+ .debug_macro   0x00000000       0x19 main.o
+ .debug_macro   0x00000000      0x11e main.o
+ .debug_macro   0x00000000      0x1c0 main.o
  .group         0x00000000        0x8 Application/sleep.o
  .group         0x00000000        0x8 Application/sleep.o
  .group         0x00000000        0x8 Application/sleep.o
@@ -1062,7 +1098,7 @@ Discarded input sections
  .bss           0x00000000        0x0 Application/sleep.o
  .text.nodeSleep
                 0x00000000        0x2 Application/sleep.o
- .debug_info    0x00000000      0x143 Application/sleep.o
+ .debug_info    0x00000000      0x155 Application/sleep.o
  .debug_abbrev  0x00000000       0xa6 Application/sleep.o
  .debug_aranges
                 0x00000000       0x20 Application/sleep.o
@@ -1103,14 +1139,14 @@ Discarded input sections
  .debug_macro   0x00000000       0x4a Application/sleep.o
  .debug_macro   0x00000000       0x10 Application/sleep.o
  .debug_macro   0x00000000       0x88 Application/sleep.o
- .debug_macro   0x00000000      0x17c Application/sleep.o
+ .debug_macro   0x00000000      0x17f Application/sleep.o
  .debug_macro   0x00000000       0x87 Application/sleep.o
  .debug_macro   0x00000000       0x10 Application/sleep.o
  .debug_macro   0x00000000      0x175 Application/sleep.o
  .debug_macro   0x00000000       0x4a Application/sleep.o
  .debug_macro   0x00000000       0x3b Application/sleep.o
- .debug_line    0x00000000      0x3ea Application/sleep.o
- .debug_str     0x00000000    0x18f40 Application/sleep.o
+ .debug_line    0x00000000      0x3e9 Application/sleep.o
+ .debug_str     0x00000000    0x18f68 Application/sleep.o
  .comment       0x00000000       0x31 Application/sleep.o
  .debug_frame   0x00000000       0x24 Application/sleep.o
  .group         0x00000000        0x8 Radio/radio.o
@@ -2109,108 +2145,6 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 Timer/timer_enddevice.o
  .debug_macro   0x00000000       0x16 Timer/timer_enddevice.o
  .debug_macro   0x00000000       0x68 Timer/timer_enddevice.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .group         0x00000000        0x8 Application/machine.o
- .text          0x00000000        0x0 Application/machine.o
- .data          0x00000000        0x0 Application/machine.o
- .bss           0x00000000        0x0 Application/machine.o
- .text.sendMdcPacket
-                0x00000000       0xcc Application/machine.o
- .text.calcMachineCRC
-                0x00000000       0x84 Application/machine.o
- .debug_macro   0x00000000      0xb08 Application/machine.o
- .debug_macro   0x00000000      0x1c9 Application/machine.o
- .debug_macro   0x00000000       0x22 Application/machine.o
- .debug_macro   0x00000000       0x2e Application/machine.o
- .debug_macro   0x00000000       0x35 Application/machine.o
- .debug_macro   0x00000000       0x16 Application/machine.o
- .debug_macro   0x00000000       0x97 Application/machine.o
- .debug_macro   0x00000000       0x16 Application/machine.o
- .debug_macro   0x00000000       0x10 Application/machine.o
- .debug_macro   0x00000000      0x302 Application/machine.o
- .debug_macro   0x00000000       0x9e Application/machine.o
- .debug_macro   0x00000000     0x3aaf Application/machine.o
- .debug_macro   0x00000000       0x9a Application/machine.o
- .debug_macro   0x00000000       0x81 Application/machine.o
- .debug_macro   0x00000000       0x34 Application/machine.o
- .debug_macro   0x00000000       0x18 Application/machine.o
- .debug_macro   0x00000000       0x6c Application/machine.o
- .debug_macro   0x00000000       0x69 Application/machine.o
- .debug_macro   0x00000000       0x10 Application/machine.o
- .debug_macro   0x00000000      0x160 Application/machine.o
- .debug_macro   0x00000000       0xef Application/machine.o
- .debug_macro   0x00000000       0x33 Application/machine.o
- .debug_macro   0x00000000      0x1bd Application/machine.o
- .debug_macro   0x00000000     0x1b5a Application/machine.o
- .debug_macro   0x00000000      0x265 Application/machine.o
- .debug_macro   0x00000000       0x58 Application/machine.o
- .debug_macro   0x00000000       0x10 Application/machine.o
- .debug_macro   0x00000000       0x35 Application/machine.o
- .debug_macro   0x00000000       0xf2 Application/machine.o
- .debug_macro   0x00000000       0x43 Application/machine.o
- .debug_macro   0x00000000       0x83 Application/machine.o
- .debug_macro   0x00000000      0x10e Application/machine.o
- .debug_macro   0x00000000      0x17c Application/machine.o
- .debug_macro   0x00000000       0xb8 Application/machine.o
- .debug_macro   0x00000000       0x87 Application/machine.o
- .debug_macro   0x00000000       0x10 Application/machine.o
- .debug_macro   0x00000000      0x175 Application/machine.o
- .debug_macro   0x00000000       0x4a Application/machine.o
- .debug_macro   0x00000000       0x1c Application/machine.o
- .debug_macro   0x00000000      0x112 Application/machine.o
- .debug_macro   0x00000000       0xd6 Application/machine.o
- .debug_macro   0x00000000      0x1af Application/machine.o
- .debug_macro   0x00000000       0x4a Application/machine.o
- .debug_macro   0x00000000       0x28 Application/machine.o
- .debug_macro   0x00000000       0x34 Application/machine.o
- .debug_macro   0x00000000       0x16 Application/machine.o
- .debug_macro   0x00000000       0x68 Application/machine.o
  .group         0x00000000        0x8 UART/serial.o
  .group         0x00000000        0x8 UART/serial.o
  .group         0x00000000        0x8 UART/serial.o
@@ -2320,194 +2254,6 @@ Discarded input sections
  .debug_macro   0x00000000      0x10e UART/serial.o
  .debug_macro   0x00000000       0x4a UART/serial.o
  COMMON         0x00000000       0xc8 UART/serial.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sensors.o
- .text          0x00000000        0x0 RUM/sensors.o
- .data          0x00000000        0x0 RUM/sensors.o
- .bss           0x00000000        0x0 RUM/sensors.o
- .text.twiInit  0x00000000        0x2 RUM/sensors.o
- .text.twiWrite
-                0x00000000        0x2 RUM/sensors.o
- .text.sensorGetName
-                0x00000000        0x6 RUM/sensors.o
- .text.sensorSendSetNodeName
-                0x00000000        0x2 RUM/sensors.o
- .debug_info    0x00000000      0x1ec RUM/sensors.o
- .debug_abbrev  0x00000000       0xe1 RUM/sensors.o
- .debug_aranges
-                0x00000000       0x38 RUM/sensors.o
- .debug_ranges  0x00000000       0x28 RUM/sensors.o
- .debug_macro   0x00000000      0x232 RUM/sensors.o
- .debug_macro   0x00000000      0xb08 RUM/sensors.o
- .debug_macro   0x00000000      0x1c9 RUM/sensors.o
- .debug_macro   0x00000000       0x22 RUM/sensors.o
- .debug_macro   0x00000000       0x2e RUM/sensors.o
- .debug_macro   0x00000000       0x82 RUM/sensors.o
- .debug_macro   0x00000000       0x3b RUM/sensors.o
- .debug_macro   0x00000000       0x16 RUM/sensors.o
- .debug_macro   0x00000000       0x97 RUM/sensors.o
- .debug_macro   0x00000000       0x16 RUM/sensors.o
- .debug_macro   0x00000000       0x10 RUM/sensors.o
- .debug_macro   0x00000000      0x302 RUM/sensors.o
- .debug_macro   0x00000000       0x9e RUM/sensors.o
- .debug_macro   0x00000000     0x3aaf RUM/sensors.o
- .debug_macro   0x00000000       0x9a RUM/sensors.o
- .debug_macro   0x00000000       0x81 RUM/sensors.o
- .debug_macro   0x00000000       0x34 RUM/sensors.o
- .debug_macro   0x00000000       0x18 RUM/sensors.o
- .debug_macro   0x00000000       0x6c RUM/sensors.o
- .debug_macro   0x00000000       0x69 RUM/sensors.o
- .debug_macro   0x00000000       0x10 RUM/sensors.o
- .debug_macro   0x00000000      0x160 RUM/sensors.o
- .debug_macro   0x00000000       0xef RUM/sensors.o
- .debug_macro   0x00000000       0x33 RUM/sensors.o
- .debug_macro   0x00000000      0x1bd RUM/sensors.o
- .debug_macro   0x00000000     0x1b5a RUM/sensors.o
- .debug_macro   0x00000000      0x265 RUM/sensors.o
- .debug_macro   0x00000000       0x58 RUM/sensors.o
- .debug_macro   0x00000000       0x10 RUM/sensors.o
- .debug_macro   0x00000000       0x35 RUM/sensors.o
- .debug_macro   0x00000000       0xf2 RUM/sensors.o
- .debug_macro   0x00000000       0x43 RUM/sensors.o
- .debug_macro   0x00000000       0x83 RUM/sensors.o
- .debug_macro   0x00000000      0x10e RUM/sensors.o
- .debug_macro   0x00000000       0x10 RUM/sensors.o
- .debug_macro   0x00000000       0x43 RUM/sensors.o
- .debug_macro   0x00000000       0x2e RUM/sensors.o
- .debug_macro   0x00000000       0x10 RUM/sensors.o
- .debug_macro   0x00000000       0x1c RUM/sensors.o
- .debug_macro   0x00000000       0x5a RUM/sensors.o
- .debug_macro   0x00000000      0x17c RUM/sensors.o
- .debug_macro   0x00000000       0x87 RUM/sensors.o
- .debug_macro   0x00000000       0x10 RUM/sensors.o
- .debug_macro   0x00000000      0x175 RUM/sensors.o
- .debug_macro   0x00000000       0x4a RUM/sensors.o
- .debug_macro   0x00000000       0xdd RUM/sensors.o
- .debug_line    0x00000000      0x491 RUM/sensors.o
- .debug_str     0x00000000    0x193a2 RUM/sensors.o
- .comment       0x00000000       0x31 RUM/sensors.o
- .debug_frame   0x00000000       0x54 RUM/sensors.o
- COMMON         0x00000000        0x4 RUM/sensors.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .group         0x00000000        0x8 RUM/sixlowpan_wake.o
- .text          0x00000000        0x0 RUM/sixlowpan_wake.o
- .data          0x00000000        0x0 RUM/sixlowpan_wake.o
- .bss           0x00000000        0x0 RUM/sixlowpan_wake.o
- .debug_info    0x00000000       0x76 RUM/sixlowpan_wake.o
- .debug_abbrev  0x00000000       0x29 RUM/sixlowpan_wake.o
- .debug_aranges
-                0x00000000       0x18 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0x18a RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0xb08 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0x1c9 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x22 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x2e RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x35 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x16 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x97 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x16 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x10 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0x302 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x9e RUM/sixlowpan_wake.o
- .debug_macro   0x00000000     0x3aaf RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x9a RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x81 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x34 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x18 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x6c RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x69 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x10 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0x160 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0xef RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x33 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0x1bd RUM/sixlowpan_wake.o
- .debug_macro   0x00000000     0x1b5a RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0x265 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x58 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x10 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x35 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0xf2 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x43 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x83 RUM/sixlowpan_wake.o
- .debug_macro   0x00000000      0x10e RUM/sixlowpan_wake.o
- .debug_macro   0x00000000       0x43 RUM/sixlowpan_wake.o
- .debug_line    0x00000000      0x38e RUM/sixlowpan_wake.o
- .debug_str     0x00000000    0x15a9e RUM/sixlowpan_wake.o
- .comment       0x00000000       0x31 RUM/sixlowpan_wake.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a(vfprintf_flt.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a(vfprintf_flt.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a(vfprintf_flt.o)
@@ -2550,12 +2296,6 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_zero.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_zero.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_zero.o)
- .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3.o)
- .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3.o)
- .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3.o)
- .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3x.o)
- .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3x.o)
- .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3x.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodhi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodhi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodhi4.o)
@@ -2757,6 +2497,12 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fp_cmp.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fp_cmp.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fp_cmp.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3x.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3x.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3x.o)
  .text          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
@@ -2875,6 +2621,7 @@ LOAD Application/BowComm.o
 LOAD Application/display.o
 LOAD Application/SpeedQueen.o
 LOAD Application/reader.o
+LOAD Application/zstring.o
 LOAD mifare/Mifare.o
 LOAD mifare/RegCtrl.o
 LOAD SPI/spi.o
@@ -2894,10 +2641,7 @@ LOAD RUM/mac_route.o
 LOAD RUM/mac_scan.o
 LOAD Timer/avr_timer.o
 LOAD Timer/timer_enddevice.o
-LOAD Application/machine.o
 LOAD UART/serial.o
-LOAD RUM/sensors.o
-LOAD RUM/sixlowpan_wake.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a
@@ -3008,7 +2752,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x6b1e
+.text           0x00000000     0x6c2e
  *(.vectors)
  .vectors       0x00000000      0x120 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51/crtatmega128rfa1.o
                 0x00000000                __vector_default
@@ -3181,641 +2925,635 @@ END GROUP
                 0x000003c0        0x2 Application/application.o
                 0x000003c0                appPacketSendAccessFail
  .text.appPacketSendFailed
-                0x000003c2       0x8e Application/application.o
+                0x000003c2       0x8a Application/application.o
                 0x000003c2                appPacketSendFailed
  .text.appDataIndication
-                0x00000450       0x52 Application/application.o
-                0x00000450                appDataIndication
+                0x0000044c       0x52 Application/application.o
+                0x0000044c                appDataIndication
  .text.appChildAssociated
-                0x000004a2        0xe Application/application.o
-                0x000004a2                appChildAssociated
+                0x0000049e        0xe Application/application.o
+                0x0000049e                appChildAssociated
  .text.appAssociateConfirm
-                0x000004b0       0x36 Application/application.o
-                0x000004b0                appAssociateConfirm
+                0x000004ac       0x14 Application/application.o
+                0x000004ac                appAssociateConfirm
  .text.appScanConfirm
-                0x000004e6       0x2e Application/application.o
-                0x000004e6                appScanConfirm
+                0x000004c0       0x2e Application/application.o
+                0x000004c0                appScanConfirm
  .text.checkEeprom
-                0x00000514      0x160 Application/application.o
-                0x00000514                checkEeprom
- .text.appInit  0x00000674      0x152 Application/application.o
-                0x00000674                appInit
+                0x000004ee      0x160 Application/application.o
+                0x000004ee                checkEeprom
+ .text.appInit  0x0000064e      0x144 Application/application.o
+                0x0000064e                appInit
  .text.GetParam
-                0x000007c6       0x68 Application/application.o
-                0x000007c6                GetParam
+                0x00000792       0x68 Application/application.o
+                0x00000792                GetParam
  .text.DevicePoll
-                0x0000082e       0x10 Application/application.o
-                0x0000082e                DevicePoll
- .text.padLeft  0x0000083e       0xb0 Application/application.o
-                0x0000083e                padLeft
- .text.appTask  0x000008ee      0x6fc Application/application.o
-                0x000008ee                appTask
+                0x000007fa       0x10 Application/application.o
+                0x000007fa                DevicePoll
+ .text.appTask  0x0000080a      0x832 Application/application.o
+                0x0000080a                appTask
  .text.timeoutWaitingForOLTReponse
-                0x00000fea        0xc Application/BowComm.o
- .text.asciiStringToNibble
-                0x00000ff6       0x78 Application/BowComm.o
-                0x00000ff6                asciiStringToNibble
+                0x0000103c        0xc Application/BowComm.o
  .text.constructOutgoingString
-                0x0000106e      0x140 Application/BowComm.o
-                0x0000106e                constructOutgoingString
+                0x00001048      0x140 Application/BowComm.o
+                0x00001048                constructOutgoingString
  .text.sendBOWReaderFirmwareVersion
-                0x000011ae       0x5c Application/BowComm.o
-                0x000011ae                sendBOWReaderFirmwareVersion
+                0x00001188       0x5c Application/BowComm.o
+                0x00001188                sendBOWReaderFirmwareVersion
  .text.sendBOWSetupRequest
-                0x0000120a       0x52 Application/BowComm.o
-                0x0000120a                sendBOWSetupRequest
+                0x000011e4       0x52 Application/BowComm.o
+                0x000011e4                sendBOWSetupRequest
  .text.sendBOWValidationRequest
-                0x0000125c       0x4e Application/BowComm.o
-                0x0000125c                sendBOWValidationRequest
+                0x00001236       0x4e Application/BowComm.o
+                0x00001236                sendBOWValidationRequest
  .text.sendBOWMachineLabel
-                0x000012aa       0x4e Application/BowComm.o
-                0x000012aa                sendBOWMachineLabel
+                0x00001284       0x4e Application/BowComm.o
+                0x00001284                sendBOWMachineLabel
  .text.sendBOWMachineDescription
-                0x000012f8       0x52 Application/BowComm.o
-                0x000012f8                sendBOWMachineDescription
+                0x000012d2       0x52 Application/BowComm.o
+                0x000012d2                sendBOWMachineDescription
  .text.sendNumberOfOLT
-                0x0000134a       0x4e Application/BowComm.o
-                0x0000134a                sendNumberOfOLT
+                0x00001324       0x4e Application/BowComm.o
+                0x00001324                sendNumberOfOLT
  .text.extractIncomingMessage
-                0x00001398      0x486 Application/BowComm.o
-                0x00001398                extractIncomingMessage
+                0x00001372      0x486 Application/BowComm.o
+                0x00001372                extractIncomingMessage
  .text.sendBOWCCTransaction
-                0x0000181e      0x114 Application/BowComm.o
-                0x0000181e                sendBOWCCTransaction
- .text.displayMsg
-                0x00001932       0x74 Application/display.o
-                0x00001932                displayMsg
- .text.displayVersion
-                0x000019a6        0x4 Application/display.o
-                0x000019a6                displayVersion
- .text.getSQSetupData
-                0x000019aa      0x338 Application/SpeedQueen.o
-                0x000019aa                getSQSetupData
- .text.sendSQDataPacket
-                0x00001ce2       0xc2 Application/SpeedQueen.o
-                0x00001ce2                sendSQDataPacket
- .text.sendSQACAVendPrice
-                0x00001da4      0x20a Application/SpeedQueen.o
-                0x00001da4                sendSQACAVendPrice
- .text.getSQDataPacket
-                0x00001fae       0x6e Application/SpeedQueen.o
-                0x00001fae                getSQDataPacket
- .text.getSQACAStatusData
-                0x0000201c       0xf0 Application/SpeedQueen.o
-                0x0000201c                getSQACAStatusData
- .text.SQACAMachineStatusSequence
-                0x0000210c       0x66 Application/SpeedQueen.o
-                0x0000210c                SQACAMachineStatusSequence
- .text.getSQACAInitData
-                0x00002172       0x5e Application/SpeedQueen.o
-                0x00002172                getSQACAInitData
- .text.IsACA    0x000021d0       0x5e Application/SpeedQueen.o
-                0x000021d0                IsACA
- .text.waitSQStartKey
-                0x0000222e       0x22 Application/SpeedQueen.o
-                0x0000222e                waitSQStartKey
- .text.isSQCycleRunning
-                0x00002250       0x1c Application/SpeedQueen.o
-                0x00002250                isSQCycleRunning
- .text.sendSQCashCardRemoved
-                0x0000226c       0x6c Application/SpeedQueen.o
-                0x0000226c                sendSQCashCardRemoved
- .text.sendSQACAMimicQuantumVending
-                0x000022d8       0x40 Application/SpeedQueen.o
-                0x000022d8                sendSQACAMimicQuantumVending
- .text.SQACAMimicQuantumSequence
-                0x00002318       0x18 Application/SpeedQueen.o
-                0x00002318                SQACAMimicQuantumSequence
- .text.sendSQACAVendingTransactions
-                0x00002330       0x50 Application/SpeedQueen.o
-                0x00002330                sendSQACAVendingTransactions
+                0x000017f8      0x114 Application/BowComm.o
+                0x000017f8                sendBOWCCTransaction
+ .text.sendBOWAuditDataRequest
+                0x0000190c       0x52 Application/BowComm.o
+                0x0000190c                sendBOWAuditDataRequest
  .text.sendSQDisplayCommand
-                0x00002380       0x5c Application/SpeedQueen.o
-                0x00002380                sendSQDisplayCommand
+                0x0000195e       0x5c Application/display.o
+                0x0000195e                sendSQDisplayCommand
  .text.displaySQReaderVersion
-                0x000023dc       0x3c Application/SpeedQueen.o
-                0x000023dc                displaySQReaderVersion
+                0x000019ba       0x3c Application/display.o
+                0x000019ba                displaySQReaderVersion
+ .text.displaySQBalance
+                0x000019f6       0x5c Application/display.o
+                0x000019f6                displaySQBalance
+ .text.displaySQTopOffvend
+                0x00001a52       0x38 Application/display.o
+                0x00001a52                displaySQTopOffvend
  .text.displaySQCardError
-                0x00002418       0x68 Application/SpeedQueen.o
-                0x00002418                displaySQCardError
- .text.cardRemoved
-                0x00002480       0x16 Application/SpeedQueen.o
-                0x00002480                cardRemoved
+                0x00001a8a       0x68 Application/display.o
+                0x00001a8a                displaySQCardError
+ .text.displayMsg
+                0x00001af2       0x8a Application/display.o
+                0x00001af2                displayMsg
+ .text.getSQSetupData
+                0x00001b7c      0x302 Application/SpeedQueen.o
+                0x00001b7c                getSQSetupData
+ .text.sendSQDataPacket
+                0x00001e7e       0xc2 Application/SpeedQueen.o
+                0x00001e7e                sendSQDataPacket
+ .text.sendSQACAVendPrice
+                0x00001f40      0x20a Application/SpeedQueen.o
+                0x00001f40                sendSQACAVendPrice
+ .text.getSQDataPacket
+                0x0000214a       0x6e Application/SpeedQueen.o
+                0x0000214a                getSQDataPacket
+ .text.getSQACAStatusData
+                0x000021b8       0xf0 Application/SpeedQueen.o
+                0x000021b8                getSQACAStatusData
+ .text.SQACAMachineStatusSequence
+                0x000022a8       0x66 Application/SpeedQueen.o
+                0x000022a8                SQACAMachineStatusSequence
+ .text.getSQACAInitData
+                0x0000230e       0x5e Application/SpeedQueen.o
+                0x0000230e                getSQACAInitData
+ .text.IsACA    0x0000236c       0x5e Application/SpeedQueen.o
+                0x0000236c                IsACA
+ .text.waitSQStartKey
+                0x000023ca       0x16 Application/SpeedQueen.o
+                0x000023ca                waitSQStartKey
+ .text.sendSQACAMimicQuantumVending
+                0x000023e0       0x32 Application/SpeedQueen.o
+                0x000023e0                sendSQACAMimicQuantumVending
+ .text.sendSQACAVendingTransaction
+                0x00002412       0x6e Application/SpeedQueen.o
+                0x00002412                sendSQACAVendingTransaction
  .text.isMachineCycleRunning
-                0x00002496        0x4 Application/SpeedQueen.o
-                0x00002496                isMachineCycleRunning
+                0x00002480        0xe Application/SpeedQueen.o
+                0x00002480                isMachineCycleRunning
  .text.waitForMachineStartKey
-                0x0000249a        0x4 Application/SpeedQueen.o
-                0x0000249a                waitForMachineStartKey
+                0x0000248e        0x4 Application/SpeedQueen.o
+                0x0000248e                waitForMachineStartKey
  .text.SQACAMachineStatusCommSequence
-                0x0000249e       0x10 Application/SpeedQueen.o
-                0x0000249e                SQACAMachineStatusCommSequence
+                0x00002492       0x10 Application/SpeedQueen.o
+                0x00002492                SQACAMachineStatusCommSequence
  .text.SQACAInitializationSequence
-                0x000024ae       0x30 Application/SpeedQueen.o
-                0x000024ae                SQACAInitializationSequence
+                0x000024a2       0x24 Application/SpeedQueen.o
+                0x000024a2                SQACAInitializationSequence
  .text.getSQReaderMachineSetup
-                0x000024de      0x330 Application/SpeedQueen.o
-                0x000024de                getSQReaderMachineSetup
+                0x000024c6      0x330 Application/SpeedQueen.o
+                0x000024c6                getSQReaderMachineSetup
  .text.initReader
-                0x0000280e       0xde Application/reader.o
-                0x0000280e                initReader
+                0x000027f6       0xde Application/reader.o
+                0x000027f6                initReader
  .text.storeOfflineTransaction
-                0x000028ec      0x1d6 Application/reader.o
-                0x000028ec                storeOfflineTransaction
+                0x000028d4      0x1d6 Application/reader.o
+                0x000028d4                storeOfflineTransaction
  .text.sendStoredTransaction
-                0x00002ac2       0xc2 Application/reader.o
-                0x00002ac2                sendStoredTransaction
- .text.SetTimeOut
-                0x00002b84       0x5c mifare/Mifare.o
-                0x00002b84                SetTimeOut
- .text.Rc522Init
-                0x00002be0       0xc4 mifare/Mifare.o
-                0x00002be0                Rc522Init
- .text.M522PcdCmd
-                0x00002ca4      0x280 mifare/Mifare.o
-                0x00002ca4                M522PcdCmd
- .text.Request  0x00002f24       0xb0 mifare/Mifare.o
-                0x00002f24                Request
- .text.CascAnticoll
-                0x00002fd4      0x1f2 mifare/Mifare.o
-                0x00002fd4                CascAnticoll
- .text.Select   0x000031c6       0xbe mifare/Mifare.o
-                0x000031c6                Select
- .text.AnticollSelect
-                0x00003284      0x156 mifare/Mifare.o
-                0x00003284                AnticollSelect
- .text.Authentication
-                0x000033da       0x90 mifare/Mifare.o
-                0x000033da                Authentication
- .text.Read     0x0000346a       0xb4 mifare/Mifare.o
-                0x0000346a                Read
- .text.readCardID
-                0x0000351e        0xe mifare/Mifare.o
-                0x0000351e                readCardID
- .text.RcSetReg
-                0x0000352c       0x28 mifare/RegCtrl.o
-                0x0000352c                RcSetReg
- .text.RcGetReg
-                0x00003554       0x14 mifare/RegCtrl.o
-                0x00003554                RcGetReg
- .text.RcModifyReg
-                0x00003568       0x3a mifare/RegCtrl.o
-                0x00003568                RcModifyReg
- .text.Spi_initialize
-                0x000035a2       0x30 SPI/spi.o
-                0x000035a2                Spi_initialize
- .text.Spi_send
-                0x000035d2        0xa SPI/spi.o
-                0x000035d2                Spi_send
- .text.Spi_receive
-                0x000035dc        0xe SPI/spi.o
-                0x000035dc                Spi_receive
- .text.mifareInit
-                0x000035ea        0x8 main.o
-                0x000035ea                mifareInit
- .text.startup.main
-                0x000035f2       0x3e main.o
-                0x000035f2                main
- .text.isSleeping
-                0x00003630        0xa Radio/radio.o
- .text.radioGetPartnum
-                0x0000363a       0x16 Radio/radio.o
-                0x0000363a                radioGetPartnum
- .text.radioRxStartEvent
-                0x00003650       0x10 Radio/radio.o
-                0x00003650                radioRxStartEvent
- .text.radioGetSavedRssiValue
-                0x00003660       0x12 Radio/radio.o
-                0x00003660                radioGetSavedRssiValue
- .text.radioGetSavedLqiValue
-                0x00003672        0x6 Radio/radio.o
-                0x00003672                radioGetSavedLqiValue
- .text.radioSetOperatingChannel
-                0x00003678       0x62 Radio/radio.o
-                0x00003678                radioSetOperatingChannel
- .text.radioSetClockSpeed
-                0x000036da       0x2e Radio/radio.o
-                0x000036da                radioSetClockSpeed
- .text.radioGetTrxState
-                0x00003708        0x8 Radio/radio.o
-                0x00003708                radioGetTrxState
- .text.radioResetStateMachine
-                0x00003710       0x28 Radio/radio.o
-                0x00003710                radioResetStateMachine
- .text.radioResetTrx
-                0x00003738       0x20 Radio/radio.o
-                0x00003738                radioResetTrx
- .text.radioInit
-                0x00003758       0x58 Radio/radio.o
-                0x00003758                radioInit
- .text.radioUseAutoTxCrc
-                0x000037b0       0x3c Radio/radio.o
-                0x000037b0                radioUseAutoTxCrc
- .text.radioIsBusy
-                0x000037ec       0x20 Radio/radio.o
-                0x000037ec                radioIsBusy
- .text.radioSetTrxState
-                0x0000380c       0xd6 Radio/radio.o
-                0x0000380c                radioSetTrxState
- .text.radioTrxEndEvent
-                0x000038e2      0x168 Radio/radio.o
-                0x000038e2                radioTrxEndEvent
- .text.radioSendData
-                0x00003a4a       0x6e Radio/radio.o
-                0x00003a4a                radioSendData
- .text.radioSetDeviceRole
-                0x00003ab8        0xe Radio/radio.o
-                0x00003ab8                radioSetDeviceRole
- .text.radioSetPanId
-                0x00003ac6        0xa Radio/radio.o
-                0x00003ac6                radioSetPanId
- .text.radioSetShortAddress
-                0x00003ad0        0xa Radio/radio.o
-                0x00003ad0                radioSetShortAddress
- .text.radioSetExtendedAddress
-                0x00003ada       0x16 Radio/radio.o
-                0x00003ada                radioSetExtendedAddress
- .text.radioRandom
-                0x00003af0       0x5e Radio/radio.o
-                0x00003af0                radioRandom
- .text.radioSetup900
-                0x00003b4e        0x2 Radio/radio.o
-                0x00003b4e                radioSetup900
- .text.__vector_59
-                0x00003b50       0x50 Radio/hal_avr.o
-                0x00003b50                __vector_59
- .text.__vector_60
-                0x00003ba0       0x50 Radio/hal_avr.o
-                0x00003ba0                __vector_60
- .text.__vector_63
-                0x00003bf0       0x5a Radio/hal_avr.o
-                0x00003bf0                __vector_63
- .text.__vector_61
-                0x00003c4a       0x50 Radio/hal_avr.o
-                0x00003c4a                __vector_61
- .text.calibrate_rc_osc
-                0x00003c9a       0xea Radio/hal_avr.o
-                0x00003c9a                calibrate_rc_osc
- .text.halGetEeprom
-                0x00003d84       0x2a Radio/hal_avr.o
-                0x00003d84                halGetEeprom
- .text.halPutEeprom
-                0x00003dae       0x2a Radio/hal_avr.o
-                0x00003dae                halPutEeprom
- .text.macInit  0x00003dd8       0xf6 RUM/mac.o
-                0x00003dd8                macInit
- .text.macSetOperatingChannel
-                0x00003ece        0x8 RUM/mac.o
-                0x00003ece                macSetOperatingChannel
- .text.macAssociationConfirm
-                0x00003ed6       0x14 RUM/mac_associate.o
-                0x00003ed6                macAssociationConfirm
- .text.macAssociate
-                0x00003eea       0xa4 RUM/mac_associate.o
-                0x00003eea                macAssociate
- .text.macIsChild
-                0x00003f8e       0x24 RUM/mac_associate.o
-                0x00003f8e                macIsChild
- .text.macAddChild
-                0x00003fb2       0x82 RUM/mac_associate.o
-                0x00003fb2                macAddChild
- .text.macRemoveChild
-                0x00004034       0x36 RUM/mac_associate.o
-                0x00004034                macRemoveChild
- .text.macInitNodes
-                0x0000406a        0x2 RUM/mac_associate.o
-                0x0000406a                macInitNodes
- .text.macWakeChildNode
-                0x0000406c        0x2 RUM/mac_associate.o
-                0x0000406c                macWakeChildNode
- .text.macChildIsAwake
-                0x0000406e        0xa RUM/mac_associate.o
-                0x0000406e                macChildIsAwake
- .text.sendBeaconFrame
-                0x00004078       0x56 RUM/mac_beacon.o
-                0x00004078                sendBeaconFrame
- .text.mdr_timer
-                0x000040ce        0xc RUM/mac_data.o
-                0x000040ce                mdr_timer
- .text.macDataRequestInt
-                0x000040da      0x106 RUM/mac_data.o
- .text.macDataRequest
-                0x000041e0        0x6 RUM/mac_data.o
-                0x000041e0                macDataRequest
- .text.macDataIndication
-                0x000041e6       0x6e RUM/mac_data.o
-                0x000041e6                macDataIndication
- .text.mp       0x00004254       0x8e RUM/mac_data.o
-                0x00004254                mp
- .text.macPing  0x000042e2       0x34 RUM/mac_data.o
-                0x000042e2                macPing
- .text.mac_event_pending
-                0x00004316       0x12 RUM/mac_event.o
-                0x00004316                mac_event_pending
- .text.mac_put_event
-                0x00004328       0x58 RUM/mac_event.o
-                0x00004328                mac_put_event
- .text.mac_get_event
-                0x00004380       0x3e RUM/mac_event.o
-                0x00004380                mac_get_event
- .text.macTask  0x000043be      0x114 RUM/mac_event.o
-                0x000043be                macTask
- .text.macForwardRoutingPacket
-                0x000044d2       0x98 RUM/mac_route.o
-                0x000044d2                macForwardRoutingPacket
- .text.macRouteAssociateResponse
-                0x0000456a      0x11e RUM/mac_route.o
-                0x0000456a                macRouteAssociateResponse
- .text.macRouteAssociateRequest
-                0x00004688      0x142 RUM/mac_route.o
-                0x00004688                macRouteAssociateRequest
- .text.macRouteData
-                0x000047ca       0xb2 RUM/mac_route.o
-                0x000047ca                macRouteData
- .text.macSendRoutingPacket
-                0x0000487c        0x4 RUM/mac_route.o
-                0x0000487c                macSendRoutingPacket
- .text.store_pandescriptors
-                0x00004880       0x4c RUM/mac_scan.o
- .text.macIsScanning
-                0x000048cc        0x6 RUM/mac_scan.o
-                0x000048cc                macIsScanning
- .text.mac_logPanDescriptors
-                0x000048d2       0x72 RUM/mac_scan.o
-                0x000048d2                mac_logPanDescriptors
- .text.mac_scanConfirm
-                0x00004944       0x4e RUM/mac_scan.o
-                0x00004944                mac_scanConfirm
- .text.macScan  0x00004992       0xb6 RUM/mac_scan.o
-                0x00004992                macScan
- .text.macEdCallback
-                0x00004a48        0x2 RUM/mac_scan.o
-                0x00004a48                macEdCallback
- .text.getUniqueID
-                0x00004a4a       0x4e Timer/avr_timer.o
- .text.timerStart
-                0x00004a98       0x1e Timer/avr_timer.o
- .text.macSetAlarm
-                0x00004ab6       0x92 Timer/avr_timer.o
-                0x00004ab6                macSetAlarm
- .text.macSetLongAlarm
-                0x00004b48       0x7a Timer/avr_timer.o
-                0x00004b48                macSetLongAlarm
- .text.macTimerEnd
-                0x00004bc2       0x60 Timer/avr_timer.o
-                0x00004bc2                macTimerEnd
- .text.timerInit
-                0x00004c22       0x22 Timer/avr_timer.o
-                0x00004c22                timerInit
- .text.__vector_32
-                0x00004c44      0x118 Timer/avr_timer.o
-                0x00004c44                __vector_32
- .text.__vector_35
-                0x00004d5c       0x1e Timer/timer_enddevice.o
-                0x00004d5c                __vector_35
- .text.__vector_12
-                0x00004d7a       0x1e Timer/timer_enddevice.o
-                0x00004d7a                __vector_12
+                0x00002aaa       0xc2 Application/reader.o
+                0x00002aaa                sendStoredTransaction
  .text.WaitForMachine
-                0x00004d98        0x8 Application/machine.o
-                0x00004d98                WaitForMachine
+                0x00002b6c        0x8 Application/reader.o
+                0x00002b6c                WaitForMachine
  .text.InitTimerZero
-                0x00004da0       0x10 Application/machine.o
-                0x00004da0                InitTimerZero
+                0x00002b74       0x10 Application/reader.o
+                0x00002b74                InitTimerZero
  .text.StopTimerZero
-                0x00004db0        0x4 Application/machine.o
-                0x00004db0                StopTimerZero
+                0x00002b84        0x4 Application/reader.o
+                0x00002b84                StopTimerZero
  .text.StartTimerZero
-                0x00004db4        0xe Application/machine.o
-                0x00004db4                StartTimerZero
+                0x00002b88        0xe Application/reader.o
+                0x00002b88                StartTimerZero
  .text.__vector_21
-                0x00004dc2       0x22 Application/machine.o
-                0x00004dc2                __vector_21
+                0x00002b96       0x22 Application/reader.o
+                0x00002b96                __vector_21
+ .text.padLeft  0x00002bb8       0xb0 Application/zstring.o
+                0x00002bb8                padLeft
+ .text.SetTimeOut
+                0x00002c68       0x5c mifare/Mifare.o
+                0x00002c68                SetTimeOut
+ .text.Rc522Init
+                0x00002cc4       0xc4 mifare/Mifare.o
+                0x00002cc4                Rc522Init
+ .text.M522PcdCmd
+                0x00002d88      0x280 mifare/Mifare.o
+                0x00002d88                M522PcdCmd
+ .text.Request  0x00003008       0xb0 mifare/Mifare.o
+                0x00003008                Request
+ .text.CascAnticoll
+                0x000030b8      0x1f2 mifare/Mifare.o
+                0x000030b8                CascAnticoll
+ .text.Select   0x000032aa       0xbe mifare/Mifare.o
+                0x000032aa                Select
+ .text.AnticollSelect
+                0x00003368      0x156 mifare/Mifare.o
+                0x00003368                AnticollSelect
+ .text.Authentication
+                0x000034be       0x90 mifare/Mifare.o
+                0x000034be                Authentication
+ .text.Read     0x0000354e       0xb4 mifare/Mifare.o
+                0x0000354e                Read
+ .text.readCardID
+                0x00003602        0xe mifare/Mifare.o
+                0x00003602                readCardID
+ .text.RcSetReg
+                0x00003610       0x28 mifare/RegCtrl.o
+                0x00003610                RcSetReg
+ .text.RcGetReg
+                0x00003638       0x14 mifare/RegCtrl.o
+                0x00003638                RcGetReg
+ .text.RcModifyReg
+                0x0000364c       0x3a mifare/RegCtrl.o
+                0x0000364c                RcModifyReg
+ .text.Spi_initialize
+                0x00003686       0x30 SPI/spi.o
+                0x00003686                Spi_initialize
+ .text.Spi_send
+                0x000036b6        0xa SPI/spi.o
+                0x000036b6                Spi_send
+ .text.Spi_receive
+                0x000036c0        0xe SPI/spi.o
+                0x000036c0                Spi_receive
+ .text.mifareInit
+                0x000036ce        0x8 main.o
+                0x000036ce                mifareInit
+ .text.startup.main
+                0x000036d6       0x3e main.o
+                0x000036d6                main
+ .text.isSleeping
+                0x00003714        0xa Radio/radio.o
+ .text.radioGetPartnum
+                0x0000371e       0x16 Radio/radio.o
+                0x0000371e                radioGetPartnum
+ .text.radioRxStartEvent
+                0x00003734       0x10 Radio/radio.o
+                0x00003734                radioRxStartEvent
+ .text.radioGetSavedRssiValue
+                0x00003744       0x12 Radio/radio.o
+                0x00003744                radioGetSavedRssiValue
+ .text.radioGetSavedLqiValue
+                0x00003756        0x6 Radio/radio.o
+                0x00003756                radioGetSavedLqiValue
+ .text.radioSetOperatingChannel
+                0x0000375c       0x62 Radio/radio.o
+                0x0000375c                radioSetOperatingChannel
+ .text.radioSetClockSpeed
+                0x000037be       0x2e Radio/radio.o
+                0x000037be                radioSetClockSpeed
+ .text.radioGetTrxState
+                0x000037ec        0x8 Radio/radio.o
+                0x000037ec                radioGetTrxState
+ .text.radioResetStateMachine
+                0x000037f4       0x28 Radio/radio.o
+                0x000037f4                radioResetStateMachine
+ .text.radioResetTrx
+                0x0000381c       0x20 Radio/radio.o
+                0x0000381c                radioResetTrx
+ .text.radioInit
+                0x0000383c       0x58 Radio/radio.o
+                0x0000383c                radioInit
+ .text.radioUseAutoTxCrc
+                0x00003894       0x3c Radio/radio.o
+                0x00003894                radioUseAutoTxCrc
+ .text.radioIsBusy
+                0x000038d0       0x20 Radio/radio.o
+                0x000038d0                radioIsBusy
+ .text.radioSetTrxState
+                0x000038f0       0xd6 Radio/radio.o
+                0x000038f0                radioSetTrxState
+ .text.radioTrxEndEvent
+                0x000039c6      0x168 Radio/radio.o
+                0x000039c6                radioTrxEndEvent
+ .text.radioSendData
+                0x00003b2e       0x6e Radio/radio.o
+                0x00003b2e                radioSendData
+ .text.radioSetDeviceRole
+                0x00003b9c        0xe Radio/radio.o
+                0x00003b9c                radioSetDeviceRole
+ .text.radioSetPanId
+                0x00003baa        0xa Radio/radio.o
+                0x00003baa                radioSetPanId
+ .text.radioSetShortAddress
+                0x00003bb4        0xa Radio/radio.o
+                0x00003bb4                radioSetShortAddress
+ .text.radioSetExtendedAddress
+                0x00003bbe       0x16 Radio/radio.o
+                0x00003bbe                radioSetExtendedAddress
+ .text.radioRandom
+                0x00003bd4       0x5e Radio/radio.o
+                0x00003bd4                radioRandom
+ .text.radioSetup900
+                0x00003c32        0x2 Radio/radio.o
+                0x00003c32                radioSetup900
+ .text.__vector_59
+                0x00003c34       0x50 Radio/hal_avr.o
+                0x00003c34                __vector_59
+ .text.__vector_60
+                0x00003c84       0x50 Radio/hal_avr.o
+                0x00003c84                __vector_60
+ .text.__vector_63
+                0x00003cd4       0x5a Radio/hal_avr.o
+                0x00003cd4                __vector_63
+ .text.__vector_61
+                0x00003d2e       0x50 Radio/hal_avr.o
+                0x00003d2e                __vector_61
+ .text.calibrate_rc_osc
+                0x00003d7e       0xea Radio/hal_avr.o
+                0x00003d7e                calibrate_rc_osc
+ .text.halGetEeprom
+                0x00003e68       0x2a Radio/hal_avr.o
+                0x00003e68                halGetEeprom
+ .text.halPutEeprom
+                0x00003e92       0x2a Radio/hal_avr.o
+                0x00003e92                halPutEeprom
+ .text.macInit  0x00003ebc       0xf6 RUM/mac.o
+                0x00003ebc                macInit
+ .text.macSetOperatingChannel
+                0x00003fb2        0x8 RUM/mac.o
+                0x00003fb2                macSetOperatingChannel
+ .text.macAssociationConfirm
+                0x00003fba       0x14 RUM/mac_associate.o
+                0x00003fba                macAssociationConfirm
+ .text.macAssociate
+                0x00003fce       0xa4 RUM/mac_associate.o
+                0x00003fce                macAssociate
+ .text.macIsChild
+                0x00004072       0x24 RUM/mac_associate.o
+                0x00004072                macIsChild
+ .text.macAddChild
+                0x00004096       0x82 RUM/mac_associate.o
+                0x00004096                macAddChild
+ .text.macRemoveChild
+                0x00004118       0x36 RUM/mac_associate.o
+                0x00004118                macRemoveChild
+ .text.macInitNodes
+                0x0000414e        0x2 RUM/mac_associate.o
+                0x0000414e                macInitNodes
+ .text.macWakeChildNode
+                0x00004150        0x2 RUM/mac_associate.o
+                0x00004150                macWakeChildNode
+ .text.macChildIsAwake
+                0x00004152        0xa RUM/mac_associate.o
+                0x00004152                macChildIsAwake
+ .text.sendBeaconFrame
+                0x0000415c       0x56 RUM/mac_beacon.o
+                0x0000415c                sendBeaconFrame
+ .text.mdr_timer
+                0x000041b2        0xc RUM/mac_data.o
+                0x000041b2                mdr_timer
+ .text.macDataRequestInt
+                0x000041be      0x106 RUM/mac_data.o
+ .text.macDataRequest
+                0x000042c4        0x6 RUM/mac_data.o
+                0x000042c4                macDataRequest
+ .text.macDataIndication
+                0x000042ca       0x6e RUM/mac_data.o
+                0x000042ca                macDataIndication
+ .text.mp       0x00004338       0x8e RUM/mac_data.o
+                0x00004338                mp
+ .text.macPing  0x000043c6       0x34 RUM/mac_data.o
+                0x000043c6                macPing
+ .text.mac_event_pending
+                0x000043fa       0x12 RUM/mac_event.o
+                0x000043fa                mac_event_pending
+ .text.mac_put_event
+                0x0000440c       0x58 RUM/mac_event.o
+                0x0000440c                mac_put_event
+ .text.mac_get_event
+                0x00004464       0x3e RUM/mac_event.o
+                0x00004464                mac_get_event
+ .text.macTask  0x000044a2      0x114 RUM/mac_event.o
+                0x000044a2                macTask
+ .text.macForwardRoutingPacket
+                0x000045b6       0x98 RUM/mac_route.o
+                0x000045b6                macForwardRoutingPacket
+ .text.macRouteAssociateResponse
+                0x0000464e      0x11e RUM/mac_route.o
+                0x0000464e                macRouteAssociateResponse
+ .text.macRouteAssociateRequest
+                0x0000476c      0x142 RUM/mac_route.o
+                0x0000476c                macRouteAssociateRequest
+ .text.macRouteData
+                0x000048ae       0xb2 RUM/mac_route.o
+                0x000048ae                macRouteData
+ .text.macSendRoutingPacket
+                0x00004960        0x4 RUM/mac_route.o
+                0x00004960                macSendRoutingPacket
+ .text.store_pandescriptors
+                0x00004964       0x4c RUM/mac_scan.o
+ .text.macIsScanning
+                0x000049b0        0x6 RUM/mac_scan.o
+                0x000049b0                macIsScanning
+ .text.mac_logPanDescriptors
+                0x000049b6       0x72 RUM/mac_scan.o
+                0x000049b6                mac_logPanDescriptors
+ .text.mac_scanConfirm
+                0x00004a28       0x4e RUM/mac_scan.o
+                0x00004a28                mac_scanConfirm
+ .text.macScan  0x00004a76       0xb6 RUM/mac_scan.o
+                0x00004a76                macScan
+ .text.macEdCallback
+                0x00004b2c        0x2 RUM/mac_scan.o
+                0x00004b2c                macEdCallback
+ .text.getUniqueID
+                0x00004b2e       0x4e Timer/avr_timer.o
+ .text.timerStart
+                0x00004b7c       0x1e Timer/avr_timer.o
+ .text.macSetAlarm
+                0x00004b9a       0x92 Timer/avr_timer.o
+                0x00004b9a                macSetAlarm
+ .text.macSetLongAlarm
+                0x00004c2c       0x7a Timer/avr_timer.o
+                0x00004c2c                macSetLongAlarm
+ .text.macTimerEnd
+                0x00004ca6       0x60 Timer/avr_timer.o
+                0x00004ca6                macTimerEnd
+ .text.timerInit
+                0x00004d06       0x22 Timer/avr_timer.o
+                0x00004d06                timerInit
+ .text.__vector_32
+                0x00004d28      0x118 Timer/avr_timer.o
+                0x00004d28                __vector_32
+ .text.__vector_35
+                0x00004e40       0x1e Timer/timer_enddevice.o
+                0x00004e40                __vector_35
+ .text.__vector_12
+                0x00004e5e       0x1e Timer/timer_enddevice.o
+                0x00004e5e                __vector_12
  .text.get_from_circ_buf
-                0x00004de4       0x24 UART/serial.o
+                0x00004e7c       0x24 UART/serial.o
  .text.init_rx_buf
-                0x00004e08        0xa UART/serial.o
-                0x00004e08                init_rx_buf
+                0x00004ea0        0xa UART/serial.o
+                0x00004ea0                init_rx_buf
  .text.serial_init
-                0x00004e12       0x30 UART/serial.o
-                0x00004e12                serial_init
+                0x00004eaa       0x30 UART/serial.o
+                0x00004eaa                serial_init
  .text.serial_putchar
-                0x00004e42       0x5e UART/serial.o
-                0x00004e42                serial_putchar
+                0x00004eda       0x5e UART/serial.o
+                0x00004eda                serial_putchar
  .text.rx_buf_count
-                0x00004ea0       0x18 UART/serial.o
-                0x00004ea0                rx_buf_count
+                0x00004f38       0x18 UART/serial.o
+                0x00004f38                rx_buf_count
  .text.serial_getchar
-                0x00004eb8       0x22 UART/serial.o
-                0x00004eb8                serial_getchar
+                0x00004f50       0x22 UART/serial.o
+                0x00004f50                serial_getchar
  .text.__vector_36
-                0x00004eda       0x8a UART/serial.o
-                0x00004eda                __vector_36
+                0x00004f72       0x8a UART/serial.o
+                0x00004f72                __vector_36
  .text.__vector_37
-                0x00004f64       0x70 UART/serial.o
-                0x00004f64                __vector_37
+                0x00004ffc       0x70 UART/serial.o
+                0x00004ffc                __vector_37
  .text.Ascii_to_nible
-                0x00004fd4       0x28 UART/serial.o
-                0x00004fd4                Ascii_to_nible
+                0x0000506c       0x28 UART/serial.o
+                0x0000506c                Ascii_to_nible
+ .text.asciiStringToNibble
+                0x00005094       0x78 UART/serial.o
+                0x00005094                asciiStringToNibble
  .text.avr-libc
-                0x00004ffc      0x74a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a(vfprintf_flt.o)
-                0x00004ffc                vfprintf
+                0x0000510c      0x74a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a(vfprintf_flt.o)
+                0x0000510c                vfprintf
  .text.avr-libc.fplib
-                0x00005746        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(addsf3.o)
-                0x00005746                __subsf3
-                0x00005748                __addsf3
+                0x00005856        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(addsf3.o)
+                0x00005856                __subsf3
+                0x00005858                __addsf3
  .text.avr-libc.fplib
-                0x00005754       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(addsf3x.o)
-                0x00005776                __addsf3x
+                0x00005864       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(addsf3x.o)
+                0x00005886                __addsf3x
  .text.avr-libc.fplib
-                0x00005820        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(divsf3.o)
-                0x00005820                __divsf3
+                0x00005930        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(divsf3.o)
+                0x00005930                __divsf3
  .text.avr-libc.fplib
-                0x00005828       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(divsf3x.o)
-                0x00005848                __divsf3x
-                0x0000584e                __divsf3_pse
+                0x00005938       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(divsf3x.o)
+                0x00005958                __divsf3x
+                0x0000595e                __divsf3_pse
  .text.avr-libc.fplib
-                0x00005904       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fixunssfsi.o)
-                0x00005904                __fixunssfsi
+                0x00005a14       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fixunssfsi.o)
+                0x00005a14                __fixunssfsi
  .text.avr-libc.fplib
-                0x00005962       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(floatsisf.o)
-                0x00005962                __floatunsisf
-                0x00005966                __floatsisf
+                0x00005a72       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(floatsisf.o)
+                0x00005a72                __floatunsisf
+                0x00005a76                __floatsisf
  .text.avr-libc.fplib
-                0x000059dc        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_inf.o)
-                0x000059dc                __fp_inf
+                0x00005aec        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_inf.o)
+                0x00005aec                __fp_inf
  .text.avr-libc.fplib
-                0x000059e8        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_nan.o)
-                0x000059e8                __fp_nan
+                0x00005af8        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_nan.o)
+                0x00005af8                __fp_nan
  .text.avr-libc.fplib
-                0x000059ee        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_pscA.o)
-                0x000059ee                __fp_pscA
+                0x00005afe        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_pscA.o)
+                0x00005afe                __fp_pscA
  .text.avr-libc.fplib
-                0x000059fc        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_pscB.o)
-                0x000059fc                __fp_pscB
+                0x00005b0c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_pscB.o)
+                0x00005b0c                __fp_pscB
  .text.avr-libc.fplib
-                0x00005a0a       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_round.o)
-                0x00005a0a                __fp_round
+                0x00005b1a       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_round.o)
+                0x00005b1a                __fp_round
  .text.avr-libc.fplib
-                0x00005a2c       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_split3.o)
-                0x00005a2c                __fp_split3
-                0x00005a3c                __fp_splitA
+                0x00005b3c       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_split3.o)
+                0x00005b3c                __fp_split3
+                0x00005b4c                __fp_splitA
  .text.avr-libc.fplib
-                0x00005a70        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_zero.o)
-                0x00005a70                __fp_zero
-                0x00005a72                __fp_szero
- .text.avr-libc.fplib
-                0x00005a7e        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3.o)
-                0x00005a7e                __mulsf3
- .text.avr-libc.fplib
-                0x00005a86       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(mulsf3x.o)
-                0x00005aa4                __mulsf3x
-                0x00005aaa                __mulsf3_pse
+                0x00005b80        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libm.a(fp_zero.o)
+                0x00005b80                __fp_zero
+                0x00005b82                __fp_szero
  .text.libgcc.div
-                0x00005b58       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodhi4.o)
-                0x00005b58                __udivmodhi4
+                0x00005b8e       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodhi4.o)
+                0x00005b8e                __udivmodhi4
  .text.libgcc.div
-                0x00005b80       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_divmodhi4.o)
-                0x00005b80                _div
-                0x00005b80                __divmodhi4
+                0x00005bb6       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_divmodhi4.o)
+                0x00005bb6                _div
+                0x00005bb6                __divmodhi4
  .text.libgcc.div
-                0x00005ba8       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodsi4.o)
-                0x00005ba8                __udivmodsi4
- .text.libgcc   0x00005bec       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_tablejump2.o)
-                0x00005bec                __tablejump2__
+                0x00005bde       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_udivmodsi4.o)
+                0x00005bde                __udivmodsi4
+ .text.libgcc   0x00005c22       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_tablejump2.o)
+                0x00005c22                __tablejump2__
  .text.libgcc.builtins
-                0x00005bfe       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_ashrdi3.o)
-                0x00005bfe                __ashrdi3
-                0x00005c02                __lshrdi3
+                0x00005c34       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_ashrdi3.o)
+                0x00005c34                __ashrdi3
+                0x00005c38                __lshrdi3
  .text.avr-libc
-                0x00005c3a      0x25a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(malloc.o)
-                0x00005c3a                malloc
-                0x00005d64                free
+                0x00005c70      0x25a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(malloc.o)
+                0x00005c70                malloc
+                0x00005d9a                free
  .text.avr-libc
-                0x00005e94       0xb4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(rand.o)
-                0x00005f26                rand_r
-                0x00005f2a                rand
-                0x00005f32                srand
+                0x00005eca       0xb4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(rand.o)
+                0x00005f5c                rand_r
+                0x00005f60                rand
+                0x00005f68                srand
  .text.avr-libc
-                0x00005f48      0x270 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strtoul.o)
-                0x00005f48                strtoul
+                0x00005f7e      0x270 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strtoul.o)
+                0x00005f7e                strtoul
  .text.avr-libc
-                0x000061b8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(atof.o)
-                0x000061b8                atof
+                0x000061ee        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(atof.o)
+                0x000061ee                atof
  .text.avr-libc
-                0x000061c0       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(atoi.o)
-                0x000061c0                atoi
+                0x000061f6       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(atoi.o)
+                0x000061f6                atoi
  .text.avr-libc
-                0x000061fc      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(ftoa_engine.o)
-                0x000061fc                __ftoa_engine
+                0x00006232      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(ftoa_engine.o)
+                0x00006232                __ftoa_engine
  .text.avr-libc
-                0x000063ac       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(isspace.o)
-                0x000063ac                isspace
+                0x000063e2       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(isspace.o)
+                0x000063e2                isspace
  .text.avr-libc
-                0x000063be       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strnlen_P.o)
-                0x000063be                strnlen_P
+                0x000063f4       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strnlen_P.o)
+                0x000063f4                strnlen_P
  .text.avr-libc
-                0x000063d4       0x1a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(memcmp.o)
-                0x000063d4                memcmp
+                0x0000640a       0x1a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(memcmp.o)
+                0x0000640a                memcmp
  .text.avr-libc
-                0x000063ee       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(memcpy.o)
-                0x000063ee                memcpy
+                0x00006424       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(memcpy.o)
+                0x00006424                memcpy
  .text.avr-libc
-                0x00006400       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strchr.o)
-                0x00006400                strchr
+                0x00006436       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strchr.o)
+                0x00006436                strchr
  .text.avr-libc
-                0x00006416       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strcmp.o)
-                0x00006416                strcmp
+                0x0000644c       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strcmp.o)
+                0x0000644c                strcmp
  .text.avr-libc
-                0x00006428        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strcpy.o)
-                0x00006428                strcpy
+                0x0000645e        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strcpy.o)
+                0x0000645e                strcpy
  .text.avr-libc
-                0x00006436       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strncpy.o)
-                0x00006436                strncpy
+                0x0000646c       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strncpy.o)
+                0x0000646c                strncpy
  .text.avr-libc
-                0x00006454       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strnlen.o)
-                0x00006454                strnlen
+                0x0000648a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strnlen.o)
+                0x0000648a                strnlen
  .text.avr-libc
-                0x0000646a       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strstr.o)
-                0x0000646a                strstr
+                0x000064a0       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strstr.o)
+                0x000064a0                strstr
  .text.avr-libc
-                0x0000649e       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mul10.o)
-                0x0000649e                __mulhi_const_10
+                0x000064d4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mul10.o)
+                0x000064d4                __mulhi_const_10
  .text.avr-libc
-                0x000064ae       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(ultoa_ncheck.o)
-                0x000064ae                __ultoa_ncheck
-                0x000064b0                __ultoa_common
+                0x000064e4       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(ultoa_ncheck.o)
+                0x000064e4                __ultoa_ncheck
+                0x000064e6                __ultoa_common
  .text.avr-libc
-                0x000064f2       0x70 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fputc.o)
-                0x000064f2                fputc
+                0x00006528       0x70 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fputc.o)
+                0x00006528                fputc
  .text.avr-libc
-                0x00006562       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(sprintf.o)
-                0x00006562                sprintf
+                0x00006598       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(sprintf.o)
+                0x00006598                sprintf
  .text.avr-libc
-                0x000065c2       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(ultoa_invert.o)
-                0x000065c2                __ultoa_invert
+                0x000065f8       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(ultoa_invert.o)
+                0x000065f8                __ultoa_invert
  .text.avr-libc
-                0x0000667e      0x2de c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strtod.o)
-                0x0000667e                strtod
+                0x000066b4      0x2de c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strtod.o)
+                0x000066b4                strtod
  .text.avr-libc
-                0x0000695c        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(cty_isfalse.o)
-                0x0000695c                __ctype_isfalse
-                0x00006960                __ctype_istrue
+                0x00006992        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(cty_isfalse.o)
+                0x00006992                __ctype_isfalse
+                0x00006996                __ctype_istrue
  .text.avr-libc
-                0x00006962       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strncasecmp_P.o)
-                0x00006962                strncasecmp_P
+                0x00006998       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strncasecmp_P.o)
+                0x00006998                strncasecmp_P
  .text.avr-libc
-                0x00006992       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strrev.o)
-                0x00006992                strrev
+                0x000069c8       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(strrev.o)
+                0x000069c8                strrev
  .text.avr-libc.fplib
-                0x000069b2        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(cmpsf2.o)
-                0x000069b2                __nesf2
-                0x000069b2                __eqsf2
-                0x000069b2                __cmpsf2
-                0x000069b2                __ltsf2
-                0x000069b2                __lesf2
+                0x000069e8        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(cmpsf2.o)
+                0x000069e8                __nesf2
+                0x000069e8                __eqsf2
+                0x000069e8                __cmpsf2
+                0x000069e8                __ltsf2
+                0x000069e8                __lesf2
  .text.avr-libc.fplib
-                0x000069bc       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fp_cmp.o)
-                0x000069bc                __fp_cmp
+                0x000069f2       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(fp_cmp.o)
+                0x000069f2                __fp_cmp
+ .text.avr-libc.fplib
+                0x00006a3a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3.o)
+                0x00006a3a                __mulsf3
+ .text.avr-libc.fplib
+                0x00006a42       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(mulsf3x.o)
+                0x00006a60                __mulsf3x
+                0x00006a66                __mulsf3_pse
  .text.avr-libc
-                0x00006a04       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
-                0x00006a04                eeprom_read_block
-                0x00006a08                eeprom_read_blraw
+                0x00006b14       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
+                0x00006b14                eeprom_read_block
+                0x00006b18                eeprom_read_blraw
  .text.avr-libc
-                0x00006a24       0x24 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
-                0x00006a24                eeprom_update_byte
-                0x00006a26                eeprom_update_r18
+                0x00006b34       0x24 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
+                0x00006b34                eeprom_update_byte
+                0x00006b36                eeprom_update_r18
  .text.avr-libc
-                0x00006a48       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
-                0x00006a48                eeprom_write_block
+                0x00006b58       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
+                0x00006b58                eeprom_write_block
  .text.avr-libc
-                0x00006a5c       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
-                0x00006a5c                eeprom_write_byte
-                0x00006a5e                eeprom_write_r18
+                0x00006b6c       0x1c C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
+                0x00006b6c                eeprom_write_byte
+                0x00006b6e                eeprom_write_r18
  .text.libgcc.mul
-                0x00006a78       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_mulsi3.o)
-                0x00006a78                __mulsi3
+                0x00006b88       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_mulsi3.o)
+                0x00006b88                __mulsi3
  .text.libgcc.div
-                0x00006a98       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_divmodsi4.o)
-                0x00006a98                __divmodsi4
+                0x00006ba8       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_divmodsi4.o)
+                0x00006ba8                __divmodsi4
  .text.libgcc.div
-                0x00006ac6       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_negsi2.o)
-                0x00006ac6                __negsi2
+                0x00006bd6       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_negsi2.o)
+                0x00006bd6                __negsi2
  .text.libgcc.mul
-                0x00006ad6       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_muluhisi3.o)
-                0x00006ad6                __muluhisi3
+                0x00006be6       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_muluhisi3.o)
+                0x00006be6                __muluhisi3
  .text.libgcc.mul
-                0x00006aec       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_mulshisi3.o)
-                0x00006aec                __mulshisi3
-                0x00006af2                __mulohisi3
+                0x00006bfc       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_mulshisi3.o)
+                0x00006bfc                __mulshisi3
+                0x00006c02                __mulohisi3
  .text.libgcc.mul
-                0x00006afc       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_umulhisi3.o)
-                0x00006afc                __umulhisi3
-                0x00006b1a                . = ALIGN (0x2)
+                0x00006c0c       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_umulhisi3.o)
+                0x00006c0c                __umulhisi3
+                0x00006c2a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00006b1a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_exit.o)
-                0x00006b1a                _exit
-                0x00006b1a                exit
+ .fini9         0x00006c2a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_exit.o)
+                0x00006c2a                _exit
+                0x00006c2a                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -3834,11 +3572,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00006b1a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_exit.o)
+ .fini0         0x00006c2a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr51\libgcc.a(_exit.o)
  *(.fini0)
-                0x00006b1e                _etext = .
+                0x00006c2e                _etext = .
 
-.data           0x00800200      0x32a load address 0x00006b1e
+.data           0x00800200      0x32a load address 0x00006c2e
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(malloc.o)
@@ -3885,12 +3623,12 @@ END GROUP
                 0x0080052a                _edata = .
                 0x0080052a                PROVIDE (__data_end, .)
 
-.bss            0x0080052a      0x7a2
+.bss            0x0080052a      0x7a3
                 0x0080052a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.Len.4467  0x0080052a        0x1 Application/application.o
- .bss.ucDataLength.4360
+ .bss.Len.4448  0x0080052a        0x1 Application/application.o
+ .bss.ucDataLength.4358
                 0x0080052b        0x1 Application/application.o
  .bss.failCount
                 0x0080052c        0x1 Application/application.o
@@ -3901,7 +3639,7 @@ END GROUP
                 0x0080052e                KPTOFlag
  .bss.TOFlag    0x0080052f        0x1 Application/application.o
                 0x0080052f                TOFlag
- .bss.oLTTimerId.3842
+ .bss.oLTTimerId.4051
                 0x00800530        0x1 Application/BowComm.o
  .bss.MpIsrInfo
                 0x00800531        0x2 mifare/Mifare.o
@@ -3941,62 +3679,63 @@ END GROUP
  .bss.rxbuf     0x0080073a       0x82 UART/serial.o
  .bss.txbuf     0x008007bc       0x82 UART/serial.o
  *(COMMON)
- COMMON         0x0080083e      0x2d2 Application/application.o
+ COMMON         0x0080083e      0x2d3 Application/application.o
                 0x0080083e                ParamStr
                 0x008008a2                SQACAFrontloadProgramming
-                0x008008c8                INSUFFCIENT_FUNDS
-                0x008008c9                SQACAToploadProgramming
-                0x008008fc                SQACAAuditData
-                0x0080092a                CurrentAccount
-                0x00800934                ucNumberOfRetry
-                0x00800935                ReaderStateFlag
-                0x00800937                DataBuffer
+                0x008008c8                SQACAToploadProgramming
+                0x008008fb                SQACAAuditData
+                0x00800929                CurrentAccount
+                0x00800933                ucNumberOfRetry
+                0x00800934                ReaderStateFlag
+                0x00800936                DataBuffer
+                0x008009b6                vendType
                 0x008009b7                OP
                 0x008009b8                ucMachineWait
                 0x008009b9                ucDeviceStateFlag
                 0x008009ba                ReaderSetup
-                0x00800a02                timeout
-                0x00800a03                SQACADryerProgramming
-                0x00800a2f                ucCardStatus
-                0x00800a30                ucSendDataBuffer
-                0x00800af0                deviceStatus
-                0x00800af3                gotPanCoordPing
-                0x00800af4                SQACAMachineStatus
-                0x00800b0e                ucSendDataSize
-                0x00800b0f                deviceFlag
- COMMON         0x00800b10       0x1c mifare/Mifare.o
-                0x00800b10                SerBuffer
-                0x00800b24                MInfo
- COMMON         0x00800b2c      0x11d RUM/mac.o
-                0x00800b2c                mac_buffer_rx
-                0x00800bae                mac_buffer_tx
-                0x00800c30                macConfig
- COMMON         0x00800c49       0x5c RUM/mac_event.o
-                0x00800c49                event_queue
- COMMON         0x00800ca5       0x16 RUM/mac_scan.o
-                0x00800ca5                panDescriptor
- COMMON         0x00800cbb        0xb Application/machine.o
-                0x00800cbb                cardId
-                0x00800cbd                ucTopOffTime
-                0x00800cbe                ucCardErrorCode
-                0x00800cbf                ucTimerCount
-                0x00800cc0                vendPrice
-                0x00800cc4                ucCardBalance
- COMMON         0x00800cc6        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(malloc.o)
-                0x00800cc6                __brkval
-                0x00800cc8                __flp
- COMMON         0x00800cca        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(errno.o)
-                0x00800cca                errno
-                0x00800ccc                PROVIDE (__bss_end, .)
-                0x00006b1e                __data_load_start = LOADADDR (.data)
-                0x00006e48                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800a02                VENDTYPE
+                0x00800a03                timeout
+                0x00800a04                SQACADryerProgramming
+                0x00800a30                ucCardStatus
+                0x00800a31                ucSendDataBuffer
+                0x00800af1                deviceStatus
+                0x00800af4                gotPanCoordPing
+                0x00800af5                SQACAMachineStatus
+                0x00800b0f                ucSendDataSize
+                0x00800b10                deviceFlag
+ COMMON         0x00800b11        0xb Application/reader.o
+                0x00800b11                cardId
+                0x00800b13                ucTopOffTime
+                0x00800b14                ucCardErrorCode
+                0x00800b15                ucTimerCount
+                0x00800b16                vendPrice
+                0x00800b1a                ucCardBalance
+ COMMON         0x00800b1c       0x1c mifare/Mifare.o
+                0x00800b1c                SerBuffer
+                0x00800b30                MInfo
+ COMMON         0x00800b38      0x11d RUM/mac.o
+                0x00800b38                mac_buffer_rx
+                0x00800bba                mac_buffer_tx
+                0x00800c3c                macConfig
+ COMMON         0x00800c55       0x5c RUM/mac_event.o
+                0x00800c55                event_queue
+ COMMON         0x00800cb1       0x16 RUM/mac_scan.o
+                0x00800cb1                panDescriptor
+ COMMON         0x00800cc7        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(malloc.o)
+                0x00800cc7                __brkval
+                0x00800cc9                __flp
+ COMMON         0x00800ccb        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libc.a(errno.o)
+                0x00800ccb                errno
+                0x00800ccd                PROVIDE (__bss_end, .)
+                0x00006c2e                __data_load_start = LOADADDR (.data)
+                0x00006f58                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800ccc        0x0
+.noinit         0x00800ccd        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800ccc                _end = .
-                0x00800ccc                PROVIDE (__heap_start, .)
+                0x00800ccd                _end = .
+                0x00800ccd                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -4043,6 +3782,7 @@ END GROUP
  .comment       0x00000030       0x31 Application/display.o
  .comment       0x00000030       0x31 Application/SpeedQueen.o
  .comment       0x00000030       0x31 Application/reader.o
+ .comment       0x00000030       0x31 Application/zstring.o
  .comment       0x00000030       0x31 mifare/Mifare.o
  .comment       0x00000030       0x31 mifare/RegCtrl.o
  .comment       0x00000030       0x31 SPI/spi.o
@@ -4058,7 +3798,6 @@ END GROUP
  .comment       0x00000030       0x31 RUM/mac_scan.o
  .comment       0x00000030       0x31 Timer/avr_timer.o
  .comment       0x00000030       0x31 Timer/timer_enddevice.o
- .comment       0x00000030       0x31 Application/machine.o
  .comment       0x00000030       0x31 UART/serial.o
  .comment       0x00000030       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avr51\libprintf_flt.a(vfprintf_flt.o)
                                  0x2d (size before relaxing)
@@ -4090,250 +3829,250 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0xad0
+.debug_aranges  0x00000000      0xa80
  *(.debug_aranges)
  .debug_aranges
-                0x00000000      0x140 Application/application.o
+                0x00000000      0x128 Application/application.o
  .debug_aranges
-                0x00000140       0x78 Application/BowComm.o
+                0x00000128       0x70 Application/BowComm.o
  .debug_aranges
-                0x000001b8       0x28 Application/display.o
+                0x00000198       0x48 Application/display.o
  .debug_aranges
-                0x000001e0      0x118 Application/SpeedQueen.o
+                0x000001e0       0xb8 Application/SpeedQueen.o
  .debug_aranges
-                0x000002f8       0x40 Application/reader.o
+                0x00000298       0x78 Application/reader.o
  .debug_aranges
-                0x00000338       0x98 mifare/Mifare.o
+                0x00000310       0x20 Application/zstring.o
  .debug_aranges
-                0x000003d0       0x40 mifare/RegCtrl.o
+                0x00000330       0x98 mifare/Mifare.o
  .debug_aranges
-                0x00000410       0x48 SPI/spi.o
+                0x000003c8       0x40 mifare/RegCtrl.o
  .debug_aranges
-                0x00000458       0x28 main.o
+                0x00000408       0x48 SPI/spi.o
  .debug_aranges
-                0x00000480      0x100 Radio/radio.o
+                0x00000450       0x28 main.o
  .debug_aranges
-                0x00000580       0x60 Radio/hal_avr.o
+                0x00000478      0x100 Radio/radio.o
  .debug_aranges
-                0x000005e0       0x28 RUM/mac.o
+                0x00000578       0x60 Radio/hal_avr.o
  .debug_aranges
-                0x00000608       0xf0 RUM/mac_associate.o
+                0x000005d8       0x28 RUM/mac.o
  .debug_aranges
-                0x000006f8       0x20 RUM/mac_beacon.o
+                0x00000600       0xf0 RUM/mac_associate.o
  .debug_aranges
-                0x00000718       0x70 RUM/mac_data.o
+                0x000006f0       0x20 RUM/mac_beacon.o
  .debug_aranges
-                0x00000788       0x38 RUM/mac_event.o
+                0x00000710       0x70 RUM/mac_data.o
  .debug_aranges
-                0x000007c0       0x48 RUM/mac_route.o
+                0x00000780       0x38 RUM/mac_event.o
  .debug_aranges
-                0x00000808       0x60 RUM/mac_scan.o
+                0x000007b8       0x48 RUM/mac_route.o
  .debug_aranges
-                0x00000868       0x58 Timer/avr_timer.o
+                0x00000800       0x60 RUM/mac_scan.o
  .debug_aranges
-                0x000008c0       0x68 Timer/timer_enddevice.o
+                0x00000860       0x58 Timer/avr_timer.o
  .debug_aranges
-                0x00000928       0x50 Application/machine.o
+                0x000008b8       0x68 Timer/timer_enddevice.o
  .debug_aranges
-                0x00000978       0xd8 UART/serial.o
+                0x00000920       0xe0 UART/serial.o
  .debug_aranges
-                0x00000a50       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
+                0x00000a00       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
  .debug_aranges
-                0x00000a70       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
+                0x00000a20       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
  .debug_aranges
-                0x00000a90       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
+                0x00000a40       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
  .debug_aranges
-                0x00000ab0       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
+                0x00000a60       0x20 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x11dcd
+.debug_info     0x00000000    0x11d58
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000     0x1160 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51/crtatmega128rfa1.o
- .debug_info    0x00001160     0x2d3b Application/application.o
- .debug_info    0x00003e9b     0x14c2 Application/BowComm.o
- .debug_info    0x0000535d      0xa41 Application/display.o
- .debug_info    0x00005d9e     0x1969 Application/SpeedQueen.o
- .debug_info    0x00007707     0x125b Application/reader.o
- .debug_info    0x00008962     0x12ab mifare/Mifare.o
- .debug_info    0x00009c0d      0x28d mifare/RegCtrl.o
- .debug_info    0x00009e9a      0x1aa SPI/spi.o
- .debug_info    0x0000a044      0xa9a main.o
- .debug_info    0x0000aade      0xfb8 Radio/radio.o
- .debug_info    0x0000ba96      0x515 Radio/hal_avr.o
- .debug_info    0x0000bfab      0x534 RUM/mac.o
- .debug_info    0x0000c4df      0xd3c RUM/mac_associate.o
- .debug_info    0x0000d21b      0x339 RUM/mac_beacon.o
- .debug_info    0x0000d554      0xa04 RUM/mac_data.o
- .debug_info    0x0000df58      0x88d RUM/mac_event.o
- .debug_info    0x0000e7e5      0x8d9 RUM/mac_route.o
- .debug_info    0x0000f0be      0x8c8 RUM/mac_scan.o
- .debug_info    0x0000f986      0x4aa Timer/avr_timer.o
- .debug_info    0x0000fe30      0x29d Timer/timer_enddevice.o
- .debug_info    0x000100cd      0xf4d Application/machine.o
- .debug_info    0x0001101a      0xaf0 UART/serial.o
- .debug_info    0x00011b0a       0xb1 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
- .debug_info    0x00011bbb       0xb1 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
- .debug_info    0x00011c6c       0xb1 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
- .debug_info    0x00011d1d       0xb0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
+ .debug_info    0x00001160     0x2ad6 Application/application.o
+ .debug_info    0x00003c36     0x1cdd Application/BowComm.o
+ .debug_info    0x00005913     0x1030 Application/display.o
+ .debug_info    0x00006943     0x14c0 Application/SpeedQueen.o
+ .debug_info    0x00007e03     0x14ba Application/reader.o
+ .debug_info    0x000092bd      0x200 Application/zstring.o
+ .debug_info    0x000094bd     0x12ab mifare/Mifare.o
+ .debug_info    0x0000a768      0x28d mifare/RegCtrl.o
+ .debug_info    0x0000a9f5      0x1aa SPI/spi.o
+ .debug_info    0x0000ab9f      0xd74 main.o
+ .debug_info    0x0000b913      0xfb8 Radio/radio.o
+ .debug_info    0x0000c8cb      0x515 Radio/hal_avr.o
+ .debug_info    0x0000cde0      0x534 RUM/mac.o
+ .debug_info    0x0000d314      0xd3c RUM/mac_associate.o
+ .debug_info    0x0000e050      0x339 RUM/mac_beacon.o
+ .debug_info    0x0000e389      0xa04 RUM/mac_data.o
+ .debug_info    0x0000ed8d      0x88d RUM/mac_event.o
+ .debug_info    0x0000f61a      0x8d9 RUM/mac_route.o
+ .debug_info    0x0000fef3      0x8c8 RUM/mac_scan.o
+ .debug_info    0x000107bb      0x4aa Timer/avr_timer.o
+ .debug_info    0x00010c65      0x29d Timer/timer_enddevice.o
+ .debug_info    0x00010f02      0xb93 UART/serial.o
+ .debug_info    0x00011a95       0xb1 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
+ .debug_info    0x00011b46       0xb1 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
+ .debug_info    0x00011bf7       0xb1 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
+ .debug_info    0x00011ca8       0xb0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
 
-.debug_abbrev   0x00000000     0x485c
+.debug_abbrev   0x00000000     0x47e5
  *(.debug_abbrev)
  .debug_abbrev  0x00000000     0x1072 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51/crtatmega128rfa1.o
- .debug_abbrev  0x00001072      0x4ff Application/application.o
- .debug_abbrev  0x00001571      0x38a Application/BowComm.o
- .debug_abbrev  0x000018fb      0x187 Application/display.o
- .debug_abbrev  0x00001a82      0x3f6 Application/SpeedQueen.o
- .debug_abbrev  0x00001e78      0x255 Application/reader.o
- .debug_abbrev  0x000020cd      0x296 mifare/Mifare.o
- .debug_abbrev  0x00002363      0x16c mifare/RegCtrl.o
- .debug_abbrev  0x000024cf       0xfb SPI/spi.o
- .debug_abbrev  0x000025ca      0x1e3 main.o
- .debug_abbrev  0x000027ad      0x464 Radio/radio.o
- .debug_abbrev  0x00002c11      0x1ef Radio/hal_avr.o
- .debug_abbrev  0x00002e00      0x1bd RUM/mac.o
- .debug_abbrev  0x00002fbd      0x2d6 RUM/mac_associate.o
- .debug_abbrev  0x00003293      0x129 RUM/mac_beacon.o
- .debug_abbrev  0x000033bc      0x319 RUM/mac_data.o
- .debug_abbrev  0x000036d5      0x22f RUM/mac_event.o
- .debug_abbrev  0x00003904      0x208 RUM/mac_route.o
- .debug_abbrev  0x00003b0c      0x2f2 RUM/mac_scan.o
- .debug_abbrev  0x00003dfe      0x238 Timer/avr_timer.o
- .debug_abbrev  0x00004036      0x164 Timer/timer_enddevice.o
- .debug_abbrev  0x0000419a      0x2ba Application/machine.o
- .debug_abbrev  0x00004454      0x3b8 UART/serial.o
- .debug_abbrev  0x0000480c       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
- .debug_abbrev  0x00004820       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
- .debug_abbrev  0x00004834       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
- .debug_abbrev  0x00004848       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
+ .debug_abbrev  0x00001072      0x4c9 Application/application.o
+ .debug_abbrev  0x0000153b      0x392 Application/BowComm.o
+ .debug_abbrev  0x000018cd      0x247 Application/display.o
+ .debug_abbrev  0x00001b14      0x3c1 Application/SpeedQueen.o
+ .debug_abbrev  0x00001ed5      0x2ea Application/reader.o
+ .debug_abbrev  0x000021bf      0x10b Application/zstring.o
+ .debug_abbrev  0x000022ca      0x296 mifare/Mifare.o
+ .debug_abbrev  0x00002560      0x16c mifare/RegCtrl.o
+ .debug_abbrev  0x000026cc       0xfb SPI/spi.o
+ .debug_abbrev  0x000027c7      0x207 main.o
+ .debug_abbrev  0x000029ce      0x464 Radio/radio.o
+ .debug_abbrev  0x00002e32      0x1ef Radio/hal_avr.o
+ .debug_abbrev  0x00003021      0x1bd RUM/mac.o
+ .debug_abbrev  0x000031de      0x2d6 RUM/mac_associate.o
+ .debug_abbrev  0x000034b4      0x129 RUM/mac_beacon.o
+ .debug_abbrev  0x000035dd      0x319 RUM/mac_data.o
+ .debug_abbrev  0x000038f6      0x22f RUM/mac_event.o
+ .debug_abbrev  0x00003b25      0x208 RUM/mac_route.o
+ .debug_abbrev  0x00003d2d      0x2f2 RUM/mac_scan.o
+ .debug_abbrev  0x0000401f      0x238 Timer/avr_timer.o
+ .debug_abbrev  0x00004257      0x164 Timer/timer_enddevice.o
+ .debug_abbrev  0x000043bb      0x3da UART/serial.o
+ .debug_abbrev  0x00004795       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
+ .debug_abbrev  0x000047a9       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
+ .debug_abbrev  0x000047bd       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
+ .debug_abbrev  0x000047d1       0x14 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
 
-.debug_line     0x00000000     0xa83a
+.debug_line     0x00000000     0xa347
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x247 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51/crtatmega128rfa1.o
- .debug_line    0x00000247     0x1118 Application/application.o
- .debug_line    0x0000135f      0x8b4 Application/BowComm.o
- .debug_line    0x00001c13      0x426 Application/display.o
- .debug_line    0x00002039     0x14e6 Application/SpeedQueen.o
- .debug_line    0x0000351f      0x667 Application/reader.o
- .debug_line    0x00003b86      0xb6a mifare/Mifare.o
- .debug_line    0x000046f0      0x333 mifare/RegCtrl.o
- .debug_line    0x00004a23      0x31b SPI/spi.o
- .debug_line    0x00004d3e      0x578 main.o
- .debug_line    0x000052b6      0xb59 Radio/radio.o
- .debug_line    0x00005e0f      0x5d7 Radio/hal_avr.o
- .debug_line    0x000063e6      0x4a2 RUM/mac.o
- .debug_line    0x00006888      0x76a RUM/mac_associate.o
- .debug_line    0x00006ff2      0x417 RUM/mac_beacon.o
- .debug_line    0x00007409      0x5df RUM/mac_data.o
- .debug_line    0x000079e8      0x59a RUM/mac_event.o
- .debug_line    0x00007f82      0x5ea RUM/mac_route.o
- .debug_line    0x0000856c      0x5e0 RUM/mac_scan.o
- .debug_line    0x00008b4c      0x667 Timer/avr_timer.o
- .debug_line    0x000091b3      0x571 Timer/timer_enddevice.o
- .debug_line    0x00009724      0x642 Application/machine.o
- .debug_line    0x00009d66      0x855 UART/serial.o
- .debug_line    0x0000a5bb       0xab C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
- .debug_line    0x0000a666       0xb6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
- .debug_line    0x0000a71c       0x80 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
- .debug_line    0x0000a79c       0x9e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
+ .debug_line    0x00000247     0x107d Application/application.o
+ .debug_line    0x000012c4      0x8a0 Application/BowComm.o
+ .debug_line    0x00001b64      0x577 Application/display.o
+ .debug_line    0x000020db     0x11bc Application/SpeedQueen.o
+ .debug_line    0x00003297      0x809 Application/reader.o
+ .debug_line    0x00003aa0      0x1e6 Application/zstring.o
+ .debug_line    0x00003c86      0xb6a mifare/Mifare.o
+ .debug_line    0x000047f0      0x333 mifare/RegCtrl.o
+ .debug_line    0x00004b23      0x31b SPI/spi.o
+ .debug_line    0x00004e3e      0x587 main.o
+ .debug_line    0x000053c5      0xb59 Radio/radio.o
+ .debug_line    0x00005f1e      0x5d7 Radio/hal_avr.o
+ .debug_line    0x000064f5      0x4a2 RUM/mac.o
+ .debug_line    0x00006997      0x76a RUM/mac_associate.o
+ .debug_line    0x00007101      0x417 RUM/mac_beacon.o
+ .debug_line    0x00007518      0x5df RUM/mac_data.o
+ .debug_line    0x00007af7      0x59a RUM/mac_event.o
+ .debug_line    0x00008091      0x5ea RUM/mac_route.o
+ .debug_line    0x0000867b      0x5e0 RUM/mac_scan.o
+ .debug_line    0x00008c5b      0x667 Timer/avr_timer.o
+ .debug_line    0x000092c2      0x570 Timer/timer_enddevice.o
+ .debug_line    0x00009832      0x896 UART/serial.o
+ .debug_line    0x0000a0c8       0xab C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eerd_block.o)
+ .debug_line    0x0000a173       0xb6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eeupd_byte.o)
+ .debug_line    0x0000a229       0x80 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_block.o)
+ .debug_line    0x0000a2a9       0x9e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51\libatmega128rfa1.a(eewr_byte.o)
 
-.debug_frame    0x00000000     0x1d70
+.debug_frame    0x00000000     0x1c50
  *(.debug_frame)
- .debug_frame   0x00000000      0x3a4 Application/application.o
- .debug_frame   0x000003a4      0x270 Application/BowComm.o
- .debug_frame   0x00000614       0x44 Application/display.o
- .debug_frame   0x00000658      0x3e0 Application/SpeedQueen.o
- .debug_frame   0x00000a38       0x84 Application/reader.o
- .debug_frame   0x00000abc      0x280 mifare/Mifare.o
- .debug_frame   0x00000d3c       0x98 mifare/RegCtrl.o
- .debug_frame   0x00000dd4       0x84 SPI/spi.o
- .debug_frame   0x00000e58       0x34 main.o
- .debug_frame   0x00000e8c      0x24c Radio/radio.o
- .debug_frame   0x000010d8      0x214 Radio/hal_avr.o
- .debug_frame   0x000012ec       0x4c RUM/mac.o
- .debug_frame   0x00001338      0x1d0 RUM/mac_associate.o
- .debug_frame   0x00001508       0x24 RUM/mac_beacon.o
- .debug_frame   0x0000152c      0x110 RUM/mac_data.o
- .debug_frame   0x0000163c       0x78 RUM/mac_event.o
- .debug_frame   0x000016b4       0x84 RUM/mac_route.o
- .debug_frame   0x00001738       0xc0 RUM/mac_scan.o
- .debug_frame   0x000017f8      0x144 Timer/avr_timer.o
- .debug_frame   0x0000193c       0xe8 Timer/timer_enddevice.o
- .debug_frame   0x00001a24       0xe4 Application/machine.o
- .debug_frame   0x00001b08      0x268 UART/serial.o
+ .debug_frame   0x00000000      0x300 Application/application.o
+ .debug_frame   0x00000300      0x23c Application/BowComm.o
+ .debug_frame   0x0000053c       0xe8 Application/display.o
+ .debug_frame   0x00000624      0x27c Application/SpeedQueen.o
+ .debug_frame   0x000008a0      0x130 Application/reader.o
+ .debug_frame   0x000009d0       0x68 Application/zstring.o
+ .debug_frame   0x00000a38      0x280 mifare/Mifare.o
+ .debug_frame   0x00000cb8       0x98 mifare/RegCtrl.o
+ .debug_frame   0x00000d50       0x84 SPI/spi.o
+ .debug_frame   0x00000dd4       0x34 main.o
+ .debug_frame   0x00000e08      0x24c Radio/radio.o
+ .debug_frame   0x00001054      0x214 Radio/hal_avr.o
+ .debug_frame   0x00001268       0x4c RUM/mac.o
+ .debug_frame   0x000012b4      0x1d0 RUM/mac_associate.o
+ .debug_frame   0x00001484       0x24 RUM/mac_beacon.o
+ .debug_frame   0x000014a8      0x110 RUM/mac_data.o
+ .debug_frame   0x000015b8       0x78 RUM/mac_event.o
+ .debug_frame   0x00001630       0x84 RUM/mac_route.o
+ .debug_frame   0x000016b4       0xc0 RUM/mac_scan.o
+ .debug_frame   0x00001774      0x144 Timer/avr_timer.o
+ .debug_frame   0x000018b8       0xe8 Timer/timer_enddevice.o
+ .debug_frame   0x000019a0      0x2b0 UART/serial.o
 
-.debug_str      0x00000000    0x219e0
+.debug_str      0x00000000    0x2168c
  *(.debug_str)
  .debug_str     0x00000000      0x6de C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.1.130/gcc/dev/atmega128rfa1/avr51/crtatmega128rfa1.o
- .debug_str     0x000006de    0x1ecd9 Application/application.o
-                              0x1f0b7 (size before relaxing)
- .debug_str     0x0001f3b7      0x1d7 Application/BowComm.o
-                              0x19b1b (size before relaxing)
- .debug_str     0x0001f58e       0x4c Application/display.o
-                              0x173f4 (size before relaxing)
- .debug_str     0x0001f5da      0x25d Application/SpeedQueen.o
-                              0x1a8e3 (size before relaxing)
- .debug_str     0x0001f837       0x77 Application/reader.o
-                              0x17d09 (size before relaxing)
- .debug_str     0x0001f8ae      0x2d6 mifare/Mifare.o
+ .debug_str     0x000006de    0x1ea33 Application/application.o
+                              0x1ee04 (size before relaxing)
+ .debug_str     0x0001f111      0x1b2 Application/BowComm.o
+                              0x1ac80 (size before relaxing)
+ .debug_str     0x0001f2c3       0x7c Application/display.o
+                              0x1a398 (size before relaxing)
+ .debug_str     0x0001f33f      0x16d Application/SpeedQueen.o
+                              0x1a542 (size before relaxing)
+ .debug_str     0x0001f4ac      0x8ad Application/reader.o
+                              0x1ae93 (size before relaxing)
+ .debug_str     0x0001fd59       0x57 Application/zstring.o
+                               0x4557 (size before relaxing)
+ .debug_str     0x0001fdb0      0x2c3 mifare/Mifare.o
                                0x5004 (size before relaxing)
- .debug_str     0x0001fb84       0x88 mifare/RegCtrl.o
+ .debug_str     0x00020073       0x88 mifare/RegCtrl.o
                                0xe48f (size before relaxing)
- .debug_str     0x0001fc0c       0x7c SPI/spi.o
+ .debug_str     0x000200fb       0x7c SPI/spi.o
                                0xd554 (size before relaxing)
- .debug_str     0x0001fc88       0x9c main.o
-                              0x1c35f (size before relaxing)
- .debug_str     0x0001fd24      0x5c1 Radio/radio.o
+ .debug_str     0x00020177       0x8e main.o
+                              0x1c720 (size before relaxing)
+ .debug_str     0x00020205      0x5c1 Radio/radio.o
                               0x1666a (size before relaxing)
- .debug_str     0x000202e5      0x206 Radio/hal_avr.o
+ .debug_str     0x000207c6      0x206 Radio/hal_avr.o
                               0x16186 (size before relaxing)
- .debug_str     0x000204eb       0x3f RUM/mac.o
+ .debug_str     0x000209cc       0x3f RUM/mac.o
                               0x16297 (size before relaxing)
- .debug_str     0x0002052a      0x2d7 RUM/mac_associate.o
+ .debug_str     0x00020a0b      0x2d7 RUM/mac_associate.o
                               0x163ca (size before relaxing)
- .debug_str     0x00020801       0x88 RUM/mac_beacon.o
+ .debug_str     0x00020ce2       0x88 RUM/mac_beacon.o
                               0x1605a (size before relaxing)
- .debug_str     0x00020889      0x14e RUM/mac_data.o
+ .debug_str     0x00020d6a      0x14e RUM/mac_data.o
                               0x1624e (size before relaxing)
- .debug_str     0x000209d7       0xee RUM/mac_event.o
+ .debug_str     0x00020eb8       0xee RUM/mac_event.o
                               0x163c2 (size before relaxing)
- .debug_str     0x00020ac5       0x57 RUM/mac_route.o
+ .debug_str     0x00020fa6       0x57 RUM/mac_route.o
                               0x161bf (size before relaxing)
- .debug_str     0x00020b1c      0x15a RUM/mac_scan.o
+ .debug_str     0x00020ffd      0x15a RUM/mac_scan.o
                               0x163ab (size before relaxing)
- .debug_str     0x00020c76      0x124 Timer/avr_timer.o
+ .debug_str     0x00021157      0x124 Timer/avr_timer.o
                               0x16201 (size before relaxing)
- .debug_str     0x00020d9a      0x871 Timer/timer_enddevice.o
+ .debug_str     0x0002127b       0xec Timer/timer_enddevice.o
                               0x18af1 (size before relaxing)
- .debug_str     0x0002160b       0xbd Application/machine.o
-                              0x1b10a (size before relaxing)
- .debug_str     0x000216c8      0x318 UART/serial.o
-                              0x18f3a (size before relaxing)
+ .debug_str     0x00021367      0x325 UART/serial.o
+                              0x18f83 (size before relaxing)
 
-.debug_loc      0x00000000     0x6826
+.debug_loc      0x00000000     0x64a8
  *(.debug_loc)
- .debug_loc     0x00000000      0xc38 Application/application.o
- .debug_loc     0x00000c38      0x8b0 Application/BowComm.o
- .debug_loc     0x000014e8       0xc1 Application/display.o
- .debug_loc     0x000015a9      0xc97 Application/SpeedQueen.o
- .debug_loc     0x00002240       0xfd Application/reader.o
- .debug_loc     0x0000233d     0x1553 mifare/Mifare.o
- .debug_loc     0x00003890      0x2b6 mifare/RegCtrl.o
- .debug_loc     0x00003b46       0xae SPI/spi.o
- .debug_loc     0x00003bf4      0x826 Radio/radio.o
- .debug_loc     0x0000441a      0x6be Radio/hal_avr.o
- .debug_loc     0x00004ad8       0xa1 RUM/mac.o
- .debug_loc     0x00004b79      0x3dd RUM/mac_associate.o
- .debug_loc     0x00004f56       0x18 RUM/mac_beacon.o
- .debug_loc     0x00004f6e      0x3e5 RUM/mac_data.o
- .debug_loc     0x00005353      0x24d RUM/mac_event.o
- .debug_loc     0x000055a0      0x113 RUM/mac_route.o
- .debug_loc     0x000056b3       0xe4 RUM/mac_scan.o
- .debug_loc     0x00005797      0x57e Timer/avr_timer.o
- .debug_loc     0x00005d15      0x141 Timer/timer_enddevice.o
- .debug_loc     0x00005e56      0x32c Application/machine.o
- .debug_loc     0x00006182      0x6a4 UART/serial.o
+ .debug_loc     0x00000000      0x8fc Application/application.o
+ .debug_loc     0x000008fc      0x7a7 Application/BowComm.o
+ .debug_loc     0x000010a3      0x4bb Application/display.o
+ .debug_loc     0x0000155e      0x78a Application/SpeedQueen.o
+ .debug_loc     0x00001ce8      0x2a2 Application/reader.o
+ .debug_loc     0x00001f8a      0x1fd Application/zstring.o
+ .debug_loc     0x00002187     0x1553 mifare/Mifare.o
+ .debug_loc     0x000036da      0x2b6 mifare/RegCtrl.o
+ .debug_loc     0x00003990       0xae SPI/spi.o
+ .debug_loc     0x00003a3e      0x826 Radio/radio.o
+ .debug_loc     0x00004264      0x6be Radio/hal_avr.o
+ .debug_loc     0x00004922       0xa1 RUM/mac.o
+ .debug_loc     0x000049c3      0x3dd RUM/mac_associate.o
+ .debug_loc     0x00004da0       0x18 RUM/mac_beacon.o
+ .debug_loc     0x00004db8      0x3e5 RUM/mac_data.o
+ .debug_loc     0x0000519d      0x24d RUM/mac_event.o
+ .debug_loc     0x000053ea      0x113 RUM/mac_route.o
+ .debug_loc     0x000054fd       0xe4 RUM/mac_scan.o
+ .debug_loc     0x000055e1      0x57e Timer/avr_timer.o
+ .debug_loc     0x00005b5f      0x141 Timer/timer_enddevice.o
+ .debug_loc     0x00005ca0      0x808 UART/serial.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -4353,128 +4092,129 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x950
+.debug_ranges   0x00000000      0x900
  *(.debug_ranges)
- .debug_ranges  0x00000000      0x130 Application/application.o
- .debug_ranges  0x00000130       0x68 Application/BowComm.o
- .debug_ranges  0x00000198       0x18 Application/display.o
- .debug_ranges  0x000001b0      0x108 Application/SpeedQueen.o
- .debug_ranges  0x000002b8       0x30 Application/reader.o
- .debug_ranges  0x000002e8       0x88 mifare/Mifare.o
- .debug_ranges  0x00000370       0x30 mifare/RegCtrl.o
- .debug_ranges  0x000003a0       0x38 SPI/spi.o
- .debug_ranges  0x000003d8       0x18 main.o
- .debug_ranges  0x000003f0      0x120 Radio/radio.o
- .debug_ranges  0x00000510       0x50 Radio/hal_avr.o
- .debug_ranges  0x00000560       0x18 RUM/mac.o
- .debug_ranges  0x00000578       0xe0 RUM/mac_associate.o
- .debug_ranges  0x00000658       0x10 RUM/mac_beacon.o
- .debug_ranges  0x00000668       0x60 RUM/mac_data.o
- .debug_ranges  0x000006c8       0x28 RUM/mac_event.o
- .debug_ranges  0x000006f0       0x38 RUM/mac_route.o
- .debug_ranges  0x00000728       0x68 RUM/mac_scan.o
- .debug_ranges  0x00000790       0x60 Timer/avr_timer.o
- .debug_ranges  0x000007f0       0x58 Timer/timer_enddevice.o
- .debug_ranges  0x00000848       0x40 Application/machine.o
- .debug_ranges  0x00000888       0xc8 UART/serial.o
+ .debug_ranges  0x00000000      0x118 Application/application.o
+ .debug_ranges  0x00000118       0x60 Application/BowComm.o
+ .debug_ranges  0x00000178       0x38 Application/display.o
+ .debug_ranges  0x000001b0       0xa8 Application/SpeedQueen.o
+ .debug_ranges  0x00000258       0x68 Application/reader.o
+ .debug_ranges  0x000002c0       0x10 Application/zstring.o
+ .debug_ranges  0x000002d0       0x88 mifare/Mifare.o
+ .debug_ranges  0x00000358       0x30 mifare/RegCtrl.o
+ .debug_ranges  0x00000388       0x38 SPI/spi.o
+ .debug_ranges  0x000003c0       0x18 main.o
+ .debug_ranges  0x000003d8      0x120 Radio/radio.o
+ .debug_ranges  0x000004f8       0x50 Radio/hal_avr.o
+ .debug_ranges  0x00000548       0x18 RUM/mac.o
+ .debug_ranges  0x00000560       0xe0 RUM/mac_associate.o
+ .debug_ranges  0x00000640       0x10 RUM/mac_beacon.o
+ .debug_ranges  0x00000650       0x60 RUM/mac_data.o
+ .debug_ranges  0x000006b0       0x28 RUM/mac_event.o
+ .debug_ranges  0x000006d8       0x38 RUM/mac_route.o
+ .debug_ranges  0x00000710       0x68 RUM/mac_scan.o
+ .debug_ranges  0x00000778       0x60 Timer/avr_timer.o
+ .debug_ranges  0x000007d8       0x58 Timer/timer_enddevice.o
+ .debug_ranges  0x00000830       0xd0 UART/serial.o
 
-.debug_macro    0x00000000     0xbd2a
+.debug_macro    0x00000000     0xbbe3
  *(.debug_macro)
- .debug_macro   0x00000000      0x32e Application/application.o
- .debug_macro   0x0000032e      0xb08 Application/application.o
- .debug_macro   0x00000e36      0x1c9 Application/application.o
- .debug_macro   0x00000fff      0x2fc Application/application.o
- .debug_macro   0x000012fb       0x58 Application/application.o
- .debug_macro   0x00001353       0x10 Application/application.o
- .debug_macro   0x00001363       0x97 Application/application.o
- .debug_macro   0x000013fa       0xf2 Application/application.o
- .debug_macro   0x000014ec       0x1c Application/application.o
- .debug_macro   0x00001508       0x97 Application/application.o
- .debug_macro   0x0000159f       0x66 Application/application.o
- .debug_macro   0x00001605       0x16 Application/application.o
- .debug_macro   0x0000161b       0x20 Application/application.o
- .debug_macro   0x0000163b       0x22 Application/application.o
- .debug_macro   0x0000165d       0x2e Application/application.o
- .debug_macro   0x0000168b       0x82 Application/application.o
- .debug_macro   0x0000170d       0x3b Application/application.o
- .debug_macro   0x00001748       0xaa Application/application.o
- .debug_macro   0x000017f2     0x3aaf Application/application.o
- .debug_macro   0x000052a1       0x9a Application/application.o
- .debug_macro   0x0000533b       0x81 Application/application.o
- .debug_macro   0x000053bc       0x34 Application/application.o
- .debug_macro   0x000053f0       0x18 Application/application.o
- .debug_macro   0x00005408       0x6c Application/application.o
- .debug_macro   0x00005474       0x69 Application/application.o
- .debug_macro   0x000054dd       0x10 Application/application.o
- .debug_macro   0x000054ed      0x160 Application/application.o
- .debug_macro   0x0000564d       0x7f Application/application.o
- .debug_macro   0x000056cc       0x33 Application/application.o
- .debug_macro   0x000056ff      0x1bd Application/application.o
- .debug_macro   0x000058bc     0x1b5a Application/application.o
- .debug_macro   0x00007416      0x265 Application/application.o
- .debug_macro   0x0000767b       0x43 Application/application.o
- .debug_macro   0x000076be       0x83 Application/application.o
- .debug_macro   0x00007741      0x10e Application/application.o
- .debug_macro   0x0000784f       0x43 Application/application.o
- .debug_macro   0x00007892       0x28 Application/application.o
- .debug_macro   0x000078ba       0x10 Application/application.o
- .debug_macro   0x000078ca       0x10 Application/application.o
- .debug_macro   0x000078da      0x17c Application/application.o
- .debug_macro   0x00007a56      0x10c Application/application.o
- .debug_macro   0x00007b62      0x160 Application/application.o
- .debug_macro   0x00007cc2       0x68 Application/application.o
- .debug_macro   0x00007d2a       0x1c Application/application.o
- .debug_macro   0x00007d46      0x112 Application/application.o
- .debug_macro   0x00007e58       0xd6 Application/application.o
- .debug_macro   0x00007f2e      0x1af Application/application.o
- .debug_macro   0x000080dd       0xb8 Application/application.o
- .debug_macro   0x00008195       0x87 Application/application.o
- .debug_macro   0x0000821c       0x10 Application/application.o
- .debug_macro   0x0000822c       0x35 Application/application.o
- .debug_macro   0x00008261      0x175 Application/application.o
- .debug_macro   0x000083d6       0x4a Application/application.o
- .debug_macro   0x00008420       0x8e Application/application.o
- .debug_macro   0x000084ae       0xd6 Application/application.o
- .debug_macro   0x00008584      0x3d8 Application/application.o
- .debug_macro   0x0000895c      0x269 Application/application.o
- .debug_macro   0x00008bc5       0xea Application/application.o
- .debug_macro   0x00008caf       0x28 Application/application.o
- .debug_macro   0x00008cd7      0x21c Application/BowComm.o
- .debug_macro   0x00008ef3       0x35 Application/BowComm.o
- .debug_macro   0x00008f28       0x16 Application/BowComm.o
- .debug_macro   0x00008f3e       0x10 Application/BowComm.o
- .debug_macro   0x00008f4e      0x302 Application/BowComm.o
- .debug_macro   0x00009250       0x9e Application/BowComm.o
- .debug_macro   0x000092ee       0xef Application/BowComm.o
- .debug_macro   0x000093dd       0x4a Application/BowComm.o
- .debug_macro   0x00009427       0x5a Application/BowComm.o
- .debug_macro   0x00009481      0x1a4 Application/display.o
- .debug_macro   0x00009625      0x1fb Application/SpeedQueen.o
- .debug_macro   0x00009820      0x1e5 Application/reader.o
- .debug_macro   0x00009a05      0x10e Application/reader.o
- .debug_macro   0x00009b13       0x5c mifare/Mifare.o
- .debug_macro   0x00009b6f       0xb2 mifare/RegCtrl.o
- .debug_macro   0x00009c21       0x22 mifare/RegCtrl.o
- .debug_macro   0x00009c43       0x96 SPI/spi.o
- .debug_macro   0x00009cd9      0x2ad main.o
- .debug_macro   0x00009f86       0x63 main.o
- .debug_macro   0x00009fe9      0x1c4 Radio/radio.o
- .debug_macro   0x0000a1ad      0x1da Radio/hal_avr.o
- .debug_macro   0x0000a387      0x1e0 RUM/mac.o
- .debug_macro   0x0000a567      0x1d4 RUM/mac_associate.o
- .debug_macro   0x0000a73b      0x1be RUM/mac_beacon.o
- .debug_macro   0x0000a8f9       0x16 RUM/mac_beacon.o
- .debug_macro   0x0000a90f      0x1d7 RUM/mac_data.o
- .debug_macro   0x0000aae6      0x166 RUM/mac_data.o
- .debug_macro   0x0000ac4c       0x2e RUM/mac_data.o
- .debug_macro   0x0000ac7a      0x1ff RUM/mac_event.o
- .debug_macro   0x0000ae79      0x1cd RUM/mac_route.o
- .debug_macro   0x0000b046      0x1d9 RUM/mac_scan.o
- .debug_macro   0x0000b21f      0x1f8 Timer/avr_timer.o
- .debug_macro   0x0000b417      0x1c2 Timer/timer_enddevice.o
- .debug_macro   0x0000b5d9      0x256 Application/machine.o
- .debug_macro   0x0000b82f      0x183 Application/machine.o
- .debug_macro   0x0000b9b2      0x1e0 UART/serial.o
- .debug_macro   0x0000bb92      0x198 UART/serial.o
+ .debug_macro   0x00000000      0x330 Application/application.o
+ .debug_macro   0x00000330      0xb08 Application/application.o
+ .debug_macro   0x00000e38      0x1c9 Application/application.o
+ .debug_macro   0x00001001      0x2fc Application/application.o
+ .debug_macro   0x000012fd       0x58 Application/application.o
+ .debug_macro   0x00001355       0x10 Application/application.o
+ .debug_macro   0x00001365       0x97 Application/application.o
+ .debug_macro   0x000013fc       0xf2 Application/application.o
+ .debug_macro   0x000014ee       0x1c Application/application.o
+ .debug_macro   0x0000150a       0x97 Application/application.o
+ .debug_macro   0x000015a1       0x66 Application/application.o
+ .debug_macro   0x00001607       0x16 Application/application.o
+ .debug_macro   0x0000161d       0x20 Application/application.o
+ .debug_macro   0x0000163d       0x22 Application/application.o
+ .debug_macro   0x0000165f       0x2e Application/application.o
+ .debug_macro   0x0000168d       0x82 Application/application.o
+ .debug_macro   0x0000170f       0x3b Application/application.o
+ .debug_macro   0x0000174a       0xaa Application/application.o
+ .debug_macro   0x000017f4     0x3aaf Application/application.o
+ .debug_macro   0x000052a3       0x9a Application/application.o
+ .debug_macro   0x0000533d       0x81 Application/application.o
+ .debug_macro   0x000053be       0x34 Application/application.o
+ .debug_macro   0x000053f2       0x18 Application/application.o
+ .debug_macro   0x0000540a       0x6c Application/application.o
+ .debug_macro   0x00005476       0x69 Application/application.o
+ .debug_macro   0x000054df       0x10 Application/application.o
+ .debug_macro   0x000054ef      0x160 Application/application.o
+ .debug_macro   0x0000564f       0x7f Application/application.o
+ .debug_macro   0x000056ce       0x33 Application/application.o
+ .debug_macro   0x00005701      0x1bd Application/application.o
+ .debug_macro   0x000058be     0x1b5a Application/application.o
+ .debug_macro   0x00007418      0x265 Application/application.o
+ .debug_macro   0x0000767d       0x43 Application/application.o
+ .debug_macro   0x000076c0       0x83 Application/application.o
+ .debug_macro   0x00007743      0x10e Application/application.o
+ .debug_macro   0x00007851       0x43 Application/application.o
+ .debug_macro   0x00007894       0x28 Application/application.o
+ .debug_macro   0x000078bc       0x10 Application/application.o
+ .debug_macro   0x000078cc       0x10 Application/application.o
+ .debug_macro   0x000078dc      0x17f Application/application.o
+ .debug_macro   0x00007a5b      0x10c Application/application.o
+ .debug_macro   0x00007b67      0x160 Application/application.o
+ .debug_macro   0x00007cc7       0x68 Application/application.o
+ .debug_macro   0x00007d2f       0xb8 Application/application.o
+ .debug_macro   0x00007de7       0x87 Application/application.o
+ .debug_macro   0x00007e6e       0x10 Application/application.o
+ .debug_macro   0x00007e7e       0x35 Application/application.o
+ .debug_macro   0x00007eb3      0x175 Application/application.o
+ .debug_macro   0x00008028       0x4a Application/application.o
+ .debug_macro   0x00008072       0x19 Application/application.o
+ .debug_macro   0x0000808b      0x11e Application/application.o
+ .debug_macro   0x000081a9      0x1c0 Application/application.o
+ .debug_macro   0x00008369       0x8e Application/application.o
+ .debug_macro   0x000083f7       0xd6 Application/application.o
+ .debug_macro   0x000084cd      0x3d8 Application/application.o
+ .debug_macro   0x000088a5      0x269 Application/application.o
+ .debug_macro   0x00008b0e       0xea Application/application.o
+ .debug_macro   0x00008bf8       0x28 Application/application.o
+ .debug_macro   0x00008c20      0x23a Application/BowComm.o
+ .debug_macro   0x00008e5a       0x35 Application/BowComm.o
+ .debug_macro   0x00008e8f       0x16 Application/BowComm.o
+ .debug_macro   0x00008ea5       0x10 Application/BowComm.o
+ .debug_macro   0x00008eb5      0x302 Application/BowComm.o
+ .debug_macro   0x000091b7       0x9e Application/BowComm.o
+ .debug_macro   0x00009255       0xef Application/BowComm.o
+ .debug_macro   0x00009344       0x4a Application/BowComm.o
+ .debug_macro   0x0000938e       0x5a Application/BowComm.o
+ .debug_macro   0x000093e8      0x1df Application/display.o
+ .debug_macro   0x000095c7      0x1f6 Application/SpeedQueen.o
+ .debug_macro   0x000097bd      0x25c Application/reader.o
+ .debug_macro   0x00009a19      0x10e Application/reader.o
+ .debug_macro   0x00009b27      0x183 Application/reader.o
+ .debug_macro   0x00009caa       0x34 Application/reader.o
+ .debug_macro   0x00009cde       0x16 Application/reader.o
+ .debug_macro   0x00009cf4       0x9b Application/zstring.o
+ .debug_macro   0x00009d8f       0x5c mifare/Mifare.o
+ .debug_macro   0x00009deb       0xb2 mifare/RegCtrl.o
+ .debug_macro   0x00009e9d       0x22 mifare/RegCtrl.o
+ .debug_macro   0x00009ebf       0x96 SPI/spi.o
+ .debug_macro   0x00009f55      0x2c0 main.o
+ .debug_macro   0x0000a215       0x63 main.o
+ .debug_macro   0x0000a278      0x1c4 Radio/radio.o
+ .debug_macro   0x0000a43c      0x1da Radio/hal_avr.o
+ .debug_macro   0x0000a616      0x1e0 RUM/mac.o
+ .debug_macro   0x0000a7f6      0x1d4 RUM/mac_associate.o
+ .debug_macro   0x0000a9ca      0x1be RUM/mac_beacon.o
+ .debug_macro   0x0000ab88       0x16 RUM/mac_beacon.o
+ .debug_macro   0x0000ab9e      0x1d7 RUM/mac_data.o
+ .debug_macro   0x0000ad75      0x166 RUM/mac_data.o
+ .debug_macro   0x0000aedb       0x2e RUM/mac_data.o
+ .debug_macro   0x0000af09      0x1ff RUM/mac_event.o
+ .debug_macro   0x0000b108      0x1cd RUM/mac_route.o
+ .debug_macro   0x0000b2d5      0x1d9 RUM/mac_scan.o
+ .debug_macro   0x0000b4ae      0x1f8 Timer/avr_timer.o
+ .debug_macro   0x0000b6a6      0x1c2 Timer/timer_enddevice.o
+ .debug_macro   0x0000b868      0x1e0 UART/serial.o
+ .debug_macro   0x0000ba48      0x19b UART/serial.o
 OUTPUT(RDR_ACA_20170621_V0.1.1.elf elf32-avr)
 LOAD linker stubs

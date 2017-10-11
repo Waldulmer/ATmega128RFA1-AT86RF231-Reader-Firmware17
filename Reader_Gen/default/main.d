@@ -34,8 +34,9 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
  ../mifare/RegCtrl.h ../mifare/reg52.h ../mifare/Mifare.h \
  ../mifare/Rc522Reg.h ../mifare/OpCtrl.h ../mifare/ErrCode.h ../SPI/spi.h \
- ../Application/machine.h ../Application/SpeedQueen.h \
- ../Application/display.h
+ ../Application/reader.h ../Application/eeprom_map.h \
+ ../Application/application.h ../UART/serial.h \
+ ../Application/SpeedQueen.h ../Application/display.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
@@ -141,7 +142,13 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../SPI/spi.h:
 
-../Application/machine.h:
+../Application/reader.h:
+
+../Application/eeprom_map.h:
+
+../Application/application.h:
+
+../UART/serial.h:
 
 ../Application/SpeedQueen.h:
 

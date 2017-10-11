@@ -27,7 +27,17 @@
   POSSIBILITY OF SUCH DAMAGE.
 */
 /**
-   @mainpage RUM (Route-Under-MAC) network
+   @mainpage Pinpoint Systems Network (Route-Under-MAC)
+
+   @section Overview
+
+   The Pinpoint OnlineSystem enables route operators to provide customers cashless transactions 
+   through the use of an Online Account. A user account is where the customer has deposited 
+   a small amount of money with the operator. The account is debited and transactions take place 
+   when users activate washers or dryers. Adding money to an account is accomplished via WEB interface. 
+   The Pinpoint OnlineSystem constitutes two major building blocks - the Pinpoint OnlineSystems network 
+   and the Pinpoint WEB Application. The Pinpoint Network is supported by the Raspberry Pi and 
+   the ATmega128RFA1 microcontroller. 
 
    @section more_info More Information Available
 
@@ -71,7 +81,7 @@
    system.h.
 
    All of the application-level RUM API callback functions exist in
-   rum_application.c.  This file should be used as a basis for new
+   application.c.  This file should be used as a basis for new
    applications.  Particularly, the appAssociateConfirm() function is
    called when the node becomes associated to a network.  Users should
    should use this function as a starting point for
@@ -136,17 +146,14 @@
      successfully, or times out waiting to associate.
 
    After the nodes have associated the macConfig.associated flag is
-   set to true and , all nodes communicate using the same functions:
+   set to true and, all nodes communicate using the same functions:
 
    - macDataRequest() is called by the sending node, or macPing() is
      called to ping another node.  The MAC calls back to either
      appPacketSendSucceed() or appPacketSendFailed().
 
    - macDataIndication() is called by the MAC if a packet is received
-     that is addressed to this node.
-
-   For more detailed examples of association and sending sensor data,
-   see @ref mac_calls and @ref sensorcalls.
+     that is addressed to this node.   
 
    There are a few other useful functions that the MAC offers.  These
    functions are useful for making a non-networking applications, such
@@ -207,30 +214,7 @@
    The @ref timer_module can be used by an application to execute
    functions after a non-blocking delay.
 
-   The @ref serial module provides a serial port for the AVR targets.
-
-   @subsection ipv6_commands IPv6 Router and End-Node Commands
-
-   The router and end-node provide limited IPv6 support. The functions
-   for IPv6 are tailored to perform the most likely actions an end-node
-   would require, rather than supporting the entire IPv6 standard. This
-   includes ping responses, ping requests, and UDP support. The easiest
-   method of understanding is to study the @ref avr6lowpan_example.
-
-   - sixlowpan_udp_usercall() is called when an incoming UDP frame is
-     received. The user can then process the data, and optionally send
-     a response back to the source.
-
-   - sixlowpan_hc01_udp_setup_ipglobal() Is used to set up an outgoing
-     UDP frame to a global IP address. See the @ref avr6lowpan_example
-     source code for an example.
-
-   - sixlowpan_hc01_ping_setup_ipglobal() Is used to set up an outgoing
-     ping request to a global IP address. See the @ref avr6lowpan_example
-     source code for an example.
-
-   - sixlowpan_ping_usercall() is called when an incoming echo response
-     is received.
+   The @ref serial module provides a serial port for the AVR targets.     
 
    @section comps Components
 
@@ -238,9 +222,7 @@
    compiled together into one object file, but some of these modules
    can be left out of the compilation based on @ref compile_options.
 
-   - @ref app provided as a basis for a simple user application.
-
-   - @ref avr6lowpan 6LoWPAN Layer to provide IPv6 Connectivity
+   - @ref app provided as a basis for a simple user application.   
 
    - @ref mac.  A subset of the MAC defined by IEEE 802.15.4.  This
      includes multi-hop and self-forming functionality.
@@ -253,9 +235,8 @@
      another device.  This code can be left out of the project to
      reduce object code size.
 
-   - @ref sensors to demonstrate a simple data-collection network,
-     including wireless calibration of sensors.
-
+   - @ref pposreader to demonstrate a data-collection network.
+     
 
    @section esplanade How the components work together
 
@@ -288,7 +269,7 @@
 
    This package can be compiled on several host platforms, with many
    options for the target environment.  The code is written for the
-   GCC compiler (ver 4.3.0), which has been compiled as a cross
+   GCC compiler (ver 4.9.2), which has been compiled as a cross
    compiler for AVR.  See the avr-libc project
    http://www.nongnu.org/avr-libc/ for details.
 
@@ -302,26 +283,7 @@
    There are AVR Studio project files supplied for the various builds.
    Load the project file and press the compile button.  If you have a
    debugger connected to the target, you may load the code into the
-   target and begin debugging.
-
-   There are a number options listed in @ref compile_options.  To
-   enable or disable an option, add it to the list of compiler options
-   as shown below.
-
-   @image html studio-options1.png
-   @image latex studio-options1.png
-
-   @subsection hostlin Linux Host Platform
-
-   This package includes a linux Makefile.  To compile RUM on a
-   linux platform, issue a command like
-
-   @code
-   make PLATFORM=RCB230 DEBUG=0 TYPE=ROUTER
-   @endcode
-
-   This makefile accepts a number of parameters as shown above.  The
-   list of available compile-time parameters is in the next section.
+   target and begin debugging.   
 
    @subsection compile_options Compile-time options
 
@@ -331,38 +293,34 @@
 
    - TYPE can be END, ROUTER, or COORD.  This directs which kind of
      node is being compiled.  This parameter is required.  The
-     makefile sets the @ref NODETYPE macro.
+     makefile sets the @ref NODETYPE macro. In mac.h the Nodetype is set to ROUTERNODE.
 
-   - @ref PLATFORM can be RCB230, RCB231, RCB212, RAVEN, RAVENUSB, or
-     SPITFIRE.  This sets the MCU flag and other parameters to compile
-     the code for a specific platform.  If this parameter is left out,
-     the PLATFORM will be set to the default (COORD).  Note that a
-     platform defines how the CPU and radio chip are connected
+   - @ref PLATFORM is set to RCBRFA1.  
+     This sets the MCU flag and other parameters to compile the code for a specific platform.  
+	 If this parameter is left out, the PLATFORM will be set to the default (COORD).  
+	 Note that a platform defines how the CPU and radio chip are connected
      together. It does not specify which radio chip is being used,
      though it does specify the @ref BAND macro.
 
-   - @ref IPV6LOWPAN can be 0 or 1.  This flag, if set to one, causes
-     6LoWPAN to be compiled in, which causes RUM to use compressed
-     IPV6 frame in accordance with RFC4944.  This allows nodes to be
-     addressed worldwide by a world-unique IPV6 internet address. If
-     IPV6LOWPAN is zero, then no 6LoWPAN or IPv6 code will be compiled
+   - @ref IPV6LOWPAN is set to 0.  
+     If IPV6LOWPAN is zero, then no 6LoWPAN or IPv6 code will be compiled
      in. Disabling IPV6 saves some space if it will not be used.
 
-   - @ref DEBUG can be 1 or 0.  This enables/disables diagnostic
+   - @ref DEBUG is set to 0.  This enables/disables diagnostic
      messages from the serial port.  Disabling DEBUG will greatly
      reduce then object code size (flash size).  Note that either @ref
      SERIAL or @ref OTA_DEBUG must be set to use the DEBUG option.
 
-   - @ref DEMO can be 1 or 0.  In DEMO mode, a node picks its parent node
+   - @ref DEMO is set to 0.  In DEMO mode, a node picks its parent node
      as the one with the highest RSSI.  Otherwise, a parent is picked
      by (in sequence) best LQI, lowest number of hops to the
      coordinator, and then RSSI.
 
-   - @ref APP can be 0 or 1 (@ref SENSOR).  If APP is zero, then no
+   - @ref APP is set to 0.  If APP is zero, then no
      application is linked in other than the default minimal
      application.
 
-   - @ref RUMSLEEP can be 0 or 1. This enables/disables the sleep
+   - @ref RUMSLEEP is set to 0. This enables/disables the sleep
      code.  In the sensor application, an end node will go to sleep
      between readings if RUMSLEEP is set to one.  This sleep code is
      general-purpose and can be used by new applications also.  On
@@ -371,8 +329,7 @@
      the frame to the child immediately after it has woken up.  See
      also the @ref VLP flag.
 
-   - @ref PAN_CHANNEL sets a fixed channel for the node.  If
-     PAN_CHANNEL is not set, then the node will scan all channels.
+   - @ref PAN_CHANNEL is not set. The node will scan all channels.
      This applies to coordinators, routers, and end nodes.  Setting
      PAN_CHANNEL on a coordinator fixes the network to that channel.
      Setting PAN_CHANNEL on a router or end node means that the node
@@ -389,10 +346,7 @@
      the low-power oscillator should be connected to a 32.768KHz
      crystal.
 
-   After compiling, you can load the code using a tool like avarice or
-   avrdude.  Debugging is possible under linux using avarice and a
-   JTAGICE MK-II, or one of many other programmers that are available.
-   In some AVR chips, only debugWire is supported.
+   After compiling, the code is loaded using a JTAGICE.    
 
    @section other_flags Other compilation options
 
@@ -404,27 +358,12 @@
    - @ref SENSOR_TYPE configures which type of sensor to read.  If
      SENSOR_TYPE is not set, the node defaults to sending random data.
      This option is set in @ref sensors.c, where the valid sensor
-     types are listed.
-
-   - @ref CHINA_MODE is used to put the radio in IEEE 802.15.4.c mode,
-     which uses special frequencies and modulation modes for use in
-     China.  Set CHINA_MODE to "1" to enable this option, or "0" to
-     disable.  This option only works with the AT86RF212 radio chip.
-
-   - @ref DATA_RATE_212 sets the data rate and modulation mode to be
-     used with the RF212 (900MHz) chip.  Define this setting in mac.h.
+     types are listed.   
 
    - @ref CAL allows the sensor calibration code to be removed from
-     the build.  This flag is defined in sensors.c, and cannot be
-     specified from the command line.  If set to one, then the
-     calibration code is compiled in.
+     the build.  This option is not used.
 
-   - @ref VLP puts the node into Very Low Power mode. This is meant
-     for nodes with limited power capacity - for example, an
-     energy-harvesting node, or a node running on low-current
-     batteries.  In this mode, the node cannot stay awake for more
-     than a few hundred milliseconds, and cannot be woken up
-     indefinitely.  This option is off by default.
+   - @ref VLP .  This option is off by default.
 
    - @ref SERIAL brings in the serial code.  If you are compiling with
      @ref DEBUG on, then you need either SERIAL or OTA_DEBUG set.
@@ -512,10 +451,7 @@
 #define APP SENSOR
 #endif
 
-// Check validity of the APP setting
-#if APP == VOICE && PLATFORM != EVK1101
-#error "Can only build VOICE app on EVK1101 platorm"
-#endif
+
 
 /**
    Enable or disable the sleep function by setting this macro to 1

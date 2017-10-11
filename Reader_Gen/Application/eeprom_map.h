@@ -8,7 +8,7 @@
 //  |---------------|---------------------------|-------------------------------------------------------|
 //  |0x00~0x07      | Reader Mac Address		|														|
 //  |---------------|---------------------------|-------------------------------------------------------|
-//  |0x08~0x1D      |		RFU					|														|   
+//  |0x08~0x1D      |		RFU					|														|
 //  |---------------|---------------------------|-------------------------------------------------------|
 //  |0x1E~21        |   Device Type				|Type of device (washer/dryer, etc) connected to reader	|
 //  |---------------|---------------------------|-------------------------------------------------------|
@@ -28,9 +28,11 @@
 //	|0xBA~0xFF		|	RFU						|														|
 //	|---------------|---------------------------|-------------------------------------------------------|
 //	|0x100~0x500	|Machine transactions		|Transaction storage for when server is offline			|
-//	|---------------|---------------------------|-------------------------------------------------------|														
+//	|---------------|---------------------------|-------------------------------------------------------|
 
-
+/** \file
+ *  \brief Header file for eeprom_map.h.
+ */
 
 
 #include "application.h"
@@ -45,7 +47,7 @@
 #define VALID_READER_SETUP          0x00
 
 //Reader State Def
-#define READER_NEW			        0x07
+#define READER_NEW			        0x07//0x0F //0xc7
 
 //============================================BIT MASK===============================================//
 
@@ -53,27 +55,28 @@
 //setup info only apply to ACA
 //field start addresses must be recalculated for new field size
 
-#define SETUP_MAX_BYTE					50  //maximum number of bytes per machine setup			
+#define SETUP_MAX_BYTE					50  //maximum number of bytes per machine setup
 
-	#define MACHINE_SETUP_NUM_BYTE		22  // number of bytes needed to store setup in eeprom PPOS170601
-	//#define MACHINE_SETUP_NUM_BYTE			12  // number of bytes needed to store washer setup in eeprom 
-	//#define DRYER_SETUP_NUM_BYTE		7   //number of additional bytes needed dryer specific setup
-	//#define QUANTUM_SETUP_NUM_BYTE		5   //number of additional bytes needed Quantum specific setup
- 
+#define MACHINE_SETUP_NUM_BYTE			22  // number of bytes needed to store setup in eeprom PPOS170601
+//#define MACHINE_SETUP_NUM_BYTE			12  // number of bytes needed to store washer setup in eeprom
+//#define DRYER_SETUP_NUM_BYTE		7   //number of additional bytes needed dryer specific setup
+//#define QUANTUM_SETUP_NUM_BYTE		5   //number of additional bytes needed Quantum specific setup
+
 #define VALIDATION_CODE_NUM_BYTE		8   //number of bytes needed to store validation code
 #define OFFLINE_TRANSACTION_NUM_BYTE	21	//number of bytes per offline transaction
 #define READER_STATE_FLAG_SIZE			2	//number of bytes for reader state flag
 #define MACHINE_NAME_SIZE				50	//number of bytes for reader name field
 #define MACHINE_LABEL_SIZE				10	//number of bytes for reader label field
 #define MACHINE_TYPE_SIZE				2	//number of bytes for machine type
-//-----------------------------------ADDRESS OF SETUP INFO------------------------------------------// 
 
-#define MAXNUM_OFFLINE_ADDR					(u8*)0x61	
+//-----------------------------------ADDRESS OF SETUP INFO------------------------------------------//
+
+#define MAXNUM_OFFLINE_ADDR					(u8*)0x61
 #define MACHINE_TYPE_ADDR                   (u8*)0x1E	//(u8*)0x20
 #define READER_STATE_ADDR                   (u8*)0x22
 
 #define MACHINE_SETUP_ADDR				    (u8*)0x24
-#define VALIDATION_CODE_ADDR		        (u8*)0x57 //(MACHINE_SETUP_ADDR+SETUP_MAX_BYTE)) maximum number of bytes per machine setup	50 
+#define VALIDATION_CODE_ADDR		        (u8*)0x57 //(MACHINE_SETUP_ADDR+SETUP_MAX_BYTE)) maximum number of bytes per machine setup	50
 
 //#define MACHINE_SETUP_ADDR                  MACHINE_SETUP_START_ADDR
 //#define MACHINE_SETUP_ADDR_DRYER            ((u8*)(MACHINE_SETUP_ADDR+MACHINE_SETUP_NUM_BYTE))

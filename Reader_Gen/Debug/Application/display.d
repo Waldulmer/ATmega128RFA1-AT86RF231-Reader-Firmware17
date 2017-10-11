@@ -1,4 +1,4 @@
-Application/machine.d Application/machine.o: ../Application/machine.c \
+Application/display.d Application/display.o: ../Application/display.c \
  ../RUM/mac.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
@@ -25,15 +25,12 @@ Application/machine.d Application/machine.o: ../Application/machine.c \
  ../Radio/atmega128rfa1.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
- ../RUM/sensors.h ../RUM/mac.h ../Application/reader.h \
- ../Application/eeprom_map.h ../Application/application.h \
- ../UART/serial.h ../Application/application.h \
+ ../RUM/sensors.h ../RUM/mac.h ../Application/application.h \
+ ../Application/reader.h ../Application/eeprom_map.h ../UART/serial.h \
+ ../Application/application.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- ../Application/machine.h ../Application/SpeedQueen.h \
- ../Application/display.h ../Timer/avr_timer.h ../Application/system.h \
- ../Timer/timer_enddevice.h ../config.h ../compiler.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
- ../Radio/hal_avr.h ../RUM/mac_event.h ../RUM/mac_route.h
+ ../Application/ppos_types.h ../Application/SpeedQueen.h \
+ ../Application/display.h
 
 ../RUM/mac.h:
 
@@ -95,11 +92,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../RUM/mac.h:
 
+../Application/application.h:
+
 ../Application/reader.h:
 
 ../Application/eeprom_map.h:
-
-../Application/application.h:
 
 ../UART/serial.h:
 
@@ -107,26 +104,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
 
-../Application/machine.h:
+../Application/ppos_types.h:
 
 ../Application/SpeedQueen.h:
 
 ../Application/display.h:
-
-../Timer/avr_timer.h:
-
-../Application/system.h:
-
-../Timer/timer_enddevice.h:
-
-../config.h:
-
-../compiler.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h:
-
-../Radio/hal_avr.h:
-
-../RUM/mac_event.h:
-
-../RUM/mac_route.h:

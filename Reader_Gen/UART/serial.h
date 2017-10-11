@@ -63,7 +63,7 @@
 */
 /**
    RX handler callback function definition.  Define a function like
-   the one below to recieve each serial character, and pass this
+   the one below to receive each serial character, and pass this
    function name to the serial_init() function.
 
    @code
@@ -104,7 +104,6 @@ typedef void (*t_rx_handler) (u8 ch);
 #else
 	#error "UBRRn Settings Not defined"
 #endif
-/** @} */
 
 #define SERIAL_PAYLOAD_LEN 10
 typedef struct {
@@ -157,8 +156,6 @@ u8 Ascii_to_nible ( u8 ucData );
 void serial_put_hex ( u8 ucData );
 void init_rx_buf(void);
 u8 asciiStringToNibble( char *inStr, char *outStr);
-
-
 
 #if __AVR__
 
@@ -236,9 +233,9 @@ u8 asciiStringToNibble( char *inStr, char *outStr);
 #define USART_DRE_WAIT() (!(UCSR(USART,A) & (1<<UDRE(USART))))
 ///  UART data register
 #define USART_REG (UDR(USART))
-/// Eanble the data register empy interrupt
+/// Enable the data register empty interrupt
 #define USART_DRE_ENABLE() (UCSR(USART,B) |= (1<<UDRIE(USART)))
-/// Disable the data register empy interrupt
+/// Disable the data register empty interrupt
 #define USART_DRE_DISABLE() ((UCSR(USART,B) &= ~(1<<UDRIE(USART))))
 
 #if (!defined(__AVR_ATmega328P__) && !defined(__AVR_ATmega168P__))
@@ -252,6 +249,7 @@ u8 asciiStringToNibble( char *inStr, char *outStr);
   /// UART Tx vector
   #define USARTTXVECT USART_UDRE_vect
 #endif
+/** @} */
 /** @} */
 /** @} */
 #endif // __AVR__

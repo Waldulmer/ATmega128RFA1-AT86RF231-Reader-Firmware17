@@ -15,6 +15,7 @@
 #include "hal_avr.h"
 #include "application.h"
 #include "reader.h"
+#include "ppos_types.h"
 #include "system.h"
 #include "UART/serial.h"
 #include "avr_timer.h"
@@ -29,6 +30,7 @@
    @{
 	   This code demonstrates BOW
 */
+
 //BOW command types outgoing
 
 #define FIRMWARE_VERSION		1

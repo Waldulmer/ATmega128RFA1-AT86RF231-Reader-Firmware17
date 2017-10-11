@@ -10,11 +10,12 @@
 #include "BowComm.h"
 
 /**
-@addtogroup app
-@{
-@defgroup pposbow BOW Communication
-@{
+	@addtogroup pposbow
+	@{
+	@defgroup pposbow BOW Communication
+	@{
 */
+
 #define lowNibble 0
 #define highNibble 1
 
@@ -104,33 +105,6 @@ bool sendNumberOfOLT()
 	return true;
 }
 
-/**
-\brief Converting ASCII to Nibble.
-
-param inStr is the ASCII value to be converted.
-
-return outStr is the nibble value with number of characters received.
-*/
-/*
-u8 asciiStringToNibble( char *inStr, char *outStr)
-{
-	u8 n, k;
-	
-	n = strlen(inStr);
-	k = 0;
-
-
-	while (k < n)
-	{
-		*outStr = (Ascii_to_nible ( *(inStr+k) ) * 16)
-		+  Ascii_to_nible ( *(inStr+k+1));
-		k += 2;
-		
-		outStr++;
-	}
-	return n/2;
-}
-*/
 
 /**
 Construct a frame for transmission.
@@ -252,7 +226,7 @@ u8 extractIncomingMessage(char *dataBuffer)
 	11 ShowBalance			SHOW_BALANCE_REQUEST
 	12 faultcode
 	13 AuditRq				AUDITDATA_REQUEST
-*/
+	*/
 	//1
 	if(strstr(dataBuffer, "SetupPackage") != NULL)
 	{
@@ -270,14 +244,14 @@ u8 extractIncomingMessage(char *dataBuffer)
 			ReaderStateFlag.ReaderSetup = READER_SETUP_DONE;
 			halPutEeprom(READER_STATE_ADDR, 1, (u8*)&ReaderStateFlag);
 		}
-			
+		
 		if((ptr = GetParam((char *)dataBuffer,"<ValidationCode>","<")) != NULL)
-		{			
+		{
 			n = asciiStringToNibble(ptr, nibbleStr);
 			// save validation code
 			halPutEeprom(VALIDATION_CODE_ADDR, 1, (u8*)&n);
 			halPutEeprom(VALIDATION_CODE_ADDR+1, n, (u8*)nibbleStr);
-		}		
+		}
 		
 		if((ptr = GetParam((char *)dataBuffer,"<ReaderId>","<")) != NULL)
 		{ //1
@@ -559,8 +533,8 @@ bool sendBOWCCTransaction(structTransaction *transRecord)
 }
 
 /**
-	@brief The sendBOWAuditDataRequest function is used to send a frame over the air to the BOW. 
-	The reader sends this packet frame (Audit Data packet 0x30) to transmit Short Audit Data about the vend.
+@brief The sendBOWAuditDataRequest function is used to send a frame over the air to the BOW.
+The reader sends this packet frame (Audit Data packet 0x30) to transmit Short Audit Data about the vend.
 */
 bool sendBOWAuditDataRequest()
 {

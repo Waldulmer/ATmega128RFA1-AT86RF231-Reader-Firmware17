@@ -29,7 +29,9 @@
 /*    
   $Id: main.c,v 1.17 2009/01/31 00:37:59 bleverett Exp $
 */
-
+/** \file
+ *  \brief Implementation of main functions.
+ */
 
 /*
 	Debug Compile switches
@@ -45,6 +47,7 @@
     - VIRGIN BOARD ADDRESS (0x1111111111111111) 
 
 */
+// application includes
 #include <stdlib.h>
 #include <stdio.h>
 #include "stdboolrum.h"
@@ -71,7 +74,6 @@
 #include "ErrCode.h"
 #include "spi.h"
 
-#include "ha_timer.h"
 
 // Make the compiler accept these unused function names
 #define usb_task_init()
@@ -110,7 +112,6 @@ int main(void){
     timerInit();
 
 	InitTimerZero();	//timer for ACA machine comm.
-
 
     sei();
 	    

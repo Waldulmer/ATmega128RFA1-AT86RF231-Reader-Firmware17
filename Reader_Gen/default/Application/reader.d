@@ -28,8 +28,11 @@ Application/reader.d Application/reader.o: ../Application/reader.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
  ../RUM/sensors.h ../RUM/mac.h ../Application/reader.h \
  ../Application/eeprom_map.h ../Application/application.h \
- ../Application/machine.h ../Application/SpeedQueen.h \
- ../Application/display.h ../Radio/hal_avr.h ../Application/system.h
+ ../UART/serial.h ../Application/application.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
+ ../Application/SpeedQueen.h ../Application/display.h ../Radio/hal_avr.h \
+ ../Application/system.h ../UART/serial.h ../Timer/timer_enddevice.h \
+ ../config.h ../compiler.h ../RUM/mac_event.h ../RUM/mac_route.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
@@ -99,7 +102,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../Application/application.h:
 
-../Application/machine.h:
+../UART/serial.h:
+
+../Application/application.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
 
 ../Application/SpeedQueen.h:
 
@@ -108,3 +115,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../Radio/hal_avr.h:
 
 ../Application/system.h:
+
+../UART/serial.h:
+
+../Timer/timer_enddevice.h:
+
+../config.h:
+
+../compiler.h:
+
+../RUM/mac_event.h:
+
+../RUM/mac_route.h:

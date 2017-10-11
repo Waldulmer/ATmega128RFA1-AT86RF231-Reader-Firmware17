@@ -45,6 +45,10 @@
 #include "ErrCode.h"
 #include "Mifare.h"
 
+/**
+   @addtogroup mifare  Implementation communitation for Mifare Support
+   @{
+*/
 
 typedef struct
          {

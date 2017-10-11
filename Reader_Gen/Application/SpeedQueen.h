@@ -13,13 +13,15 @@
 #define SPEEDQUEEN_H_
 
 #include "display.h"
+
 /**
-@addtogroup pposreader
+@addtogroup machine
 @{
-	@name Speedqueen related functions
+	@name Speedqueen Header (Speedqueen.h)
 	@{
 */
 
+// Macros & Defines
 //#define MDC_SERIES		1
 //#define QUANTUM_SERIES	2
 #define ACA_SERIES		3
@@ -51,7 +53,7 @@
 
 #define ACA_A4_MIMIC_QUANTUM_PACKET	0x64		//Mimic Quantum Interface = 0x64
 #define ACA_A4_MIMIC_QUANTUM_BYTES	3			//Number of bytes in Data Field = 3
-#define ACA_A4_STARTPAD_FLASHING	30
+#define ACA_A4_STARTPAD_FLASHING	15
 #define ACA_A4_LOCKCYCLE_ENABLED	1
 
 #define ACA_VENDING_PAYMENT_PACKET	0x6A		//Vending Payment = 0x6A
@@ -63,7 +65,7 @@
 #define TOPOFF_VEND		2
 
 //#define CASH_CARD		1
-#define REMOVE_CARD		2
+//#define REMOVE_CARD	2
 
 #define READER_CONTROL_VEND_PRICE	0x10
 #define VEND_DISPLAY_ENABLE		0x00
@@ -84,11 +86,10 @@
 #define PROGRAMMING_DATA					0x20			//Program Packet Base Value
 #define PROGRAMMING_DATA_TOPLOAD			0x21			//Program Packet ID Topload
 #define PROGRAMMING_DATA_FRONTLOAD			0x22			//Program Packet ID Frontload
-
 #define PROGRAMMING_DATA_DRYER				0x29			//Program Packet ID Dryer
 
 
-#define CASH_CARD_INSERTED			0x40
+//#define CASH_CARD_INSERTED			0x40
 //#define CARD_REMOVED				0x41
 //#define	CASH_CARD_TOPOFF			0x42
 
@@ -137,9 +138,8 @@
 #define INVALID_MACHINE			0x00
 
 //Machine Status 0x71 PRIMARY MODES
-//Machine Status 0x71 PRIMARY MODES
 #define MACHINE_READY_MODE		0x01
-#define MACHINE_PARTIAL_MODE	0x02
+//#define MACHINE_PARTIAL_MODE	0x02
 #define MACHINE_START_MODE		0x04
 
 #define MACHINE_RUN_MODE		0x08
@@ -154,28 +154,24 @@
 
 #define NUMRETRIES				8
 
-
 extern u16 ucCardBalance;
 extern u16 cardId;
 extern double vendPrice;
 extern u8 ucTimerCount;
 u8 ucCardStatus;
+//#define APP_GET_ASSC()    
+/** @} */
 
-
-
-
-
+// Implementation
 
 void getSQAuditData(void);
-
-
 bool sendSQDataPacket(u8 *buf);
 bool getSQDataPacket(u8 *buf);
 
 bool isACA(void);
 //receive Initialization Packet 0x74
 bool getSQACAInitData(void);               //receive Initialization Packet 0x74
-//write setup data to the appropriate location in memory
+// write setup data to the appropriate location in memory
 void getSQSetupData(void);
 //STATUS REQUEST PACKET 0x70
 bool SQACAMachineStatusSequence(void);		//STATUS REQUEST PACKET 0x70 SQACAMachineStatusSequence
@@ -192,16 +188,12 @@ bool isSQCycleRunning(void);
 
 bool sendSQCardErrorCode(u8 cardErrorCode);
 bool sendSQAudioBeepRequest(u8 beepLength);
-//bool sendSQDisplayCommand(u8 led1, u8 led2, u8 led3, u8 led4, u8 led5, u8 led6, u8 duration);
-//bool displaySQReaderVersion(void);	//PPOS
-//bool displaySQCardError(void);
 
 //Send machine setup at every power up if reader has setup and machine is connected
 bool getSQReaderMachineSetup(void);
 
 //send Mimic Quantum Vending 0x64
 bool sendSQACAMimicQuantumVending(void);
-//bool SQACAMimicQuantumSequence(u8 cardType);
 
 bool waitForMachineStartKey();
 bool isMachineCycleRunning();
@@ -210,11 +202,12 @@ bool isMachineCycleRunning();
 void SQACAInitializationSequence(void);
 //Sequence of 70,71,72
 void SQACAMachineStatusCommSequence(void);
-
+//Mimic Quantum Interface = 0x64
 bool sendSQACAVendingTransaction(u8 vendType);
+//Connected to the network, machine is online or offline
+bool isAssociated(void);
 
 
-/** @} */
 /** @} */
 
 #endif /* SPEEDQUEEN_H_ */

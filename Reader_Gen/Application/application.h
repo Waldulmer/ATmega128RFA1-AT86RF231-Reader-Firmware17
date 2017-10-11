@@ -1,3 +1,4 @@
+#include "rum_types.h"
 /* Copyright (c) 2009  ATMEL Corporation
    All rights reserved.
 
@@ -31,6 +32,9 @@
  */
 #ifndef _APPLICATION_H_
 #define _APPLICATION_H_
+
+
+
 //Operation commands
 #define INIT_READER 				0x01
 #define SCANNING					0x02	
@@ -67,6 +71,7 @@
 #define APP_INIT					0x20
 #define IDLE						0x27
 #define SEND_OFFLINE_TRANSACTIONS	0x28
+
 	
 // bootloader definitions	
 #define EEPROM_RESET_VALUE 			0xFFFFFFFFFFFFFFFF 
@@ -98,8 +103,8 @@
 #define SETUP_VALIDATION_TIMEOUT	60 
 // Wait time for BOW response to setup request, in seconds.
 #define SETUP_REQUEST_TIMEOUT		120 
-// Wait time response to KeyPressWaitTime, in seconds. 25sec default value for Quantum
-#define MACHINE_KEYPRESS_WAITTIME	30
+// Wait time response to KeyPressWaitTime, in seconds. 30sec default value for Quantum
+#define MACHINE_KEYPRESS_WAITTIME	30   //see Start Pad
 
 // Wait time to toggle led1, in msec
 #define FAST_HEARTBEAT              250
@@ -128,11 +133,10 @@ u8 ucNumberOfRetry;
 u8 ucSendDataBuffer[SERIAL_RECEIVE_MAX_BUFFER];
 u8 ucSendDataSize;
 
-
 void appStartScan(void);
 void doPing(void);
 
-void String_to_hexa_convert ( u8 ucDataLength, u8 * pucDataBuffer );
+//void String_to_hexa_convert ( u8 ucDataLength, u8 * pucDataBuffer );
 
 void Beeps(u8 nBeeps);
 //void Led1_toggle (void);

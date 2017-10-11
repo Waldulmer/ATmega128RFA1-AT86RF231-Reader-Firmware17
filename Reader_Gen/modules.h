@@ -10,13 +10,14 @@
 	  @}
   @defgroup radio        Radio interface  
   @defgroup timer_module Timer module
-  @defgroup app          Sample Application  
-    @{	
+  @defgroup app          Pinpoint Application  
+    	@{	
 	@defgroup sleep Sleep functions
 	@defgroup pposreader       Pinpoint Reader Application  
 	@defgroup pposbow       Pinpoint Controller Application  
 	@}
-@defgroup serial       Serial Port    
+ @defgroup serial       Serial Port    
+@defgroup mifare      Mifare Support    
   
 	 
 */

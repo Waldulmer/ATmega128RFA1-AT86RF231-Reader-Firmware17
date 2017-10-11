@@ -26,8 +26,10 @@ Application/display.d Application/display.o: ../Application/display.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
  ../RUM/sensors.h ../RUM/mac.h ../Application/application.h \
- ../Application/machine.h ../Application/SpeedQueen.h \
- ../Application/display.h
+ ../Application/reader.h ../Application/eeprom_map.h ../UART/serial.h \
+ ../Application/application.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
+ ../Application/SpeedQueen.h ../Application/display.h
 
 ../RUM/mac.h:
 
@@ -91,7 +93,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../Application/application.h:
 
-../Application/machine.h:
+../Application/reader.h:
+
+../Application/eeprom_map.h:
+
+../UART/serial.h:
+
+../Application/application.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
 
 ../Application/SpeedQueen.h:
 

@@ -44,8 +44,19 @@
 
 #if ((NODETYPE == ENDDEVICE) || defined(DOXYGEN)) && (SLEEP == 1)
 
+/**
+   @defgroup sleep Sleep functions
+   Function to support the sleeping of the node.  Currently, this code
+   only runs on the end nodes, as part of the sensor application.  It
+   can be called at any time to put the node to sleep, however.
+   
+   @{
+*/
+
 #else  // if (NODETYPE != COORD)
 // For coord, provide dummy function so that code compiles
 void nodeSleep(u16 seconds) {}
 
 #endif // if (NODETYPE != COORD)
+
+/** @} */

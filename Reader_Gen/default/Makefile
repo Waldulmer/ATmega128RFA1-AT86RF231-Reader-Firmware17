@@ -50,6 +50,7 @@ C_SRCS +=  \
 ../Application/display.c \
 ../Application/SpeedQueen.c \
 ../Application/reader.c \
+../Application/zstring.c \
 ../mifare/Mifare.c \
 ../mifare/RegCtrl.c \
 ../SPI/spi.c \
@@ -69,10 +70,7 @@ C_SRCS +=  \
 ../RUM/mac_scan.c \
 ../Timer/avr_timer.c \
 ../Timer/timer_enddevice.c \
-../Application/machine.c \
-../UART/serial.c \
-../RUM/sensors.c \
-../RUM/sixlowpan_wake.c
+../UART/serial.c
 
 
 PREPROCESSING_SRCS += 
@@ -87,6 +85,7 @@ Application/BowComm.o \
 Application/display.o \
 Application/SpeedQueen.o \
 Application/reader.o \
+Application/zstring.o \
 mifare/Mifare.o \
 mifare/RegCtrl.o \
 SPI/spi.o \
@@ -106,10 +105,7 @@ RUM/mac_route.o \
 RUM/mac_scan.o \
 Timer/avr_timer.o \
 Timer/timer_enddevice.o \
-Application/machine.o \
-UART/serial.o \
-RUM/sensors.o \
-RUM/sixlowpan_wake.o
+UART/serial.o
 
 OBJS_AS_ARGS +=  \
 Application/application.o \
@@ -117,6 +113,7 @@ Application/BowComm.o \
 Application/display.o \
 Application/SpeedQueen.o \
 Application/reader.o \
+Application/zstring.o \
 mifare/Mifare.o \
 mifare/RegCtrl.o \
 SPI/spi.o \
@@ -136,10 +133,7 @@ RUM/mac_route.o \
 RUM/mac_scan.o \
 Timer/avr_timer.o \
 Timer/timer_enddevice.o \
-Application/machine.o \
-UART/serial.o \
-RUM/sensors.o \
-RUM/sixlowpan_wake.o
+UART/serial.o
 
 C_DEPS +=  \
 Application/application.d \
@@ -147,6 +141,7 @@ Application/BowComm.d \
 Application/display.d \
 Application/SpeedQueen.d \
 Application/reader.d \
+Application/zstring.d \
 mifare/Mifare.d \
 mifare/RegCtrl.d \
 SPI/spi.d \
@@ -166,10 +161,7 @@ RUM/mac_route.d \
 RUM/mac_scan.d \
 Timer/avr_timer.d \
 Timer/timer_enddevice.d \
-Application/machine.d \
-UART/serial.d \
-RUM/sensors.d \
-RUM/sixlowpan_wake.d
+UART/serial.d
 
 C_DEPS_AS_ARGS +=  \
 Application/application.d \
@@ -177,6 +169,7 @@ Application/BowComm.d \
 Application/display.d \
 Application/SpeedQueen.d \
 Application/reader.d \
+Application/zstring.d \
 mifare/Mifare.d \
 mifare/RegCtrl.d \
 SPI/spi.d \
@@ -196,10 +189,7 @@ RUM/mac_route.d \
 RUM/mac_scan.d \
 Timer/avr_timer.d \
 Timer/timer_enddevice.d \
-Application/machine.d \
-UART/serial.d \
-RUM/sensors.d \
-RUM/sixlowpan_wake.d
+UART/serial.d
 
 OUTPUT_FILE_PATH +=RDR_ACA_20170621_V0.1.1.elf
 
@@ -215,10 +205,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
-
-
 
 
 

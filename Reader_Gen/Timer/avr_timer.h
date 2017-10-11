@@ -47,11 +47,11 @@ void macSetTimeout(u16 timeout);
 u8 macSetAlarm(u16 microseconds, void(*callback)(void));
 
 void macTimerEnd(u8 timerID);
+
 /**
    @addtogroup timer_module
    @{
 */
-
 u8 macSetLongAlarm(u16 seconds, void(*callback)(void));
 
 
@@ -71,7 +71,7 @@ u8 macSetLongAlarm(u16 seconds, void(*callback)(void));
 #define TICKVECT
 #else
 /**
-   @name Tick Timer Macros
+   @name Tick Timer Macros (avr_timer.h)
 
    For the macAlarm timer.
    @{

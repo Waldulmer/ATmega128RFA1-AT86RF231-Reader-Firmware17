@@ -6,15 +6,31 @@
 *  Author: Paul Bastien
 *	Copyright (C) 2011
 */
-
+/** \file
+ *  \brief Implementation of Reader functions.
+ */
 #include <stdlib.h>
 #include "mac.h"
 #include "reader.h"
 #include "application.h"
-#include "ha_timer.h"
+
 #include "hal_avr.h"
 #include "eeprom_map.h"
 #include "system.h"
+
+#include "serial.h"
+#include "timer_enddevice.h"
+#include "hal_avr.h"
+#include "eeprom_map.h"
+#include "mac_event.h"
+#include "SpeedQueen.h"
+
+/**
+@addtogroup pposreader
+@{
+@addtogroup subgroup Reader related functions  (reader.c)
+@{
+*/
 
 /**
 @brief Initializes the reader on startup. A function to read data out of eeprom
@@ -27,7 +43,7 @@ and calls funtion getSQSetupData(), programming data for the machine
 void initReader(void)
 {
 	halGetEeprom(READER_STATE_ADDR,2,(u8*)&ReaderStateFlag);
-	halGetEeprom(MACHINE_TYPE_ADDR, MACHINE_TYPE_SIZE,(u8*)&deviceStatus.deviceType);
+	halGetEeprom(MACHINE_TYPE_ADDR,MACHINE_TYPE_SIZE,(u8*)&deviceStatus.deviceType);
 	
 	ReaderSetup.customerId = 0;
 	ReaderSetup.manufacturerId = 1;
@@ -40,26 +56,28 @@ void initReader(void)
 	//Init machine variables
 	if (ReaderStateFlag.ReaderSetup == READER_SETUP_DONE)
 	{
-		//a valid reader ID has been detected. check for valid setup
+		//a valid reader ID has been detected 
 		getSQSetupData();
+		//check for valid setup
 		ReaderStateFlag.ValidateSetup = VALIDATE_READER_SETUP;
+		//read # of allowed Offline Trx from Eeprom
 		halGetEeprom(MAXNUM_OFFLINE_ADDR,1,(u8*)&ReaderSetup.maxOfflineTransaction);
 		if (ReaderSetup.maxOfflineTransaction)
 		{
 			ReaderStateFlag.EnableOfflineTransaction = true;
-			halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
+			halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
 			if (ReaderSetup.numOfSavedTransactions == 0xff)
 			{
 				ReaderSetup.numOfSavedTransactions = 0;
-				halPutEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
+				halPutEeprom(OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
 			}
 			
 		}
 		//clear buffers
 		memset(ReaderSetup.machineLabel,0,MACHINE_LABEL_SIZE+1);
 		memset(ReaderSetup.machineDescription,0,MACHINE_NAME_SIZE+1);
-		halGetEeprom(MACHINE_LABEL_ADDR, MACHINE_LABEL_SIZE, (u8*)&ReaderSetup.machineLabel);
-		halGetEeprom(MACHINE_DESCRIPTION_ADDR, MACHINE_NAME_SIZE, (u8*)&ReaderSetup.machineDescription);
+		halGetEeprom(MACHINE_LABEL_ADDR, MACHINE_LABEL_SIZE,(u8*)&ReaderSetup.machineLabel);
+		halGetEeprom(MACHINE_DESCRIPTION_ADDR, MACHINE_NAME_SIZE,(u8*)&ReaderSetup.machineDescription);
 	}
 	else
 	{
@@ -92,6 +110,7 @@ u8 storeOfflineTransaction(u32 cardNum)
 	OfflineTransaction.MachineId[1] = SQACAMachineStatus.MachineType[1];
 	OfflineTransaction.CycleType	= SQACAMachineStatus.CycleType;
 	OfflineTransaction.ManufactureId = ReaderSetup.manufacturerId;
+	
 	switch( deviceStatus.deviceType[0] )
 	{
 		case PROGRAMMING_DATA_TOPLOAD:
@@ -216,7 +235,7 @@ u8 storeOfflineTransaction(u32 cardNum)
 	
 	OfflineTransaction.isOffline = true;
 	//get number of stored records
-	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
+	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
 	//store structure in the next EEPROM record address
 	if ((ReaderSetup.numOfSavedTransactions == 0xff) || (ReaderSetup.numOfSavedTransactions < ReaderSetup.maxOfflineTransaction))
 	{
@@ -234,7 +253,7 @@ u8 storeOfflineTransaction(u32 cardNum)
 		
 		halPutEeprom((u8*)(OFFLINE_TRANSACTION_ADDR_START + (ReaderSetup.numOfSavedTransactions * OFFLINE_TRANSACTION_NUM_BYTE)), OFFLINE_TRANSACTION_NUM_BYTE, (u8*)&OfflineTransaction);
 		ReaderSetup.numOfSavedTransactions++;
-		halPutEeprom((u8*)OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
+		halPutEeprom((u8*)OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
 		if(ReaderStateFlag.OfflineTransactionExist == false)
 		{
 			ReaderStateFlag.OfflineTransactionExist = true;
@@ -248,7 +267,7 @@ u8 storeOfflineTransaction(u32 cardNum)
 	}
 	else if(ReaderSetup.numOfSavedTransactions >= ReaderSetup.maxOfflineTransaction){
 		halGetEeprom(READER_STATE_ADDR, 1, (u8*)&ReaderStateFlag);
-		ReaderStateFlag.EnableOfflineTransaction = false; // stop conducting offline transaction, EEPROM is full.
+		ReaderStateFlag.EnableOfflineTransaction = false; // stop conducting off line transaction, EEPROM is full.
 		ReaderStateFlag.MaxNumTransReached = true;
 		halPutEeprom(READER_STATE_ADDR,1,(u8*)&ReaderStateFlag);
 		return_code = 0;
@@ -264,7 +283,7 @@ u8 storeOfflineTransaction(u32 cardNum)
 u8 sendStoredTransaction(void)
 {
 	//get total number of stored off line transactions from EEPROM.
-	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
+	halGetEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
 	
 	//build buffer of transactions to be transmitted.
 	if (ReaderSetup.numOfSavedTransactions > 0 && ReaderSetup.numOfSavedTransactions < 0xFF) // valid number of transactions stored, prepare to send to BOW
@@ -273,8 +292,8 @@ u8 sendStoredTransaction(void)
 		u16 addr;
 		
 		//send data to BOW
-		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START,2,(u8*)&addr);
-		halGetEeprom((void*)addr, OFFLINE_TRANSACTION_NUM_BYTE,(u8*)&record); // get transaction record
+		halGetEeprom(OFFLINE_TRANSACTION_RECORD_START, 2, (u8*)&addr);
+		halGetEeprom((void*)addr, OFFLINE_TRANSACTION_NUM_BYTE, (u8*)&record); // get transaction record
 		
 		if( sendBOWCCTransaction(&record) )
 		{//update current record address
@@ -282,7 +301,7 @@ u8 sendStoredTransaction(void)
 			
 			ReaderSetup.numOfSavedTransactions--;
 			halPutEeprom(OFFLINE_TRANSACTION_RECORD_START,2,(u8*)&addr);
-			halPutEeprom(OFFLINE_TRANSACTION_RECORD_ADDR,1,&ReaderSetup.numOfSavedTransactions);
+			halPutEeprom(OFFLINE_TRANSACTION_RECORD_ADDR, 1, &ReaderSetup.numOfSavedTransactions);
 		}
 	}
 	if (ReaderSetup.numOfSavedTransactions == 0)
@@ -310,17 +329,112 @@ void getTime(structTime *time)
 	time->seconds = 0;
 }
 
-/**
-@brief  Function to store SetupString into Eeprom for testing purposes.
-*/
+//default SetupString to test eeprom
 void defaultSetupString()
 {
-	u8 n;	
+	u8 n;
 	char nibbleStr[50] = {"00770076007500740073007200710070006F00190503"};
 	char *ptr = &nibbleStr[0] ;
-	n = asciiStringToNibble(ptr, nibbleStr); //position at eeprom address 0x24
-	
+	n = asciiStringToNibble(ptr, nibbleStr); //eeprom address at 0x24
 	halPutEeprom(MACHINE_SETUP_ADDR, n, (u8*)ptr);
 }
+
+//old machine.c file
+#ifndef COORNODE
+
+
+//u16 calcMachineCRC(u8 *msg, u8 len);
+#define MAX_ALLOWED_ARRAY_SIZE  50
+
+#if ( DEVICE_CONNECTED == ACA_MACHINE )
+
+
+u8 ucTopOffTime;
+u8 ucCardErrorCode;
+
+u16 ucCardBalance;
+u16 cardId;
+double vendPrice;
+
+u8 ucTimerCount;
+
+
+
+void WaitForMachine(void)
+{
+	ucMachineWait = MACHINE_TIME_OUT;
+}
+
+/** @brief Function to initialize the hardware Timer
+
+*/
+void InitTimerZero(void)
+{
+	TIFR0 = 2;//1<<TOV0;					//clear TOV0 / clear interrupt
+	TIMSK0 = 2;//1<<TOIE0;				//enable timer0 overflow interrupt
+	TCNT0 = 0;//16;
+	ucTimerCount = 0;
+}
+
+
+/** @brief Stop the hardware timer running.
+
+*/
+void StopTimerZero(void)
+{
+	TCCR0B = 0;//~(1<<CS02) | ~(1<<CS01) | ~(1<<CS00);	//set prescaler to zero
+}
+
+
+/** @brief Start the hardware timer running.
+set timer zero to 5 milisecond resolution and start
+*/
+void StartTimerZero(void)
+{
+	OCR0A = 78;
+	TCCR0A = 2;
+	TCCR0B = (1<<CS02) | (1<<CS00);	//set prescaler to 1024
+}
+
+/**
+@brief Timer interrupt service routine.
+*/
+ISR(TIMER0_COMPA_vect)
+{
+	ucTimerCount++;
+
+}
+
+
+#endif // (MACHINE_TYPE)
+
+
+u16 calcMachineCRC(u8 *msg, u8 len)
+{
+	u8 i;                            //loop counter 1
+	u8 j;                            //loop counter 2
+	u8 flag;                         //flag
+	u16 crc;                         //CRC
+	u8 tempMsg[MAX_ALLOWED_ARRAY_SIZE];//temp array
+
+	crc = 0;                            //clear crc
+
+	for(i=0;i<len; i++)                //save into temp array
+	tempMsg[i] = msg[i];
+
+	for(i=0;i<len; i++)                 //loop through msg array
+	{
+		for(j=0;j<8; j++)                //loop through bits
+		{
+			flag = crc & 0x0001;          //set or reset flag
+			crc >>= 1;                    //shift crc
+			if (flag ^ (tempMsg[i] & 0x01)) crc ^= 0xA001;//crc calculation
+			tempMsg[i] >>= 1;                //shift message
+		}
+	}
+	return (crc);                       //return crc
+}//end of calcMachin
+
 /** @} */
+#endif // (NODETYPE == ENDDEVICE)
 /** @} */

@@ -27,10 +27,11 @@ Application/BowComm.d Application/BowComm.o: ../Application/BowComm.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
  ../RUM/sensors.h ../RUM/mac.h ../Radio/hal_avr.h \
  ../Application/application.h ../Application/reader.h \
- ../Application/eeprom_map.h ../Application/system.h ../UART/serial.h \
+ ../Application/eeprom_map.h ../UART/serial.h \
  ../Application/application.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- ../Timer/avr_timer.h ../Application/system.h \
+ ../Application/SpeedQueen.h ../Application/display.h \
+ ../Application/system.h ../Timer/avr_timer.h ../Application/system.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h
 
@@ -104,13 +105,17 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../Application/eeprom_map.h:
 
-../Application/system.h:
-
 ../UART/serial.h:
 
 ../Application/application.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
+
+../Application/SpeedQueen.h:
+
+../Application/display.h:
+
+../Application/system.h:
 
 ../Timer/avr_timer.h:
 

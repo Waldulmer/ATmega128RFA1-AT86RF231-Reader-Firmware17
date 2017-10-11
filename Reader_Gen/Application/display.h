@@ -12,6 +12,13 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
+/**
+   @addtogroup machinedisplay
+   @{
+*/
+
+// Macros & Defines
+
 //led defines
 #define LED_0     0x3f
 #define LED_1     0x06
@@ -58,7 +65,6 @@
 #define DATA_COLLECTION						(BLANK,d,c,BLANK,2)				//data Collection display dc
 
 // message types
-
 #define CARD_ERR_MSG	1
 #define SETUP_MSG		2
 #define SERVICE_MSG		3
@@ -67,19 +73,19 @@
 #define CABLE_MSG		6
 #define TOPOFF_MSG		7
 
-
 // message table lookup index
 enum{need = 0, ser, card};
 	
 //external types
 extern u8 msgNumber[];
 
+// Implementation
 void displayMsg(u8 msg);
 //void displayVersion(void);
 bool sendSQDisplayCommand(u8 led1, u8 led2, u8 led3, u8 led4, u8 led5, u8 led6, u8 duration);
 bool displaySQReaderVersion(void);
 bool displaySQCardError(void);
 bool displaySQBalance(float amount);
-bool displaySQTopOffvend(double vend);
-	
+bool displaySQTopOffvend(double vend);	
+bool displaySQCardError(void);
 #endif /* DISPLAY_H_ */
